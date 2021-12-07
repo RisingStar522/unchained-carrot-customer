@@ -1,0 +1,129 @@
+.app-slidebar {
+    border-right: 1px solid #ccc;
+    width: $sidebar-width;
+    height: auto;
+    position: relative;
+    // min-width: 220px;
+    color: $sidebar-color;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        padding: 15px;
+        height: $header-height;
+        border-bottom: 1px solid $sidebar-border-color;
+
+        .btn-icon {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: $brand-color;
+
+            @include hover-focus() {
+                color: $brand-color-hover;
+            }
+        }
+    }
+
+    .content {
+        height: 70vh;
+        padding: 15px;
+        font-size: 15px;
+        overflow-y: auto;
+
+        .nav {
+            flex-direction: column;
+            margin-bottom: 20px;
+
+            .nav-group {
+                position: relative;
+            }
+
+            .nav-menu {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+
+                &.collapse,
+                &.collapsing {
+                    .nav-item {
+                        font-weight: normal;
+
+                        .fa-circle {
+                            width: 30px;
+                            font-size: 0.5em;
+                            text-align: center;
+                            line-height: inherit;
+                        }
+                    }
+                }
+            }
+
+            .nav-item {
+                display: flex;
+
+                @include hover() {
+                    background: $sidebar-bg-hover;
+                }
+
+                &.nav-item--active {
+                    background: $sidebar-border-color;
+
+                    & + .nav-menu {
+                        .nav-item--active {
+                            .nav-link {
+                                color: $sidebar-second-color;
+                            }
+                        }
+                    }
+                }
+
+                .nav-link {
+                    display: block;
+                    height: $sidebar-item-height;
+                    line-height: $sidebar-item-height;
+                    padding: 0 1rem;
+                    position: relative;
+                    color: $sidebar-color;
+                    text-decoration: none;
+                    width: $sidebar-width;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+
+                    .nav-arrow {
+                        position: absolute;
+                        right: 1rem;
+                    }
+
+                    @include hover() {
+                        color: $sidebar-second-color;
+
+                        .nav-icon {
+                            color: $sidebar-second-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        height: 1.5 * $header-height;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        padding: 0 30px;
+        margin-top: auto;
+    }
+}
+
+.app-slidebar--hidden {
+    .app-slidebar {
+        margin-left: -$sidebar-width;
+    }
+}
+
+

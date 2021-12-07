@@ -1,0 +1,267 @@
+.form_numeric {
+  display: grid;
+  grid-template-columns: 85px 1fr;
+
+  &_index {
+    grid-column: 1;
+    position: relative;
+    &:nth-last-child(2) {
+      &:after {
+        display: none;
+      }
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: 44px;
+      bottom: 9px;
+      left: 19px;
+      width: 1px;
+      background-color: $lightgray;
+    }
+    span {
+      display: block;
+      width: 38px;
+      height: 38px;
+      border: 1px solid $purple;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 38px;
+      color: $purple;
+    }
+    &.success span {
+      position: relative;
+      background-color: $purple;
+      &:after {
+        position: absolute;
+        content: '';
+        width: 13px;
+        height: 8px;
+        border: solid #fff;
+        top: 12px;
+        left: 12px;
+        transform: rotate(-45deg);
+        border-width: 0 0 2px 2px;
+      }
+    }
+  }
+  &_data {
+    width: 100%;
+    grid-column: 2;
+    label, h5 {
+      color: $darkpurple;
+    }
+  }
+  &_tab {
+    width: 100%;
+    .card-body {
+      width: 100%;
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      // margin-top: .5rem;
+
+      h5 {
+        margin: 0.5rem 0;
+        transition: font-size .3s ease, margin .3s ease;
+      }
+      a {
+        cursor: pointer;
+        transition: margin .3s ease;
+      }
+    }
+    &-form {
+      .row + .row {
+        margin-top: 1.5rem;
+      }
+      .row {
+        label {
+          margin: .4rem 0 0;
+        }
+      }
+    }
+  }
+}
+.tablelike-header {
+  padding: 0.75rem 0.75rem 0.75rem 2rem;
+  color: $tableheader-text;
+  text-transform: uppercase;
+  font-size: .875rem;
+  font-weight: bold;
+  background-color: $tableheader-bg;
+}
+.grid-wrapper {
+  padding: 2rem 2rem;
+}
+.select-small {
+  width: 100px;
+  &.in-text {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 1rem;
+  }
+}
+.row-action {
+  width: 41px;
+  height: 41px;
+}
+.inline-text {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+}
+.action-row {
+  margin-top: 20px;
+}
+.input-with-icon {
+  position: relative;
+  img, svg, .icon {
+    position: absolute;
+    top: .75rem;
+    left: 16px;
+    height: 1rem;
+    width: auto;
+    fill: rgb(188, 188, 203);
+    transition: fill .3s ease;
+  }
+  input {
+    padding-left: 40px;
+    &:focus + svg, &:active + svg {
+      fill: $darkpurple !important;
+    }
+  }
+}
+.no-margin {
+  margin: 0 !important;
+}
+.custom-radio + .custom-radio {
+  margin-top: .5rem;
+}
+.custom-radio .custom-control-label{
+  font-size: .875rem;
+  padding-left: 8px;
+
+  &::before {
+    border-radius: 4px;
+    border: 1px solid #808495;
+    width: 19px;
+    height: 18px;
+    top: 2px;
+  }
+  &::after {
+    content: "x";
+    color: #fff;
+    top: -1px;
+    left: -19px;
+    font-family: 'Rubik';
+    font-size: 15px;
+    width: auto;
+    height: auto;
+    background-image: none !important;
+  }
+}
+.inline-button + .inline-button {
+  margin-left: 25px;
+}
+.reviewdata-container {
+  width: 80%;
+  margin: 0 auto;
+  .row {
+    min-height: 40px;
+  }
+}
+.bottom-buttons {
+  width: 100%;
+  padding-left: 85px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.edit-visible {
+  h5 {
+      font-size: 1.75rem;
+      margin-bottom: 30px;
+  }
+  a {
+      margin-bottom: 30px;
+  }
+}
+// modals
+.modal-dialog-centered {
+  .modal-header {
+    text-align: center;
+    h5 {
+      flex: 1;
+    }
+  }
+}
+.modal-header {
+  border-bottom: 0;
+}
+.modal-body, .modal-header {
+  padding: 25px;
+}
+// datetime
+.vdatetime-input {
+  font-size: .875rem;
+  padding: 9px 16px;
+  height: auto;
+  width: 100%;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+.vdatetime-popup__header, .vdatetime-calendar__month__day--selected > span > span, .vdatetime-calendar__month__day--selected:hover > span > span {
+  background: $darkpurple;
+}
+.vdatetime-time-picker__item--selected {
+  color: $darkpurple;
+}
+// buttons
+.with-spinner {
+  position: relative;
+}
+.button-spinner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0, .6);
+}
+.self-center {
+  align-self: center;
+}
+
+.checkbox-with-select {
+  display: flex;
+  align-items: center;
+  select {
+    flex: 1;
+    margin-left: 15px;
+    max-width: 200px;
+  }
+}
+
+.witherror-input {
+  margin-bottom: 16px;
+  &.is-invalid {
+      margin-bottom: 0;
+  }
+}
+.invalid-feedback {
+  line-height: 1;
+}
+.row.witherror + .row {
+  margin-top: 0.5rem;
+  margin-top: calc(1.5rem - 16px);
+}

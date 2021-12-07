@@ -1,0 +1,30 @@
+.question {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 4px;
+  padding: 10px 5px 10px 15px;
+  margin-bottom: 10px;
+  background-color: $white;
+  color: $brand-color;
+
+  &.active {
+    background-color: $brand-color;
+    color: $white;
+  }
+
+  .question-icons {
+    float: right;
+    display: flex;
+    justify-content: space-around;
+    width: 70px;
+    align-items: center;
+
+    svg {
+      width: 25px;
+      height: 25px;
+      padding: 4px;
+      cursor: pointer;
+    }
+  }
+}

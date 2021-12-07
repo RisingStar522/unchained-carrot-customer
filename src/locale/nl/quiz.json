@@ -1,0 +1,19 @@
+{
+  "COME_BACK_SOON": "Come back soon!",
+  "NEW_WAYS_REDEEM_SOON": "New ways to redeem your point available soon..",
+  "ON_NO": "On no!",
+  "SORRY_TIME_EXPIRED": "Sorry, time expired",
+  "TRY_AGAIN": "Try again",
+  "START": "Start",
+  "READY": "Ready?",
+  "YOU_HAVE_TO_COMPLETE": "You have {sec} sec to complete the challenge. Are you ready to do it?",
+  "HINT": "Hint",
+  "NEXT": "Next",
+  "LEARN_MORE": "Learn more",
+  "COMPLETE": "Complete",
+  "SUBMIT": "Submit",
+  "SELECT_ANSWER": "Please, select some answer",
+  "YOU_GOT_CORRECT_TOTAL": "You got {correct} right out of {total} questions.",
+  "CORRECT_ANSWER": "Correct answer!",
+  "WRONG_ANSWER": "Wrong answer!"
+}

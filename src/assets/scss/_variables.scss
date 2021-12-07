@@ -1,0 +1,55 @@
+// General
+$body-bg: #f0f0f7;
+$brand-color: #2f3380;
+$brand-color-hover: darken($brand-color, 10);
+$layout-transition-speed: 0.25s;
+$error-color: #ff1744;
+
+// Header
+$header-height: 55px;
+$header-bg: #fff;
+$header-color: $gray-600;
+$header-hover-color: darken($header-color, 20);
+
+// Aside
+$aside-width: 260px;
+$aside-width-hidden: 60px;
+$aside-color: $white;
+$aside-second-color: #f79946;
+$aside-bg: $brand-color;
+$aside-brand-height: $header-height;
+$aside-brand-width: 200px;
+$aside-brand-bg: darken($brand-color, 5);
+$aside-brand-bg-hover: darken($aside-brand-bg, 5);
+$aside-logo-height: 45px;
+$aside-nav-item-height: 55px;
+$aside-nav-icon-color: #73818f;
+
+// Buttons
+$btn-brand-bg: $brand-color;
+$btn-brand-bg-hover: darken($btn-brand-bg, 10);
+$btn-brand-color: $white;
+$btn-brand-color-hover: $white;
+$btn-brand-border: #262a63;
+$btn-brand-border-hover: darken($btn-brand-border, 5);
+$btn-brand-shadow-focus: 0 0 0 0.2rem lighten($btn-brand-border, 40);
+
+$btn-secondary-bg: #6c757d;
+$btn-secondary-bg-hover: darken($btn-secondary-bg, 10);
+$btn-secondary-color: $white;
+$btn-secondary-color-hover: $white;
+$btn-secondary-border: #6c757d;
+$btn-secondary-border-hover: darken($btn-secondary-border, 5);
+$btn-secondary-shadow-focus: 0 0 0 0.2rem lighten($btn-secondary-border, 40);
+
+// SlideBar
+$sidebar-width: 15rem;
+$sidebar-color: $brand-color;
+$sidebar-second-color: #f79946;
+$sidebar-bg: #dedfe3;
+$sidebar-bg-hover: #dedfe3;
+$sidebar-bg-header: #c4c5cc;
+$sidebar-border-color: #b5bbc0;
+$sidebar-item-height: 40px;
+
+$primary: #2f3380;

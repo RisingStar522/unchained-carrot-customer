@@ -1,0 +1,15 @@
+{
+  "name": "unchained-carrot-customer-webserer",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "cp -R ../dist dist && nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

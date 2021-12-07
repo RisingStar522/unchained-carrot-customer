@@ -1,0 +1,127 @@
+// IE10&11 Flexbox fix
+@media all and (-ms-high-contrast:none) {
+  html {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.list-group-item.active {
+  background-color: #2f3380;
+  color: #fff !important;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+.app-header {
+  flex: 0 0 $header-height;
+  width: 100%;
+}
+
+.app-body {
+  flex: auto;
+  width: 100%;
+  overflow-x: hidden;
+  margin-left: $aside-width;
+  background-color: $body-bg;
+}
+
+@media (max-width: 576px) {
+  .app-body {
+    margin-left: $aside-width-hidden;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+
+  .content {
+    width: 100%;
+    padding: 0 30px 40px;
+  }
+}
+
+//
+// Animations
+//
+.app-header,
+.app-aside,
+.app-body,
+.app-slidebar {
+  transition: margin-left $layout-transition-speed, margin-right $layout-transition-speed, width $layout-transition-speed, flex $layout-transition-speed;
+}
+
+.app-aside--hidden {
+  .app-aside {
+    margin-left: -($aside-width - $aside-width-hidden);
+  }
+
+  .app-body {
+    margin-left: $aside-width-hidden;
+  }
+}
+
+.notifications {
+  top: 15px !important;
+  right: 10px !important;
+}
+
+
+.page-header {
+  margin: 2rem 0;
+  color: $brand-color;
+}
+
+input:focus,
+a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.text-error {
+  color: $error-color !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .hidden-xs {
+    display: none !important;
+  }
+
+  .col-xs-1 {
+    flex: 0 0 8.333333%;
+    max-width: 8.333333%;
+  }
+
+  .col-xs-11 {
+    flex: 0 0 91.666667%;
+    max-width: 91.666667%;
+  }
+
+}
+
+.position--relative {
+  position: relative;
+}

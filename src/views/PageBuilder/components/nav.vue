@@ -1,0 +1,67 @@
+<template>
+    <div class="d-flex justify-content-center my-5">
+        <div class="links d-flex">
+            <router-link
+                :class="pageName === 'PageBuilder/pages' && 'active'"
+                :to="{ name: 'PageBuilder/pages' }"
+                >My pages</router-link
+            >
+
+            <router-link
+                :class="pageName === 'PageBuilder/newPage' && 'active'"
+                :to="{ name: 'PageBuilder/newPage' }"
+                >My templates</router-link
+            >
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'nav-page-builder',
+    computed: {
+        pageName() {
+            return this.$route.name;
+        }
+    }
+};
+</script>
+
+<style>
+.links {
+    box-shadow: 0px 6px 10px 1px #ccc;
+    width: 50%;
+    text-align: center;
+}
+.links a,
+.links a:link {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.links a:first-child {
+    border-right: 1px solid #ccc;
+}
+
+.links a:hover {
+    color: #fff !important;
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: 0px 15px 30px -7px #2f3380;
+    text-align: center;
+
+    background: #2f3380;
+}
+
+.active {
+    color: #fff !important;
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: 0px 15px 30px -7px #2f3380;
+    text-align: center;
+    background: #2f3380; /* Old browsers */
+}
+</style>

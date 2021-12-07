@@ -1,0 +1,53 @@
+@import '../email_campaign/variables';
+
+.card-headertext {
+  font-size: 1.75rem;
+  margin-bottom: 30px;
+  color: $darkpurple;
+}
+
+.b-form-tag {
+  background: #a3a0fb;
+  border: 1px solid #4e51a2;
+
+  & > button.b-form-tag-remove {
+    color: #3b3f8d;
+    text-shadow: none;
+  }
+}
+#tags-with-dropdown {
+  padding: 3px 12px;
+
+  .list-inline {
+    margin: 0;
+    padding: 4px 3px;
+
+    .list-inline-item:not(:last-child) {
+      margin-right: 0;
+    }
+  }
+  .b-dropdown {
+    min-width: 175px;
+    display: inline-block;
+    vertical-align: middle;
+
+    .dropdown-toggle {
+      &:focus {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      color: $lightgray;
+      font-weight: 300;
+      text-align: left;
+      padding: 0;
+      padding: 4px 3px;
+      &:after {
+        display: none;
+      }
+    }
+
+    .dropdown-menu {
+      width: 300px !important;
+    }
+  }
+}

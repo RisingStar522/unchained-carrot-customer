@@ -1,0 +1,96 @@
+@import '~vue-material/dist/vue-material.min.css';
+
+@import '~vue-material/dist/theme/engine'; // Import the theme engine
+
+@include md-register-theme(
+    'default',
+    (
+        primary: $brand-color,
+        accent: #b9d7fb
+    )
+);
+
+@import '~vue-material/dist/components/MdField/theme';
+@import '~vue-material/dist/components/MdCheckbox/theme';
+@import '~vue-material/dist/components/MdRadio/theme';
+@import '~vue-material/dist/components/MdMenu/theme';
+@import '~vue-material/dist/components/MdList/theme';
+@import '~vue-material/dist/components/MdSteppers/theme';
+
+.md-invalid {
+    .md-checkbox {
+        color: $error-color;
+    }
+}
+
+.md-menu-content {
+    &.md-select-menu {
+        z-index: $zindex-sticky + 100;
+    }
+}
+
+.md-button {
+    &:focus {
+        outline: none;
+    }
+}
+
+.md-field {
+    .md-input {
+        min-width: 100px;
+    }
+
+    &.md-disabled {
+        opacity: 0.5;
+    }
+}
+
+.md-radio,
+.md-checkbox {
+    &.md-disabled {
+        opacity: 0.5;
+    }
+}
+
+.md-field.md-theme-default > .md-icon:after {
+    background-color: inherit !important;
+}
+
+.md-datepicker-dialog {
+    z-index: $zindex-sticky + 100;
+    background-color: $body-bg;
+
+    .md-datepicker-body-footer {
+        min-height: 52px;
+        padding: 8px 8px 8px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        position: relative;
+    }
+}
+
+.md-radio {
+    .md-radio-container {
+        border-color: $brand-color !important;
+
+        &:after {
+            background-color: $brand-color !important;
+        }
+    }
+
+    .md-ripple {
+        color: $brand-color-hover !important;
+    }
+}
+
+.d-flex > .md-radio {
+    margin: 16px 0 16px 16px;
+}
+
+.md-steppers.md-theme-default {
+    background-color: transparent;
+}
+.md-steppers-navigation {
+    box-shadow: none;
+}

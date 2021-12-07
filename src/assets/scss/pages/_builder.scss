@@ -1,0 +1,10 @@
+.bee-container {
+    transition: width 0.1s ease-in;
+    height: 100vh;
+    &__slidebar-open {
+        width: 45vw;
+    }
+    &__slidebar-closed {
+        width: 95vw;
+    }
+}

@@ -1,0 +1,57 @@
+@import '../variables';
+
+.statistic_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px 30px;
+  margin-bottom: 30px;
+  &-item {
+    margin: 0;
+    border: 0;
+    box-shadow: 0 2px 6px rgba(#000, 0.04);
+    p {
+      margin: 0;
+      text-align: center;
+    }
+    &_number {
+      font-size: 1.5rem;
+      &.blue {
+        color: $blue;
+      }
+      &.red {
+        color: $red;
+      }
+    }
+    &_hint {
+      font-size: .875rem;
+    }
+  }
+}
+#bounced-info {
+  width: 18px;
+  height: 18px;
+  line-height: 17px;
+  display: block;
+  border: 1px solid;
+  border-radius: 18px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: bold;
+  position: absolute;
+  top: 9px;
+  right: 9px;
+}
+#bounced-info-popover.popover {
+  border: 0;
+  box-shadow: 0 0 15px rgba(#000, .1);
+  .arrow::before {
+    box-shadow: 0 0 15px rgba(#000, .1);
+    border: 0 !important;
+  }
+  p {
+    margin: 0;
+  }
+  .popover-body {
+    padding: 10px 20px;
+  }
+}

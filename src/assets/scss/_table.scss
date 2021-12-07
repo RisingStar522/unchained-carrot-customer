@@ -1,0 +1,33 @@
+.table-responsive {
+  margin: 0;
+}
+
+.table.b-table > tbody > tr{
+  outline: none;
+
+  td {
+    a {
+      color: #212529;
+    }
+  }
+}
+
+.table.b-table > tbody > .table-active {
+  color: #ffffff;
+  background-color: #2f3380;
+
+  td {
+    a {
+      color: #ffffff !important;
+    }
+    .btn-outline-brand {
+      color: #ffffff !important;
+      background-color: #2f3380;
+      border-color: #ffffff;
+    }
+  }
+}
+
+.table.b-table > tbody > .table-active:hover td {
+  color: #ffffff !important;
+}

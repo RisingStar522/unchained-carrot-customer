@@ -1,0 +1,239 @@
+.app-aside {
+  position: fixed;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  flex: 0 0 $aside-width;
+  width: $aside-width;
+  color: $aside-color;
+  background: $aside-bg;
+  z-index: $zindex-sticky - 1;
+
+
+
+  .header {
+    height: $aside-brand-height;
+    background: $aside-brand-bg;
+
+
+
+    .brand {
+      height: inherit;
+      float: left;
+      width: $aside-brand-width;
+
+      .brand-img {
+        max-width: $aside-brand-width;
+        height: $aside-logo-height;
+        padding: 5px;
+        margin: 5px 0;
+      }
+    }
+
+    .menu-btn {
+      height: inherit;
+      float: left;
+      text-align: center;
+      cursor: pointer;
+      color: $white;
+      width: calc(100% - #{$aside-brand-width});
+
+      @include hover() {
+        color: $white;
+        background-color: $aside-brand-bg-hover;
+      }
+
+      svg {
+        width: 18px;
+        height: $aside-brand-height;
+      }
+    }
+  }
+
+  .content {
+    height: calc(100vh - #{$aside-brand-height});
+    font-size: 15px;
+
+
+
+    .nav {
+      flex-direction: column;
+      margin-bottom: 20px;
+
+
+
+      .nav-group {
+        position: relative;
+      }
+
+      .nav-menu {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        &.collapse,
+        &.collapsing {
+          .nav-item {
+            font-weight: normal;
+
+            .fa-circle {
+              width: 30px;
+              font-size: .5em;
+              text-align: center;
+              line-height: inherit;
+            }
+          }
+        }
+      }
+
+      .nav-item {
+        display: flex;
+
+        @include hover() {
+          background: $aside-brand-bg-hover;
+        }
+
+        &.nav-item--active {
+          background: $aside-brand-bg-hover;
+
+          .nav-link {
+            .nav-icon {
+              color: $aside-second-color;
+            }
+          }
+
+          &+.nav-menu {
+            .nav-item--active {
+              .nav-link {
+                color: $aside-second-color;
+              }
+            }
+          }
+        }
+
+        .nav-link {
+          display: block;
+          height: $aside-nav-item-height;
+          line-height: $aside-nav-item-height;
+          padding: 0 30px 0 1rem;
+          position: relative;
+          color: $aside-color;
+          text-decoration: none;
+          width: $aside-width;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          .nav-icon {
+            display: inline-block;
+            width: 20px;
+            margin: 0 .5rem 0 0;
+            font-size: .875rem;
+            color: $aside-nav-icon-color;
+            text-align: center;
+
+            svg {
+              width: 20px;
+            }
+          }
+
+          .nav-arrow {
+            position: absolute;
+            right: 1rem;
+          }
+
+          @include hover() {
+            color: $aside-second-color;
+
+            .nav-icon {
+              color: $aside-second-color;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+
+.app-aside--hidden {
+  .app-aside {
+    .content {
+      .nav {
+        .nav-menu {
+          &.collapse {
+            display: none;
+          }
+
+          &.collapsing {
+            height: auto;
+            overflow: auto;
+            transition: none;
+          }
+        }
+
+        .nav-item {
+          .nav-link {
+            padding: 0;
+
+            .nav-icon {
+              width: $aside-width-hidden;
+              height: $aside-nav-item-height;
+              float: right;
+              margin: 0;
+              padding: 0 18px;
+
+              svg {
+                height: $aside-nav-item-height
+              }
+            }
+
+            .nav-name,
+            .nav-arrow {
+              display: none;
+            }
+          }
+        }
+
+        .nav-group {
+          @include hover() {
+            .nav-menu {
+              display: block !important;
+            }
+          }
+        }
+
+        .nav-menu {
+          position: absolute;
+          top: 0;
+          width: 300px;
+          right: -300px;
+          background: $aside-bg;
+
+          .nav-item {
+            padding: 0 1rem;
+
+            .nav-link {
+              padding: 0;
+
+              .nav-icon {
+                width: 20px;
+                margin: 0 .5rem 0 0;
+                float: left;
+
+                svg {
+                  height: 1em;
+                  width: 20px;
+                }
+              }
+
+              .nav-name {
+                display: inline;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

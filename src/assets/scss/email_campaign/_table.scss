@@ -1,0 +1,111 @@
+.b-table {
+    td,
+    th {
+        font-size: 0.875rem;
+        vertical-align: middle;
+        &:nth-child(1) {
+            padding-left: 2rem;
+        }
+        &:nth-last-child(1) {
+            padding-right: 2rem;
+        }
+    }
+    thead {
+        background: $tableheader-bg;
+        th {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: $tableheader-text;
+            border-bottom: 0;
+            border-top: 0;
+        }
+    }
+    tbody tr:nth-child(1) td {
+        border-top: 0;
+    }
+}
+.table-wrapper {
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(#000, 0.04);
+}
+.table-preheader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    &.only-text {
+        padding: 1.625rem 2rem;
+    }
+    .left-part {
+        min-width: 340px;
+        .row {
+            align-items: center;
+        }
+    }
+    h5 {
+        margin: 0;
+        color: $primary;
+    }
+}
+.th-actions {
+    width: 150px;
+}
+.table-action {
+    padding: 5px;
+    background: transparent !important;
+    outline: none !important;
+    border: 0;
+    width: 34px;
+    img {
+        width: auto;
+        height: 24px;
+        margin-bottom: 2px;
+    }
+    svg {
+        font-size: 1rem;
+        color: #4d4f5c;
+        margin-right: 0 !important;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+        svg {
+            color: $sidebar-second-color;
+        }
+    }
+}
+.status-circle {
+    display: inline-block;
+    margin-right: 1rem;
+    width: 11px;
+    height: 11px;
+    border-radius: 11px;
+    vertical-align: baseline;
+    border: 1px solid;
+    border-color: $circle-border;
+
+    &.class-sent,
+    &.class-validated {
+        background-color: $sentcolor;
+        border-color: $sentcolor;
+    }
+    &.class-scheduled,
+    &.class-not-validated {
+        background-color: $schedulecolor;
+        border-color: $schedulecolor;
+    }
+    &.class-blocked {
+        background-color: $red;
+        border-color: $red;
+    }
+}
+.table-templateimage {
+    border-radius: 5px;
+    border: 1px solid $darkpurple;
+    display: inline-block;
+    max-width: 120px;
+    iframe {
+        height: 130px;
+        width: 110px;
+    }
+}

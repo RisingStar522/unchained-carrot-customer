@@ -1,0 +1,41 @@
+.card {
+  margin-bottom: 30px;
+}
+
+.overview-card {
+  .card-title {
+    font-size: 1.2rem;
+    color: #4d4f5c;
+  }
+}
+
+
+.card--page {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  transition: all 0.2s;
+  color: #4a4a4a;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.card--page .card--page--body {
+  overflow: hidden;
+}
+
+.card--page .card--page--title {
+  font-size: 14px;
+}
+
+.card--page .card--page--description {
+  font-weight: 300;
+  font-size: 13px;
+}
+
+
+.card--page:hover {
+  box-shadow: 5px 5px 5px #ccc;
+}

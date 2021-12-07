@@ -1,0 +1,29 @@
+.error-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $body-bg;
+  text-align: center;
+
+  .error-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .error-icon {
+    height: 40px;
+    opacity: .3;
+    margin-bottom: 1.5rem;
+  }
+
+  .error-text {
+    color: #999;
+  }
+
+  .error-btn {
+    margin: 2rem 1rem 0;
+    padding: .5rem 1rem;
+    width: 150px;
+  }
+}
