@@ -67,7 +67,7 @@
 <script>
 import AsideNavItem from './AsideNavItem';
 import { mapGetters } from 'vuex';
-import { isEnabled } from 'vue-feature-flipping';
+// import { isEnabled } from 'vue-feature-flipping';
 import { submitTrackingEvent } from '../../services/TrackingService';
 
 export default {
@@ -80,6 +80,12 @@ export default {
             asideHide: false,
             navigation: [],
             adminNavigation: [
+                {
+                    name: 'Personas',
+                    icon: require('../../assets/icons/Surveys.svg'),
+                    hasSidenav: false,
+                    linkName: 'Personas'
+                },
                 {
                     name: 'Loyalty Programs',
                     icon: require('../../assets/icons/Reward Rules.svg'),
@@ -145,7 +151,7 @@ export default {
                 {
                     name: 'Traffic Routes',
                     icon: require('../../assets/icons/TrafficRoutes.svg'),
-                    hasSidenav: false,
+                    hasSidenav: true,
                     linkName: 'TrafficRoutes'
                 },
                 {
@@ -185,12 +191,6 @@ export default {
                     icon: require('../../assets/icons/Webhooks.svg'),
                     hasSidenav: false,
                     linkName: 'Webhooks'
-                },
-                {
-                    name: 'Personas',
-                    icon: require('../../assets/icons/Surveys.svg'),
-                    hasSidenav: false,
-                    linkName: 'Personas'
                 },
                 {
                     name: 'Social Media',
@@ -248,7 +248,8 @@ export default {
             const nav = this.navigation;
 
             return nav.filter(element => {
-                return isEnabled(element.linkName);
+                return element.linkName;
+                // return isEnabled(element.linkName);
             });
         },
         isTestMode() {

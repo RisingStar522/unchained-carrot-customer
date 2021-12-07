@@ -1,0 +1,356 @@
+.svd_container {
+  background-color: inherit !important;
+  color: $brand-color !important;
+
+  a:focus,
+  select:focus,
+  span:focus,
+  div:focus,
+  tr:focus,
+  input[type="checkbox"]:focus + span.checkmark {
+    outline-color: $brand-color !important;
+  }
+
+  a {
+    color: $brand-color !important;
+    text-decoration: underline;
+
+    @include hover-focus() {
+      text-decoration: underline !important;
+    }
+  }
+
+  .svd_commercial_container,
+  .editor-tabs {
+    display: none;
+  }
+
+  .svd_content {
+    background-color: transparent !important;
+    padding: 0 0 30px !important;
+
+    svd-splitter {
+      display: none;
+    }
+
+    .svd_toolbox {
+      margin-top: 95px;
+      padding: 10px 0;
+      height: 75vh;
+      overflow-y: auto;
+      background-color: $brand-color;
+
+      .svd_toolbox_title {
+        display: none;
+      }
+
+      .svd_toolbox_item {
+        border-color: $brand-color-hover;
+        color: $white;
+
+        @include hover() {
+          background-color: $brand-color-hover;
+        }
+
+        .svd-svg-icon {
+          fill: $white !important;
+        }
+      }
+    }
+
+    .svd_properties {
+      margin-top: 50px;
+      padding: 0 0 10px;
+      height: calc(75vh + 45px);
+      overflow-y: hidden;
+
+      .svd-property-grid__header {
+        margin: 0;
+        height: 45px;
+        line-height: 45px;
+        padding: 0 1.5em;
+
+        .svd-property-grid__header-title {
+          color: $brand-color;
+        }
+
+        .svd-property-grid__header-hide-button {
+          position: absolute;
+          text-align: right;
+          padding: 0 1.5em;
+          width: 100%;
+          left: 0;
+        }
+      }
+
+      .svd_object_selector {
+        border-color: $brand-color !important;
+        padding: 20px 10px;
+      }
+
+      .svd_object_editor {
+        height: calc(75vh - 80px);
+        padding: 20px 10px;
+      }
+    }
+
+    .svd_toolbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      .svd-property-grid__header {
+        background-color: transparent !important;
+        font-weight: bold;
+        margin-top: 0.5em;
+        padding: .2rem .5rem;
+        height: auto;
+
+        .svd-property-grid__header-title {
+          color: $brand-color;
+          margin-right: 10px;
+        }
+      }
+      .svd_action {
+        .btn {
+          padding: .5rem;
+          background-color: transparent !important;
+          color: $brand-color !important;
+          border: 0 !important;
+          font-weight: bold;
+
+          &:focus {
+            box-shadow: $btn-brand-shadow-focus;
+          }
+        }
+      }
+    }
+
+    pages-editor {
+      display: flex;
+      height: 45px;
+
+      .svd-page-selector {
+        display: none;
+      }
+
+      .svd-page-add,
+      .svd-page-scroller-arrow {
+        padding: 1em;
+        margin: 0;
+      }
+
+      .svd-pages {
+        width: 100%;
+
+        .svd-page {
+          border: 0;
+        }
+
+        .svd-page-actions-container {
+          margin-left: 10px;
+
+          .svd-page-actions {
+            padding: 10px !important;
+          }
+        }
+      }
+    }
+
+    .svd_editors {
+      position: initial;
+      padding: 0;
+      margin-top: 50px;
+
+      .svd_questions_editor {
+
+        .sv_container {
+          padding: 0 10px;
+
+          .panel-body {
+            margin-top: 0 !important;
+
+            .svd_question {
+              margin: 40px 0 0 !important;
+              padding: 30px 10px 20px !important;
+              border-color: $brand-color !important;
+
+              .svda-question-actions {
+                left: 5px;
+                right: 5px;
+
+                .svda_question_action {
+                  padding: 2px;
+                  margin-left: 6px;
+                }
+
+              }
+
+              .svda-add-custom-item {
+                color: $brand-color;
+                font-weight: bold;
+              }
+
+              .btn-secondary {
+                color: $brand-color;
+                border-color: $btn-brand-border;
+                background-color: transparent;
+              }
+
+              .table thead th {
+                border-bottom: 0;
+              }
+
+              .card {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100px;
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .modal {
+    z-index: 1050 !important;
+
+    .modal-header {
+      display: block;
+
+      .close {
+        margin-top: -10px;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .modal-body {
+      .svd-accordion-tab-header {
+        min-height: 40px;
+        line-height: 40px;
+      }
+    }
+
+    .modal-footer {
+      .btn {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        vertical-align: middle;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+
+        &:not(:last-child) {
+          margin-right: 15px;
+        }
+      }
+    }
+  }
+
+  .svd-main-color {
+    color: $brand-color !important;
+  }
+
+  .svd-svg-icon {
+    fill: $brand-color !important;
+  }
+
+  .form-control:focus {
+    border-color: $brand-color !important;
+  }
+
+  .svd_custom_select::before {
+    background-color: $brand-color !important;
+    padding: 19px;
+  }
+
+  .svd-main-background-color {
+    background-color: $brand-color !important;
+  }
+
+  .input-group {
+    flex-wrap: nowrap;
+    .input-group-addon {
+      position: relative;
+      padding: 10px !important;
+      text-align: center;
+      line-height: 1;
+      min-width: 38px;
+    }
+  }
+
+  .form-control + .input-group-addon {
+    border: 1px solid #ced4da;
+    margin-left: -1px;
+    padding: 10px 6px !important;
+  }
+
+  .ddmenu-container .ddmenu {
+    position: inherit;
+  }
+
+  .propertyeditor-triggers .ddmenu-container .ddmenu > span,
+  .propertyeditor-validators .ddmenu-container .ddmenu > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 13px !important;
+  }
+
+  .btn {
+    height: auto;
+    padding: 1em;
+  }
+
+  .btn-primary {
+    color: $btn-brand-color !important;
+    background-color: $btn-brand-bg !important;
+    border-color: $btn-brand-border !important;
+
+    @include hover() {
+      color: $btn-brand-color-hover !important;
+      background-color: $btn-brand-bg-hover !important;
+      border-color: $btn-brand-border-hover !important;
+    }
+
+    &:focus {
+      box-shadow: $btn-brand-shadow-focus !important;
+    }
+  }
+
+  .btn-secondary {
+    color: $btn-secondary-color !important;
+    background-color: $btn-secondary-bg !important;
+    border-color: $btn-secondary-border !important;
+
+    @include hover() {
+      color: $btn-secondary-color-hover !important;
+      background-color: $btn-secondary-bg-hover !important;
+      border-color: $btn-secondary-border-hover !important;
+    }
+
+    &:focus {
+      box-shadow: $btn-secondary-shadow-focus !important;
+    }
+  }
+
+  .svd_save_btn {
+    display: none;
+  }
+
+  .btn-group {
+    display: inline-block;
+  }
+}
+
+.st0 {
+  fill: $white !important;
+}
