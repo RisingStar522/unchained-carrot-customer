@@ -529,6 +529,24 @@ export default [
                 name: 'Personas',
                 component: () => import('../views/Personas')
             },
+            {
+                path: '/personas/add-personas',
+                name: 'AddPersonas',
+                component: () =>
+                    import('../views/Personas/AddPersonas')
+            },
+            {
+                path: '/personas/:id/edit',
+                name: 'EditPersonas',
+                component: () =>
+                    import('../views/Personas/AddPersonas')
+            },
+            {
+                path: '/personas-list',
+                name: 'PersonasList',
+                component: () =>
+                    import('../views/Personas/PersonasList')
+            },
 
             // Apple Wallet
             {

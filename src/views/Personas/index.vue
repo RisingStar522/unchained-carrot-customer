@@ -14,8 +14,57 @@
                 </div>
                 <b-row class="personas-index-row">
                     <b-col><b-button class="personas-index-btn" variant="outline-brand">Read Guide</b-button></b-col>
-                    <b-col><b-button class="personas-index-btn" variant="primary">Add personas</b-button></b-col>
+                    <b-col>
+                    <b-button
+                        class="personas-index-btn"
+                        variant="primary"
+                        :to="{ name: 'AddPersonas' }"
+                    >
+                        Add personas
+                    </b-button>
+                    </b-col>
+                    <!-- <b-col><b-button class="personas-index-btn" v-b-modal.addPersonas  variant="primary">Add personas</b-button></b-col> -->
                 </b-row>
+
+                <!-- <Modal modalId="addPersonas" title="Add Persona Trait">
+                    <template v-slot:default>
+                        <div class="validation_mark">
+                            <img
+                                class="mr-2"
+                                src="../../assets/icons/validation_mandatory.svg"
+                            />
+                            <span>MANDATORY</span>
+                        </div>
+                        <b-row class="m-1">
+                            <label><small>Source</small></label>
+                            <b-form-select
+                                id="event-source"
+                                name="event-source"
+                                v-model="selected"
+                                :options="transformActiveIntegrations"
+                                class="mb-3"
+                                aria-placeholder="select event source"
+                            >
+                            </b-form-select>
+                        </b-row>
+                        <b-form-group id="input-group-1" label="Name" label-for="input-2">
+                            <b-form-input
+                                id="input-1"
+                                v-model="form.name"
+                                placeholder="Propensity to buy"
+                                required
+                            ></b-form-input>
+                        </b-form-group>
+                        <b-form-group id="input-group-2" label="Default Value" label-for="input-2">
+                            <b-form-input
+                                id="input-2"
+                                v-model="form.value"
+                                placeholder="50%"
+                                required
+                            ></b-form-input>
+                        </b-form-group>
+                    </template>
+                </Modal> -->
             </div>
         </div>
         <div class="personas-main-find-content">
@@ -44,27 +93,52 @@
 </template>
 
 <script>
+import Modal from '../../views/Personas/components/modal';
 import dayjs from 'dayjs';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'personas',
+    components: {
+        Modal
+    },
     data() {
         return {
             personasMainFindContent: [
-            'List of users',
-            'List of subscribers',
-            'List of members'
-            ]
+                'List of users',
+                'List of subscribers',
+                'List of members'
+            ],
+            transformActiveIntegrations: [
+                { value: null, text: 'Please select an option' },
+                { value: 'a', text: 'This is First option' },
+                { value: 'b', text: 'Selected Option' },
+                { value: 'd', text: 'This one is disabled', disabled: true }
+            ],
+            form: {
+                name: '',
+                transformActiveIntegrations: null,
+                value: ''
+            },
         };
     },
     computed: {
-        ...mapGetters(['getAllPersonas'])
+        ...mapGetters(['getAllPersonas']),
+        // transformActiveIntegrations() {
+        //     return this.activeIntegrations.map(({ externalSystem }) =>
+        //         this.capitalizeFirstLetter(externalSystem)
+        //     );
+        // }
     },
     methods: {
         ...mapActions(['getUserProfilePersonas']),
         dayjs(...args) {
             return dayjs(...args);
+        },
+        capitalizeFirstLetter(string) {
+            return (
+                string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+            );
         }
     },
     async mounted() {
@@ -116,5 +190,20 @@ export default {
 }
 .content-list {
     background-color: #f0f0f7;
+}
+.validation_mark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    margin-left: 15px;
+    margin-top: -80px;
+
+    span {
+        color: #a3a0fb;
+        font-size: 12px;
+        line-height: 20px;
+    }
 }
 </style>

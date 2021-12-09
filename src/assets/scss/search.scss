@@ -1,0 +1,9 @@
+.b-input-group {
+    &-append {
+        margin-left: -1px;
+    }
+    &-text {
+        background-color: $body-bg;
+        border-right-width: 0px;
+    }
+}
