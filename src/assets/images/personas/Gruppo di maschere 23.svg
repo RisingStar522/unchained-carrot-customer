@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="29" height="29" viewBox="0 0 29 29">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rettangolo_1692" data-name="Rettangolo 1692" width="29" height="29" transform="translate(920 310)" fill="#2f3380" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Gruppo_di_maschere_23" data-name="Gruppo di maschere 23" transform="translate(-920 -310)" clip-path="url(#clip-path)">
+    <path id="linkedin_1_" data-name="linkedin (1)" d="M14.5,0A14.5,14.5,0,1,0,29,14.5,14.481,14.481,0,0,0,14.5,0ZM9.538,23.49H5.8V11.471H9.538ZM7.669,9.86A2.187,2.187,0,0,1,5.51,7.669a2.159,2.159,0,1,1,4.318,0A2.187,2.187,0,0,1,7.669,9.86ZM23.49,23.49H19.752V17.658c0-1.386-.032-3.19-1.933-3.19-1.933,0-2.223,1.514-2.223,3.093V23.49H11.858V11.471h3.577v1.643H15.5a3.9,3.9,0,0,1,3.512-1.933c3.77,0,4.479,2.481,4.479,5.7Z" transform="translate(920 310)" fill="#2f3380"/>
+  </g>
+</svg>

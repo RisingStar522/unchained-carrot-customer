@@ -1,3 +1,22 @@
+<style scoped>
+.nav-tabs .nav-link {
+    padding: 0px !important;
+    border: none !important
+}
+.card-header {
+    background-color: #f0f0f7 !important;
+    border-bottom: none !important;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.125); */
+}
+.nav-tabs .nav-link {
+    margin-bottom: -1px;
+    border: none !important;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+</style>
 <template>
     <div class="content">
         <div class="traffic-routes">
@@ -14,15 +33,18 @@
                         <span class="text-brand mr-3 flex-grow">Order by</span>
                         <div>
                             <b-form-select
-                                @change="sortTrafficRoute"
+                                @change="sortPersonas"
                                 v-model="selectedOrderByOption"
                             >
                                 <option selected value="dateCreated">
                                     Date Created
                                 </option>
                                 <option value="status">Status</option>
-                                <option value="utmCampaign">
-                                    UTM Campaign
+                                <option value="firstName">
+                                    FIRST NAME
+                                </option>
+                                <option value="lastName">
+                                    LAST NAME
                                 </option>
                             </b-form-select>
                         </div>
@@ -53,26 +75,29 @@
                     </div>
                 </div>
 
-                <!-- :current-page="currentPageForTrafficRoutes" -->
+                <!-- :current-page="currentPageForPersonas" -->
                 <!-- :per-page="perPageForTrafficRoutes" -->
                 <b-table
                     hover
                     id="traffic-routes"
-                    :fields="fieldsForTrafficRoutes"
-                    :items="itemsForTrafficRoutes"
-                    @row-clicked="handleClickTrafficRoutesTableRow"
+                    :fields="fieldsForPersonas"
+                    :items="itemsForPersonas"
+                    @row-clicked="handleClickPersonasTableRow"
                     caption-top
                     responsive
                     head-variant="light"
                     ref="traffictable"
                 >
-                    <template v-slot:cell(title)="data">
+                    <template v-slot:cell(email)="data">
                         <div class="pl-2">
                             {{ data.value }}
                         </div>
                     </template>
-                    <template v-slot:cell(shortenedLink)="data">
-                        <div
+                    <template v-slot:cell(firstName)="data">
+                        <div class="text-center">
+                            {{ data.value }}
+                        </div>
+                        <!-- <div
                             class="
                                 d-flex"
                         >
@@ -98,11 +123,39 @@
                                     src="../../../assets/icons/copy-hover.svg"
                                 />
                             </button>
+                        </div> -->
+                    </template>
+                    <template v-slot:cell(lastName)="data">
+                        <div class="text-center">
+                            {{ data.value }}
                         </div>
                     </template>
-                    <template v-slot:cell(utmCampaign)="data">
+
+
+                    <!-- <template v-slot:cell(redirects)="data">
                         <div class="text-center">
-                            {{ data.value || '-' }}
+                            {{ dayjs(data.value).format('DD/MM/YYYY') }}
+                        </div>
+                    </template>
+                    <template v-slot:cell(status)="data">
+                        <div class="text-center">
+                            <b-btn
+                                variant="outline-brand"
+                                @click="publishOrUnpublishRoute(data)"
+                                style="width: 120px"
+                            >
+                                {{
+                                    data.item.status === 'published'
+                                        ? 'Unpublish'
+                                        : 'Publish'
+                                }}
+                            </b-btn>
+                        </div>
+                    </template> -->
+
+                    <template v-slot:cell(residence)="data">
+                        <div class="text-center">
+                            {{ data.value }}
                         </div>
                     </template>
                     <template v-slot:cell(createdAt)="data">
@@ -112,10 +165,16 @@
                     </template>
                     <template v-slot:cell(redirects)="data">
                         <div class="text-center">
-                            {{ data.value }}
+                            <b-btn
+                                variant="outline-brand"
+                                @click="publishOrUnpublishRoute(data)"
+                                style="width: 120px"
+                            >
+                                EMPLOYEE
+                            </b-btn>
                         </div>
                     </template>
-                    <template v-slot:cell(status)="data">
+                    <!-- <template v-slot:cell(status)="data">
                         <div
                             class="
                                 d-flex
@@ -133,7 +192,7 @@
                             ></div>
                             <span class="ml-1">{{ data.value }}</span>
                         </div>
-                    </template>
+                    </template> -->
                     <template v-slot:cell(action)="data">
                         <div
                             class="
@@ -142,7 +201,7 @@
                                 justify-content-end
                             "
                         >
-                            <b-link
+                            <!-- <b-link
                                 class="action-icon mr-2"
                                 @click.prevent="showChartForRoute(data.item)"
                                 data-toggle="tooltip"
@@ -373,7 +432,7 @@
                                         </svg>
                                     </span>
                                 </template>
-                            </b-link>
+                            </b-link> -->
 
                             <b-link
                                 class="action-icon mr-2"
@@ -537,7 +596,7 @@
                                     </svg>
                                 </span>
                             </b-link>
-
+<!-- 
                             <b-btn
                                 variant="outline-brand"
                                 @click="publishOrUnpublishRoute(data)"
@@ -548,7 +607,7 @@
                                         ? 'Unpublish'
                                         : 'Publish'
                                 }}
-                            </b-btn>
+                            </b-btn> -->
                         </div>
                     </template>
                 </b-table>
@@ -567,7 +626,7 @@
                         </b-form-select>
                     </div>
                     <b-pagination
-                        v-model="currentPageForTrafficRoutes"
+                        v-model="currentPageForPersonas"
                         aria-controls="traffic-routes"
                         align="right"
                         :total-rows="trafficRoutesTotal"
@@ -662,7 +721,7 @@
             </div>
         </b-card>
 
-        <div
+        <!-- <div
             class="recent-redirects"
             v-bind:class="{
                 hide: isShowRecentRedirectsTable === false,
@@ -749,7 +808,49 @@
                     </b-pagination>
                 </div>
             </b-card>
-        </div>
+        </div> -->
+
+        <TabModal modalId="viewEmployees" class="tab-modal" title="Add Persona Trait">
+            <b-tabs card fill >
+                <b-tab
+                    active-nav-item-class="active-nav-item"
+                    class="tab-item"
+                    title="Events"
+                >
+                    <EventTab></EventTab>
+                </b-tab>
+                <b-tab 
+                    class="tab-item"
+                    title="Traits">
+                    <TraitsTab></TraitsTab>
+                </b-tab>
+                <b-tab 
+                    class="tab-item"
+                    title="Audiances">
+                    <AudiancesTab></AudiancesTab>
+                </b-tab>
+                <b-tab 
+                    class="tab-item"
+                    title="Identities">
+                    <IdentitiesTab></IdentitiesTab>
+                </b-tab>
+                <b-tab 
+                    class="tab-item"
+                    title="Opt In/Opt Out">
+                    <TraitsTab></TraitsTab>
+                </b-tab>
+                <b-tab 
+                    class="tab-item"
+                    title="Memberships">
+                    <MembershipsTab></MembershipsTab>
+                </b-tab>
+                <b-tab 
+                    class="tab-item"
+                    title="Rewards">
+                    <RewardsTab></RewardsTab>       
+                </b-tab>
+            </b-tabs>
+        </TabModal>
 
         <DeleteConfirmModal
             :trafficRoute="selectedTrafficRoute"
@@ -761,6 +862,13 @@
 <script>
 import DateRangePicker from 'vue2-daterange-picker';
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
+import TabModal from './TabModal.vue';
+import EventTab from './EventTab.vue';
+import TraitsTab from './TraitsTab.vue';
+import AudiancesTab from './AudiancesTab.vue';
+import IdentitiesTab from './IdentitiesTab.vue';
+import MembershipsTab from './MembershipsTab.vue';
+import RewardsTab from './RewardsTab.vue'
 
 import dayjs from 'dayjs';
 
@@ -774,7 +882,14 @@ import { submitTrackingEvent } from '../../../services/TrackingService';
 export default {
     name: 'traffic-routes-table',
     components: {
-        DeleteConfirmModal
+        DeleteConfirmModal,
+        TabModal,
+        EventTab,
+        TraitsTab,
+        AudiancesTab,
+        IdentitiesTab,
+        MembershipsTab,
+        RewardsTab
     },
     data: () => ({
         tableTitle: '',
@@ -823,28 +938,36 @@ export default {
         selectedTrafficRoute: null,
         isShowRecentRedirectsTable: false,
         perPageForTrafficRoutes: 5,
-        currentPageForTrafficRoutes: 1,
-        fieldsForTrafficRoutes: [
+        currentPageForPersonas: 1,
+        fieldsForPersonas: [
             {
-                key: 'title',
+                key: 'email',
                 sortable: false,
-                label: 'TITLE',
+                label: 'EMAIL',
                 thStyle: {
                     paddingLeft: '40px'
                 }
             },
             {
-                key: 'shortenedLink',
+                key: 'firstName',
                 sortable: false,
-                label: 'SHORTENED LINK',
+                label: 'FIRST NAME',
                 thStyle: {
                     textAlign: 'center'
                 }
             },
             {
-                key: 'utmCampaign',
+                key: 'lastName',
                 sortable: false,
-                label: 'UTM CAMPAIGN',
+                label: 'LAST NAME',
+                thStyle: {
+                    textAlign: 'center'
+                }
+            },
+            {
+                key: 'residence',
+                sortable: false,
+                label: 'COUNTRY OF RESIDENCE',
                 thStyle: {
                     textAlign: 'center'
                 }
@@ -860,7 +983,7 @@ export default {
             {
                 key: 'redirects',
                 sortable: false,
-                label: 'REDIRECTS',
+                label: '',
                 thStyle: {
                     textAlign: 'center'
                 }
@@ -960,9 +1083,57 @@ export default {
     computed: {
         ...mapGetters(['getAllTrafficRoutes']),
 
-        itemsForTrafficRoutes: {
+        itemsForPersonas: {
             get: function() {
-                return JSON.parse(JSON.stringify(this.getAllTrafficRoutes));
+                return [
+                    {
+                        "_id":"61b172d29aa3ac001d5216ca",
+                        "email":"samjanssen@gmail.com",
+                        "firstName":"Sam",
+                        "lastName":"Janssen",
+                        "residence":"Netherlands",
+
+                        "shortenedDomain":"quenchy.link",
+                        "shortenedCode":"FRgqdW",
+                        "redirects":0,
+                        "destinations":[{"url":"https://adf.com","percentage":100}],
+                        "utmSource":"",
+                        "utmMedium":"",
+                        "utmTerm":"",
+                        "utmContent":"",
+                        "qr":"data:image/png;base64,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",
+                        "status":"published",
+                        "createdAt":"2021-12-09T03:06:58.983Z",
+                        "redirectLimit":null,
+                        "redirectLimitReachedUrl":"",
+                        "redirectExpiresOn":null,
+                        "redirectExpiredUrl":""
+                    },
+                    {
+                        "_id":"61b172d29aa3ac001d5312ca",
+                        "email":"plangkoAnssen@gmail.com",
+                        "firstName":"Plango",
+                        "lastName":"Anssen",
+                        "residence":"Netherlands",
+
+                        "shortenedDomain":"quenchy.link",
+                        "shortenedCode":"FRgqdW",
+                        "redirects":0,
+                        "destinations":[{"url":"https://adf.com","percentage":100}],
+                        "utmSource":"",
+                        "utmMedium":"",
+                        "utmTerm":"",
+                        "utmContent":"",
+                        "qr":"data:image/png;base64,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",
+                        "status":"published",
+                        "createdAt":"2021-12-09T03:06:58.983Z",
+                        "redirectLimit":null,
+                        "redirectLimitReachedUrl":"",
+                        "redirectExpiresOn":null,
+                        "redirectExpiredUrl":""
+                    }
+                ];
+                // return JSON.parse(JSON.stringify(this.getAllTrafficRoutes));
             },
             set: function() {}
         },
@@ -979,11 +1150,12 @@ export default {
         }
     },
     methods: {
-        async handleClickTrafficRoutesTableRow(item) {
+        async handleClickPersonasTableRow(item) {
+            // alert(item);
             this.selectedTrafficRoute = item;
 
-            for (var i = 0; i < this.itemsForTrafficRoutes.length; i++) {
-                this.itemsForTrafficRoutes[i]._rowVariant = '';
+            for (var i = 0; i < this.itemsForPersonas.length; i++) {
+                this.itemsForPersonas[i]._rowVariant = '';
             }
 
             item._rowVariant = 'active';
@@ -993,53 +1165,55 @@ export default {
             this.isShowRecentRedirectsTable = true;
             this.isShowCharts = false;
             this.$refs.traffictable.refresh();
+
+            this.$root.$emit('bv::show::modal', 'viewEmployees')
         },
         async refreshTrafficRoutes() {
-            this.currentPageForTrafficRoutes = 1;
+            this.currentPageForPersonas = 1;
             this.isShowRecentRedirectsTable = false;
             this.closeCharts();
             await this.getTrafficRoutes();
         },
-        async publishOrUnpublishRoute(data) {
-            const route = this.findRouteById(data.item._id);
-            this.selectedTrafficRoute = route;
+        // async publishOrUnpublishRoute(data) {
+        //     const route = this.findRouteById(data.item._id);
+        //     this.selectedTrafficRoute = route;
 
-            if (data.item.status === 'published') {
-                await this.$store
-                    .dispatch(
-                        'unpublishTrafficRoute',
-                        this.selectedTrafficRoute._id
-                    )
-                    .then(() => {
-                        // Send Tracking Event With UCC SDK
-                        submitTrackingEvent(
-                            'TRAFFIC-ROUTE-UNPUBLISHED',
-                            { trafficRouteId: this.selectedTrafficRoute._id },
-                            this.$store.getters['customerData']
-                        );
-                        this.$store.dispatch('getAllTrafficRoutes', {
-                            sort_by: this.selectedOrderByOption
-                        });
-                    });
-            } else {
-                await this.$store
-                    .dispatch(
-                        'publishTrafficRoute',
-                        this.selectedTrafficRoute._id
-                    )
-                    .then(() => {
-                        // Send Tracking Event With UCC SDK
-                        submitTrackingEvent(
-                            'TRAFFIC-ROUTE-PUBLISHED',
-                            { trafficRouteId: this.selectedTrafficRoute._id },
-                            this.$store.getters['customerData']
-                        );
-                        this.$store.dispatch('getAllTrafficRoutes', {
-                            sort_by: this.selectedOrderByOption
-                        });
-                    });
-            }
-        },
+        //     if (data.item.status === 'published') {
+        //         await this.$store
+        //             .dispatch(
+        //                 'unpublishTrafficRoute',
+        //                 this.selectedTrafficRoute._id
+        //             )
+        //             .then(() => {
+        //                 // Send Tracking Event With UCC SDK
+        //                 submitTrackingEvent(
+        //                     'TRAFFIC-ROUTE-UNPUBLISHED',
+        //                     { trafficRouteId: this.selectedTrafficRoute._id },
+        //                     this.$store.getters['customerData']
+        //                 );
+        //                 this.$store.dispatch('getAllTrafficRoutes', {
+        //                     sort_by: this.selectedOrderByOption
+        //                 });
+        //             });
+        //     } else {
+        //         await this.$store
+        //             .dispatch(
+        //                 'publishTrafficRoute',
+        //                 this.selectedTrafficRoute._id
+        //             )
+        //             .then(() => {
+        //                 // Send Tracking Event With UCC SDK
+        //                 submitTrackingEvent(
+        //                     'TRAFFIC-ROUTE-PUBLISHED',
+        //                     { trafficRouteId: this.selectedTrafficRoute._id },
+        //                     this.$store.getters['customerData']
+        //                 );
+        //                 this.$store.dispatch('getAllTrafficRoutes', {
+        //                     sort_by: this.selectedOrderByOption
+        //                 });
+        //             });
+        //     }
+        // },
         // async showChartForRoute(item) {
         //     this.tableTitle = item.title;
         //     this.totalClicks = item.redirects;
@@ -1050,8 +1224,8 @@ export default {
         //     this.isShowCharts = true;
         //     this.isShowRecentRedirectsTable = false;
 
-        //     for (var i = 0; i < this.itemsForTrafficRoutes.length; i++) {
-        //         this.itemsForTrafficRoutes[i]._rowVariant = '';
+        //     for (var i = 0; i < this.itemsForPersonas.length; i++) {
+        //         this.itemsForPersonas[i]._rowVariant = '';
         //     }
 
         //     if (this.isShowCharts && this.selectedChartId === item._id) {
@@ -1069,7 +1243,7 @@ export default {
         //     this.selectedTrafficRoute = null;
         // },
         findRouteById(id) {
-            return this.itemsForTrafficRoutes.find(item => item._id === id);
+            return this.itemsForPersonas.find(item => item._id === id);
         },
         doCopy(text) {
             this.$copyText(text).then(
@@ -1102,7 +1276,7 @@ export default {
         },
         confirmDeleteTrafficRoute(value) {
             if (value) {
-                this.itemsForTrafficRoutes = this.itemsForTrafficRoutes.filter(
+                this.itemsForPersonas = this.itemsForPersonas.filter(
                     item => item._id !== this.selectedTrafficRoute._id
                 );
                 this.isShowRecentRedirectsTable = false;
@@ -1249,7 +1423,7 @@ export default {
                 sort_by: this.selectedOrderByOption,
                 limit: this.perPageForTrafficRoutes,
                 offset:
-                    (this.currentPageForTrafficRoutes - 1) *
+                    (this.currentPageForPersonas - 1) *
                     this.perPageForTrafficRoutes
             });
             this.trafficRoutesTotal = routes.total;
@@ -1266,7 +1440,7 @@ export default {
             this.itemsForRecentRedirects = redirects.data.data;
         },
         async handleTrafficRoutesChange(value) {
-            this.currentPageForTrafficRoutes = value;
+            this.currentPageForPersonas = value;
             await this.getTrafficRoutes();
         },
         async handleRecentRedirectsPageChange(value) {
@@ -1275,7 +1449,7 @@ export default {
         },
         async handleTrafficRoutesPageSizeChange(size) {
             this.perPageForTrafficRoutes = size;
-            this.currentPageForTrafficRoutes = 1;
+            this.currentPageForPersonas = 1;
             await this.getTrafficRoutes();
         },
         async handleRecentRedirectsPageSizeChange(size) {
@@ -1292,8 +1466,8 @@ export default {
         dayjs(...args) {
             return dayjs(...args);
         },
-        async sortTrafficRoute() {
-            this.currentPageForTrafficRoutes = 1;
+        async sortPersonas() {
+            this.currentPageForPersonas = 1;
             await this.getTrafficRoutes();
         },
         hoverIcon(routeId) {
@@ -1309,6 +1483,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// .employee-modal {
+//     background-color: #f0f0f7;
+// }
 .disable--pointer {
     cursor: not-allowed !important;
 }
@@ -1387,9 +1564,9 @@ export default {
     background: #9fe364 0% 0% no-repeat padding-box;
 }
 
-.unpublished {
-    background: #c6c6c6 0% 0% no-repeat padding-box;
-}
+// .unpublished {
+//     background: #c6c6c6 0% 0% no-repeat padding-box;
+// }
 
 .draft {
     border: 1px solid #707070;
@@ -1494,4 +1671,9 @@ table {
         }
     }
 }
+// .active-nav-item {
+//     font-weight: bold;
+//     color: #2f3380 !important;
+//     font-size: 24px;
+// }
 </style>
