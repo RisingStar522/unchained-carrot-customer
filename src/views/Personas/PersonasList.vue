@@ -5,13 +5,13 @@
         </div>
         <div v-else>
             <div
-                class="traffic-table-container"
-                v-if="itemsForTrafficRoutes.length > 0"
+                class="personas-table-container"
+                v-if="itemsForPersonas.length > 0"
             >
                 <PersonasTable />
             </div>
-            <div class="traffic-route-container" v-else>
-                <!-- <h2>Traffic Routes</h2> -->
+            <div class="personas-container" v-else>
+                <!-- <h2>Personas</h2> -->
                 <router-link to="/traffic-routes/add-route">
                     <img
                         to="/traffic-routes/add-route"
@@ -81,7 +81,7 @@ export default {
     },
     computed: {
         ...mapGetters(['getAllTrafficRoutes']),
-        itemsForTrafficRoutes() {
+        itemsForPersonas() {
             return JSON.parse(JSON.stringify(this.getAllTrafficRoutes));
         }
     },
@@ -92,7 +92,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.traffic-route-container {
+.personas-container {
     text-align: center;
     padding: 20px 0px;
     max-height: 100%;

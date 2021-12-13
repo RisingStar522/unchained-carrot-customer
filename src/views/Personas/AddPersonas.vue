@@ -1,6 +1,11 @@
-♦<template>
+<style scoped>
+.calendar-class {
+    width: 25% !important;
+}
+</style>
+<template>
     <main class="content">
-        <div class="container mx-4 mt-3">
+        <div class="container mt-3">
             <b-form @submit.prevent="onSubmit">
                 <div
                     class="
@@ -23,8 +28,9 @@
                             type="submit"
                             variant="brand"
                             :disabled="!itemsForDestination.length"
-                            >{{
-                                !trafficRouteId ? 'Add' : 'Update'
+                            >
+                            {{
+                                !addPersonaId ? 'Add' : 'Update'
                             }}
                             Persona</b-button
                         >
@@ -81,7 +87,8 @@
                                                     v-model="formData.firstName"
                                                     placeholder=""
                                                     required
-                                                ></b-form-input>
+                                                >
+                                                </b-form-input>
                                             </div>
                                         </b-form-group>
                                     </b-col>
@@ -102,7 +109,8 @@
                                                     v-model="formData.lastName"
                                                     placeholder=""
                                                     required
-                                                ></b-form-input>
+                                                >
+                                                </b-form-input>
                                             </div>
                                         </b-form-group>
                                     </b-col>
@@ -110,22 +118,24 @@
                                         <div>
                                             <label for="example-input">Date of Birth</label>
                                             <b-input-group class="mb-3">
-                                            <b-form-input
-                                                id="example-input"
-                                                v-model="value"
-                                                type="text"
-                                                placeholder="MM-DD-YYYY"
-                                                autocomplete="off"
-                                            ></b-form-input>
+                                                <b-form-input
+                                                    id="example-input"
+                                                    v-model="formData.dateOfBirth"
+                                                    type="text"
+                                                    placeholder="DD-MM-YYYY"
+                                                    autocomplete="off"
+                                                >
+                                                </b-form-input>
                                             <b-input-group-append>
                                                 <b-form-datepicker
-                                                v-model="value"
-                                                button-only
-                                                right
-                                                locale="en-US"
-                                                aria-controls="example-input"
-                                                @context="onContext"
-                                                ></b-form-datepicker>
+                                                    v-model="formData.dateOfBirth"
+                                                    button-only
+                                                    right
+                                                    locale="en-US"
+                                                    aria-controls="example-input"
+                                                    @context="onContext"
+                                                >
+                                                </b-form-datepicker>
                                             </b-input-group-append>
                                             </b-input-group>
                                         </div>
@@ -134,16 +144,9 @@
                                 </b-row>
                                 <b-row>
                                     <b-col sm="4">
-                                        <!-- <b-col sm="6" class="no-right-padding">
-                                            <b-form-input
-                                                id="sender-email"
-                                                type="text"
-                                                placeholder="E.g. youremail@example.com"
-                                            />
-                                        </b-col> -->
                                         <b-form-group
                                             id="input-group-route"
-                                            label="First Name"
+                                            label="Email"
                                         >
                                             <div
                                                 class="
@@ -162,7 +165,7 @@
                                             </div>
                                         </b-form-group>
                                     </b-col>
-                                    <b-col sm="7">
+                                    <b-col sm="7" >
                                         <b-row>
                                             <b-col sm="12">
                                                 <label for="store-country">Store Country</label>
@@ -342,10 +345,31 @@
                                 <b-row class="mt-4 pt-4 ml-1 mb-2">
                                     <b-row class="justify-content-left">
                                         <b-col sm="12">
-                                            <Search
-                                                placeholder="Search template..."
-                                                :searchHandler="searchHandler"
-                                            />
+                                            <div class="input-with-icon">
+                                                <b-form-input placeholder="Search program" />
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    width="16"
+                                                    height="16"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <defs>
+                                                        <clipPath id="a">
+                                                            <rect
+                                                                width="16"
+                                                                height="16"
+                                                                fill="none"
+                                                            />
+                                                        </clipPath>
+                                                    </defs>
+                                                    <g clip-path="url(#a)">
+                                                        <path
+                                                            d="M12.7,11.23a6.777,6.777,0,0,0,1.4-4.174A7.02,7.02,0,0,0,7.1,0,7.105,7.105,0,0,0,0,7.056a7.105,7.105,0,0,0,7.1,7.056,6.667,6.667,0,0,0,4.2-1.391l3,2.981a.971.971,0,0,0,1.4,0,.957.957,0,0,0,0-1.391Zm-5.6.8A5.022,5.022,0,0,1,2,7.056a5.1,5.1,0,0,1,10.2,0A5.022,5.022,0,0,1,7.1,12.025Z"
+                                                        />
+                                                    </g>
+                                                </svg>
+                                            </div>
                                         </b-col>
                                     </b-row>
                                 </b-row>
@@ -410,75 +434,6 @@
                     </div>
                 </template>
             </b-modal>
-
-            <b-modal
-                id="warning-modal-for-link"
-                header-border-variant="light"
-                footer-border-variant="light"
-                centered
-                hide-header
-            >
-                <div class="d-block text-center">
-                    Only change the code if you have not yet distributed the
-                    shortened link or the QR code! Links containing the old code
-                    will no longer work!
-                </div>
-
-                <template v-slot:modal-footer="{ hide }">
-                    <div class="d-flex justify-content-center w-100">
-                        <b-btn
-                            @click="hide()"
-                            variant="outline-brand"
-                            size="lg"
-                            class="mr-2"
-                            >Cancel</b-btn
-                        >
-                        <b-btn
-                            size="lg"
-                            variant="brand"
-                            @click="updateTrafficRoute()"
-                            >Continue</b-btn
-                        >
-                    </div>
-                </template>
-            </b-modal>
-
-            <b-modal
-                id="publish-confirm-modal"
-                header-border-variant="light"
-                footer-border-variant="light"
-                centered
-                hide-header
-                hide-footer
-            >
-                <div
-                    class="d-block text-center p-5"
-                    style="width: 360px; margin: auto"
-                >
-                    Your route is not published yet. Do you want to publish it
-                    now?
-                </div>
-
-                <template>
-                    <div class="d-flex justify-content-center w-100 pb-3">
-                        <b-btn
-                            @click="cancelPublish"
-                            variant="outline-brand"
-                            size="lg"
-                            class="mr-2"
-                            style="width: 170px"
-                            >Later</b-btn
-                        >
-                        <b-btn
-                            size="lg"
-                            variant="brand"
-                            @click="publishRoute"
-                            style="width: 170px"
-                            >Publish Now</b-btn
-                        >
-                    </div>
-                </template>
-            </b-modal>
         </div>
     </main>
 </template>
@@ -486,7 +441,6 @@
 <script>
 import QrcodeVue from 'qrcode.vue';
 import { Validator } from 'vee-validate';
-import { submitTrackingEvent } from '../../services/TrackingService';
 import Search from '../../components/search';
 
 export default {
@@ -498,8 +452,18 @@ export default {
     data() {
         return {
             formData: {
-                enabled: true,
-                filter: ''
+                title: '',
+                firstName: '',
+                lastName: '',
+                dateOfBirth: '',
+                referral1: '',
+                referral2: '',
+                referral3: '',
+                referral4: '',
+                loyalty1: '',
+                loyalty2: '',
+                loyalty3: '',
+                loyalty4: '',
             },
             selectedCountry: 'Netherlands',
             storeCountries: [
@@ -509,37 +473,14 @@ export default {
                 }
             ],
             searchTerm: '',
-            value: '',
+            dateOfBirth: '',
             formatted: '',
             selected: '',
-            formData: {
-                title: '',
-                shortenedCode: '',
-                utmCampaign: '',
-                utmSource: '',
-                utmMedium: '',
-                utmTerm: '',
-                utmContent: '',
-                redirectLimit: '',
-                redirectLimitReachedUrl: '',
-                redirectExpiresOn: '',
-                redirectExpiredUrl: ''
-            },
+
             itemsForDestination: [
                 {
                     url: '',
                     percentage: this.$store.getters.getTotalDestinationPercent
-                }
-            ],
-            qrCodeImageSize: 150,
-            qrCodeImageUrl: '',
-            shortenedDomain: 'quenchy.link',
-            domainLinks: [
-                {
-                    value: 'quenchy.link'
-                },
-                {
-                    value: 'ucc.link'
                 }
             ],
             link: '',
@@ -548,23 +489,8 @@ export default {
             showLabel: true,
             isShowUTMTags: false,
             isShowFallbackDestinations: false,
-            newTrafficRouteId: ''
+            newAddPersonaId: ''
         };
-    },
-    async created() {
-        if (!Object.keys(this.currentTrafficRoute).length) {
-            await this.$store
-                .dispatch('getTrafficRouteById', this.$route.params.id)
-                .then(
-                    () =>
-                        (this.link = `https://${this.shortenedDomain}/${this.formData.shortenedCode}`)
-                );
-        }
-
-        if (this.$route.params.id) {
-            this.loadTrafficRouteData();
-            this.link = `https://${this.shortenedDomain}/${this.formData.shortenedCode}`;
-        }
     },
     methods: {
         onContext(ctx) {
@@ -572,18 +498,6 @@ export default {
             this.formatted = ctx.selectedFormatted
             // The following will be an empty string until a valid date is entered
             this.selected = ctx.selectedYMD
-        },
-        onCopy() {
-            // Send Tracking Event With UCC SDK
-            submitTrackingEvent(
-                'TRAFFIC-ROUTE-QR-CODE-COPIED',
-                { trafficRouteId: this.newTrafficRouteId },
-                this.$store.getters['customerData']
-            );
-            this.$notify({
-                title: 'Copied!',
-                type: 'success'
-            });
         },
         onError() {
             alert('Failed to copy text');
@@ -595,100 +509,58 @@ export default {
         switchLabelElement() {
             this.showLabel = true;
         },
-        cancelPublish() {
-            this.$bvModal.hide('publish-confirm-modal');
-            this.$router.push({ name: 'TrafficRoutes' }).catch(() => {});
+        async createAddPersona() {
+            this.$router.push({ name: 'PersonasList' });
+            // Comment for Api.
+
+            // if (!this.formData.firstName) {
+            //     this.$bvModal.show('warning-modal-for-validation');
+            // } else if (!this.formData.lastName) {
+
+            // } else if (!this.formData.dateOfBirth){
+
+            // } else if (!this.formData.email){
+
+            // } else {
+            //     await this.$store
+            //         .dispatch(
+            //             'createAddPersona',
+            //             Object.assign(
+            //                 this.formData
+            //             )
+            //         )
+            //         .then(data => {
+            //             if (data.result && data.result._id) {
+            //                 this.newAddPersonaId = data.result._id;
+            //             }
+            //         });
+            // }
         },
-        async publishRoute() {
-            await this.$store
-                .dispatch('publishTrafficRoute', this.newTrafficRouteId)
-                .then(() => {
-                    // Send Tracking Event With UCC SDK
-                    submitTrackingEvent(
-                        'TRAFFIC-ROUTE-PUBLISHED',
-                        { trafficRouteId: this.newTrafficRouteId },
-                        this.$store.getters['customerData']
-                    );
-                    this.$router
-                        .push({ name: 'TrafficRoutes' })
-                        .catch(() => {});
-                });
-            this.$bvModal.hide('publish-confirm-modal');
-        },
-        async createTrafficRoute() {
-            if (!this.formData.title) {
-                this.$bvModal.show('warning-modal-for-validation');
-            } else {
-                await this.$store
-                    .dispatch(
-                        'createTrafficRoute',
-                        Object.assign(
-                            {
-                                qr: this.qrCodeImageUrl,
-                                destinations: this.itemsForDestination,
-                                shortenedDomain: this.shortenedDomain
-                            },
-                            this.formData
-                        )
-                    )
-                    .then(data => {
-                        if (data.result && data.result._id) {
-                            this.newTrafficRouteId = data.result._id;
-                            this.$bvModal.show('publish-confirm-modal');
-                            // Send Tracking Event With UCC SDK
-                            submitTrackingEvent(
-                                'TRAFFIC-ROUTE-CREATED',
-                                data.result,
-                                this.$store.getters['customerData']
-                            );
-                        }
-                    });
-            }
-        },
-        checkIfLinkChanges() {
-            if (this.shortenedLink !== this.link) {
-                this.$bvModal.show('warning-modal-for-link');
-            } else {
-                this.updateTrafficRoute();
-            }
-        },
-        async updateTrafficRoute() {
-            const isPublished = this.currentTrafficRoute.status === 'published';
+        async updateAddPersona() {
+            const isPublished = this.currentaddPersona.status === 'published';
             if (isPublished) {
                 await this.$store.dispatch(
-                    'unpublishTrafficRoute',
-                    this.currentTrafficRoute._id
+                    'unpublishaddPersona',
+                    this.currentaddPersona._id
                 );
             }
 
-            const data = await this.$store.dispatch('updateTrafficRoute', {
-                id: this.trafficRouteId,
+            const data = await this.$store.dispatch('updateAddPersona', {
+                id: this.addPersonaId,
                 data: Object.assign(
-                    {
-                        qr: this.qrCodeImageUrl,
-                        destinations: this.itemsForDestination,
-                        shortenedDomain: this.shortenedDomain
-                    },
                     this.formData
                 )
             });
-            // Send Tracking Event With UCC SDK
-            await submitTrackingEvent(
-                'TRAFFIC-ROUTE-UPDATED',
-                data.result,
-                this.$store.getters['customerData']
-            );
-
             if (isPublished) {
                 await this.$store
                     .dispatch(
-                        'publishTrafficRoute',
-                        this.currentTrafficRoute._id
+                        'publishaddPersona',
+                        this.currentaddPersona._id
                     )
                     .then(() =>
                         this.$router
                             .push({
-                                name: 'TrafficRoutes'
+                                name: 'addPersonas'
                             })
                             .catch(() => {})
                     );
@@ -696,7 +568,7 @@ export default {
 
             this.$router
                 .push({
-                    name: 'TrafficRoutes'
+                    name: 'addPersonas'
                 })
                 .catch(() => {});
         },
@@ -705,27 +577,11 @@ export default {
                 if (!result) {
                     return;
                 } else {
-                    const percent = 100;
-                    // Calculate all the pecentage value in the itemsForDestination array
-                    const destinationPercentageTotal = this.itemsForDestination.reduce(
-                        (prev, cur) => prev + parseInt(cur.percentage),
-                        0
-                    );
-                    // Then compare the value to the percent variable
-                    if (percent !== destinationPercentageTotal) {
-                        this.$notify({
-                            title:
-                                'Destination routes percentages must add up to 100',
-                            type: 'error'
-                        });
-                        return false;
-                    }
-
-                    if (!this.trafficRouteId) {
-                        await this.createTrafficRoute();
+                    if (!this.addPersonaId) {
+                        await this.createAddPersona();
                         this.$validator.reset();
                     } else {
-                        await this.checkIfLinkChanges();
+                        await this.updateAddPersona();
                         this.$validator.reset();
                     }
                 }
@@ -733,57 +589,6 @@ export default {
         },
         goBack() {
             this.$router.push({ name: 'Personas' });
-        },
-        generateQRCode() {
-            let result = '';
-            const characters =
-                'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            const charactersLength = characters.length;
-            for (let i = 0; i < 6; i++) {
-                result += characters.charAt(
-                    Math.floor(Math.random() * charactersLength)
-                );
-            }
-            this.formData.shortenedCode = result;
-            const qrCode = document.getElementsByTagName('canvas')[0];
-            this.qrCodeImageUrl = qrCode.toDataURL('image/png');
-        },
-        loadQRCode() {
-            const qrCode = document.getElementsByTagName('canvas')[0];
-            this.qrCodeImageUrl = qrCode.toDataURL('image/png');
-        },
-        async copyQRCode() {
-            const qrCode = document.getElementsByTagName('canvas')[0];
-
-            if (window.navigator.clipboard.write) {
-                qrCode.toBlob(async blob => {
-                    await window.navigator.clipboard
-                        .write([
-                            new ClipboardItem({
-                                [blob.type]: blob
-                            })
-                        ])
-                        .then(() => {
-                            this.$notify({
-                                title: 'Copied!',
-                                type: 'success'
-                            });
-                        });
-                });
-            } else {
-                let img = document.createElement('img');
-                img.src = qrCode.toDataURL();
-
-                let div = document.createElement('div');
-                div.contentEditable = true;
-                div.appendChild(img);
-                document.body.appendChild(div);
-
-                // do copy
-                this.SelectText(div);
-                document.execCommand('Copy');
-                document.body.removeChild(div);
-            }
         },
         SelectText(element) {
             // var doc = document;
@@ -799,92 +604,29 @@ export default {
             selection.addRange(range);
             // }
         },
-        manuallyGenerateQRCode() {
-            if (!this.formData.shortenedCode.length) {
-                this.qrCodeImageUrl = '';
-            }
-            const qrCode = document.getElementsByTagName('canvas')[0];
-            this.qrCodeImageUrl = qrCode.toDataURL('image/png');
-        },
-        downloadQR() {
-            if (this.formData.title) {
-                const qrCode = document.getElementsByTagName('canvas')[0];
-                const dataURL = qrCode.toDataURL('image/png');
-                const downloadLink = document.getElementById('downloadLink');
-                downloadLink.href = dataURL;
-                downloadLink.download =
-                    this.formData.title.replace(/ /g, '-') + '.png';
-                // Send Tracking Event With UCC SDK
-                submitTrackingEvent(
-                    'TRAFFIC-ROUTE-QR-CODE-DOWNLOADED',
-                    // TODO: not very sure if trafficRouteId is accessible like this
-                    { trafficRouteId: this.newTrafficRouteId },
-                    this.$store.getters['customerData']
-                );
-            }
-        },
-        async loadTrafficRouteData() {
-            const trafficRoute = JSON.parse(
-                JSON.stringify(this.currentTrafficRoute)
+        async loadaddPersonaData() {
+            const addPersona = JSON.parse(
+                JSON.stringify(this.currentaddPersona)
             );
 
-            this.formData.title =
-                trafficRoute && trafficRoute.title ? trafficRoute.title : '';
-            this.shortenedDomain =
-                trafficRoute && trafficRoute.shortenedDomain
-                    ? trafficRoute.shortenedDomain
-                    : 'quenchy.link';
-            this.formData.shortenedCode =
-                trafficRoute && trafficRoute.shortenedCode
-                    ? trafficRoute.shortenedCode
+            this.formData.firstName =
+                addPersona && addPersona.firstName ? addPersona.firstName : '';
+            this.formData.lastName =
+                addPersona && addPersona.lastName 
+                    ? addPersona.lastName
                     : '';
-            this.formData.utmCampaign =
-                trafficRoute && trafficRoute.utmCampaign
-                    ? trafficRoute.utmCampaign
+            this.formData.dateOfBirth =
+                addPersona && addPersona.dateOfBirth
+                    ? addPersona.dateOfBirth
                     : '';
-            this.formData.utmSource =
-                trafficRoute && trafficRoute.utmSource
-                    ? trafficRoute.utmSource
+            this.formData.email =
+                addPersona && addPersona.email
+                    ? addPersona.email
                     : '';
-            this.formData.utmMedium =
-                trafficRoute && trafficRoute.utmMedium
-                    ? trafficRoute.utmMedium
+            this.formData.country =
+                addPersona && addPersona.utmMedium
+                    ? addPersona.utmMedium
                     : '';
-            this.formData.utmTerm =
-                trafficRoute && trafficRoute.utmTerm
-                    ? trafficRoute.utmTerm
-                    : '';
-            this.formData.utmContent =
-                trafficRoute && trafficRoute.utmContent
-                    ? trafficRoute.utmContent
-                    : '';
-
-            this.formData.redirectLimit =
-                trafficRoute && trafficRoute.redirectLimit
-                    ? trafficRoute.redirectLimit
-                    : '';
-
-            this.formData.redirectLimitReachedUrl =
-                trafficRoute && trafficRoute.redirectLimitReachedUrl
-                    ? trafficRoute.redirectLimitReachedUrl
-                    : '';
-            this.formData.redirectExpiresOn =
-                trafficRoute && trafficRoute.redirectExpiresOn
-                    ? trafficRoute.redirectExpiresOn
-                    : '';
-            this.formData.redirectExpiredUrl =
-                trafficRoute && trafficRoute.redirectExpiredUrl
-                    ? trafficRoute.redirectExpiredUrl
-                    : '';
-
-            this.formData.qr =
-                trafficRoute && trafficRoute.qr ? trafficRoute.qr : '';
-
-            this.itemsForDestination =
-                trafficRoute && trafficRoute.destinations.length
-                    ? trafficRoute.destinations
-                    : [];
-
             if (
                 this.formData.redirectLimit &&
                 this.formData.redirectLimitReachedUrl
@@ -899,31 +641,6 @@ export default {
                 this.isRedirectExpiresOn = true;
             }
         },
-        addDestination() {
-            const prevDestination = this.itemsForDestination[
-                this.itemsForDestination.length - 1
-            ];
-
-            this.$store.commit(
-                'SET_REMAINING_DESTINATION_PERCENT',
-                prevDestination.percentage
-            );
-            this.itemsForDestination.push({
-                url: '',
-                percentage: this.$store.getters.getTotalDestinationPercent
-            });
-        },
-        removeRow(index) {
-            this.$store.commit(
-                'SET_ADD_REMAINING_DESTINATION_PERCENT',
-                parseInt(this.itemsForDestination[index].percentage) +
-                    parseInt(this.itemsForDestination[index - 1].percentage)
-            );
-            this.itemsForDestination.splice(index, 1);
-            this.itemsForDestination[
-                this.itemsForDestination.length - 1
-            ].percentage = this.$store.getters.getTotalDestinationPercent;
-        },
         isAlphaNumeric(e) {
             let char = String.fromCharCode(e.keyCode); // Get the character
             if (/^[A-Za-z0-9]+$/.test(char)) return true;
@@ -932,15 +649,12 @@ export default {
         }
     },
     computed: {
-        trafficRouteId() {
+        addPersonaId() {
             return this.$route.params.id;
         },
-        currentTrafficRoute() {
-            return this.$store.getters['getTrafficRouteById'];
+        currentaddPersona() {
+            return this.$store.getters['getaddPersonaById'];
         },
-        shortenedLink() {
-            return `https://${this.shortenedDomain}/${this.formData.shortenedCode}`;
-        }
     },
     mounted() {
         const dict = {
@@ -951,12 +665,6 @@ export default {
             }
         };
         Validator.localize(dict);
-
-        this.loadQRCode();
-
-        if (!this.$route.params.id) {
-            this.generateQRCode();
-        }
     }
 };
 </script>
@@ -1005,10 +713,6 @@ export default {
     margin-right: 10px;
 }
 
-.download-link,
-.copy-clipboard,
-.add-destination-url,
-.edit-utm-tags,
 .edit-fallback-destinations {
     color: #2f3380;
     text-decoration: underline;
@@ -1088,7 +792,7 @@ export default {
         margin-top: 35px;
     }
     .block-1 {
-        width: 75%;
+        width: 88%;
     }
     .checkbox-group {
         font-size: 12px;
@@ -1133,5 +837,8 @@ export default {
         color: #ffffff !important;
         background-color: #2f3380;
     }
+}
+.calendar-class {
+    width: 29%;
 }
 </style>

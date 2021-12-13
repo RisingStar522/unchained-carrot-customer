@@ -3,7 +3,8 @@
         <div class="center-flex full-height">
             <div class="personas-index">
                 <img
-                    src="@/assets/images/emailcampaign/mail-image.png"
+                    src="@/assets/images/personas/UC_personas-05-05.png"
+                    width="30%"
                     alt="Pesonas Main Image"
                 />
                 <h2>Personas are all your users, contacts and members</h2>
@@ -13,17 +14,20 @@
                     </p>
                 </div>
                 <b-row class="personas-index-row">
-                    <b-col><b-button class="personas-index-btn" variant="outline-brand">Read Guide</b-button></b-col>
                     <b-col>
-                    <b-button
-                        class="personas-index-btn"
-                        variant="primary"
-                        :to="{ name: 'AddPersonas' }"
-                    >
-                        Add personas
-                    </b-button>
+                        <b-button class="personas-index-btn" variant="outline-brand">
+                            Read Guide
+                            </b-button>
+                        </b-col>
+                    <b-col>
+                        <b-button
+                            class="personas-index-btn"
+                            variant="primary"
+                            :to="{ name: 'AddPersonas' }"
+                        >
+                            Add personas
+                        </b-button>
                     </b-col>
-                    <!-- <b-col><b-button class="personas-index-btn" v-b-modal.addPersonas  variant="primary">Add personas</b-button></b-col> -->
                 </b-row>
 
                 <!-- <Modal modalId="addPersonas" title="Add Persona Trait">
@@ -74,17 +78,24 @@
                     <div class="p-4">
                         <img
                             class="mr-2"
-                            src="../../assets/icons/right_check.svg"/>List of users</div></div>
+                            src="../../assets/icons/right_check.svg"/>
+                            List of users
+                    </div>
+                </div>
                 <div class="col px-md-4 content-list">
                     <div class="p-4">
                         <img
                             class="mr-2"
-                            src="../../assets/icons/right_check.svg"/>List of subscribers</div></div>
+                            src="../../assets/icons/right_check.svg"/>
+                            List of subscribers
+                    </div>
+                </div>
                 <div class="col px-md-4 content-list">
                     <div class="p-4">
                         <img
                             class="mr-2"
-                            src="../../assets/icons/right_check.svg"/>List of members
+                            src="../../assets/icons/right_check.svg"/>
+                            List of members
                     </div>
                 </div>
             </div>
@@ -93,15 +104,14 @@
 </template>
 
 <script>
-import Modal from '../../views/Personas/components/modal';
-import dayjs from 'dayjs';
-import { mapGetters, mapActions } from 'vuex';
+// import Modal from '../../views/Personas/components/modal';
+// import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'personas',
-    components: {
-        Modal
-    },
+    // components: {
+    //     Modal
+    // },
     data() {
         return {
             personasMainFindContent: [
@@ -109,41 +119,14 @@ export default {
                 'List of subscribers',
                 'List of members'
             ],
-            transformActiveIntegrations: [
-                { value: null, text: 'Please select an option' },
-                { value: 'a', text: 'This is First option' },
-                { value: 'b', text: 'Selected Option' },
-                { value: 'd', text: 'This one is disabled', disabled: true }
-            ],
-            form: {
-                name: '',
-                transformActiveIntegrations: null,
-                value: ''
-            },
         };
     },
-    computed: {
-        ...mapGetters(['getAllPersonas']),
-        // transformActiveIntegrations() {
-        //     return this.activeIntegrations.map(({ externalSystem }) =>
-        //         this.capitalizeFirstLetter(externalSystem)
-        //     );
-        // }
-    },
-    methods: {
-        ...mapActions(['getUserProfilePersonas']),
-        dayjs(...args) {
-            return dayjs(...args);
-        },
-        capitalizeFirstLetter(string) {
-            return (
-                string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
-            );
-        }
-    },
-    async mounted() {
-        await this.getUserProfilePersonas();
-    }
+    // computed: {
+    // },
+    // methods: {
+    // },
+    // async mounted() {
+    // }
 };
 </script>
 
@@ -151,20 +134,23 @@ export default {
 .personas-index {
   text-align: center;
 
-  h2 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #43425D;
-    margin-top: 12px;
-    margin-bottom: 12px;
-  }
-  p {
-    width: 100%;
-    margin-top: 20px;
-    margin: 1px auto 20px;
-    font-size: 11px;
-  }
+    h2 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #43425D;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    p {
+        width: 100%;
+        margin-top: 20px;
+        margin: 1px auto 20px;
+        font-size: 11px;
+        color: #43425D;
+    }
 }
+
 .personas-main-find-content {
     border: 1px solid #cecfd0;
     max-width: 840px;
@@ -181,16 +167,21 @@ export default {
         color: #43425D;
     }
 }
+
 .personas-index-row {
     margin-left: 200px;
     margin-right: 200px;
 }
+
 .personas-index-btn {
     width: 200px;
+    font-size: 14px;
 }
+
 .content-list {
     background-color: #f0f0f7;
 }
+
 .validation_mark {
     display: flex;
     justify-content: center;
