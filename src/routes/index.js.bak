@@ -547,12 +547,6 @@ export default [
                 component: () =>
                     import('../views/Personas/PersonasList')
             },
-            {
-                path: '/personas/configure-trait',
-                name: 'ConfigureTrait',
-                component: () =>
-                    import('../views/Personas/ConfigureTrait')
-            },
 
             // Apple Wallet
             {

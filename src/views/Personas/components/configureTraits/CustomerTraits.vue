@@ -1,56 +1,6 @@
-<style lang="scss" scoped>
-.card-header {
-    background-color: #f0f0f7 !important;
-    border-bottom: none !important;
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 0;
-    border: 1px solid blue;
-}
-#viewEmployees {
-    .tabs-nav-class {
-        background-color: white;
-    }
-    .nav-item > .nav-link {
-        padding: 0px !important;
-    }
-}
-
-.title-item {
-    background-color: yellow !important;
-    .nav-link{
-        padding: 0px !important;
-        border: 1px solid greenyellow;
-    }
-}
-.nav-tabs .nav-link {
-    margin-bottom: -1px;
-    padding-left: 0px;
-    padding-right: 0px;
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-}
-div.nav-wrapper-class {
-    padding-left: 10px !important;
-}
-</style>
 <template>
-    <div class="content">
+    <div>
         <div class="personas">
-            <div class="d-flex align-items-center py-3">
-                <div class="d-flex align-items-center">
-                    <h4 class="text-brand">Personas</h4>
-                </div>
-                <div class="d-flex align-items-center ml-auto">
-                    <b-button
-                        class="personas-index-btn"
-                        variant="primary"
-                        :to="{ name: 'ConfigureTrait' }"
-                    >
-                        Configure Traits
-                    </b-button>
-                </div>
-            </div>
-
             <b-card>
                 <div
                     class="d-flex align-items-center py-3"
@@ -64,20 +14,20 @@ div.nav-wrapper-class {
                                 v-model="selectedOrderByOption"
                             >
                                 <option selected value="dateCreated">
-                                    Date Created
+                                    Source
                                 </option>
                                 <option value="status">Status</option>
-                                <option value="firstName">
-                                    FIRST NAME
+                                <option value="name">
+                                    Name
                                 </option>
-                                <option value="lastName">
-                                    LAST NAME
+                                <option value="defaultValue">
+                                    Default Value
                                 </option>
                             </b-form-select>
                         </div>
                         <b-col sm="5">
                             <div class="input-with-icon">
-                                <b-form-input placeholder="Search key" />
+                                <b-form-input placeholder="" />
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -89,7 +39,7 @@ div.nav-wrapper-class {
                                             <clipPath id="a">
                                                 <rect
                                                     width="16"
-                                                    height="15"
+                                                    height="16"
                                                     fill="none"
                                                 />
                                             </clipPath>
@@ -105,92 +55,50 @@ div.nav-wrapper-class {
                     </div>
                     <div class="d-flex align-items-center ml-auto">
                         <div class="">
-                            <router-link :to="{ name: 'AddPersonas' }">
-                                <img
-                                    src="../../../assets/icons/add_circle_icon.svg"
-                                />
-                                <span
-                                    class="text-brand ml-3"
-                                    style="
-                                        text-decoration: underline;
-                                        font-size: 18px;
-                                        line-height: 22px;
-                                    "
-                                    >Add Persona</span
-                                >
-                            </router-link>
+                            <img
+                                src="../../../../assets/icons/add_circle_icon.svg"
+                            />
+                            <b-btn v-b-modal.configureTraits class="ml-2" variant="outline-brand">
+                                <!-- <fa-icon icon="plus-circle" class="mr-1" /> -->
+                                Add Trait
+                            </b-btn>
                         </div>
                     </div>
                 </div>
 
-                <!-- :current-page="currentPageForPersonas" -->
-                <!-- :per-page="perPageForPersonas" -->
                 <b-table
                     hover
                     id="personas"
                     :fields="fieldsForPersonas"
                     :items="itemsForPersonas"
-                    @row-clicked="handleClickPersonasTableRow"
                     caption-top
                     responsive
                     head-variant="light"
                     ref="personasTable"
                 >
-                    <template v-slot:cell(email)="data">
+                    <template v-slot:cell(source)="data">
                         <div class="pl-2">
                             {{ data.value }}
                         </div>
                     </template>
-                    <template v-slot:cell(firstName)="data">
+                    <template v-slot:cell(name)="data">
                         <div class="text-center">
                             {{ data.value }}
                         </div>
                     </template>
-                    <template v-slot:cell(lastName)="data">
+                    <template v-slot:cell(defaultValue)="data">
                         <div class="text-center">
                             {{ data.value }}
                         </div>
                     </template>
-                    <template v-slot:cell(residence)="data">
+                    <template v-slot:cell(dataType)="data">
                         <div class="text-center">
                             {{ data.value }}
                         </div>
                     </template>
-                    <template v-slot:cell(createdAt)="data">
+                    <template v-slot:cell(unitOfMeasure)="data">
                         <div class="text-center">
                             {{ dayjs(data.value).format('DD/MM/YYYY') }}
-                        </div>
-                    </template>
-                    <template v-slot:cell(redirects)="data">
-                        <div class="text-center">
-                            <b-btn
-                                variant="outline-brand"
-                                @click="btnEmployee(data)"
-                                style="width: 70px"
-                                class="employee"
-                                v-if="isShowEmployee"
-                            >
-                                EMPLOYEE
-                            </b-btn>
-                        </div>
-                    </template>
-                    <template v-slot:cell(status)="data">
-                        <div
-                            class="
-                                d-flex
-                                align-items-center
-                                justify-content-center
-                            "
-                        >
-                            <div
-                                class="status-dot mr-1"
-                                v-bind:class="{
-                                    Active: data.value === 'Active',
-                                    deActive: data.value === 'deActive',
-                                    draft: data.value === 'draft'
-                                }"
-                            ></div>
-                            <span class="ml-1">{{ data.value }}</span>
                         </div>
                     </template>
                     <template v-slot:cell(action)="data">
@@ -280,9 +188,9 @@ div.nav-wrapper-class {
 
                             <b-link
                                 class="action-icon mr-2"
-                                v-b-modal.modal-1
+                                @click="removeRow(data)"
                                 data-toggle="tooltip"
-                                title="Delete Persona"
+                                title="Delete Route"
                             >
                                 <span class="default">
                                     <svg
@@ -398,7 +306,7 @@ div.nav-wrapper-class {
                 <div class="validation_mark">
                     <img
                         class="mr-2"
-                        src="../../../assets/icons/validation_mandatory.svg"
+                        src="../../../../assets/icons/validation_mandatory.svg"
                     />
                     <span>MANDATORY</span>
                 </div>
@@ -441,151 +349,117 @@ div.nav-wrapper-class {
             </template>
         </Modal>
 
-        <TabModal modalId="viewEmployees" class="tab-modal" title="Add Persona Trait">
-            <b-tabs fill
-                active-tab-class="active-tab-class"
-                nav-wrapper-class="nav-wrapper-class"
-                active-nav-item-class="active-nav-item-class"
-                class="tabs-class"
-                nav-class="tabs-nav-class" 
-                style
-            >
-                <b-tab
-                    title-item-class="title-item-class"
-                    class="tab-item"
-                    title="Events"
-                >
-                    <EventTab></EventTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Traits">
-                    <TraitsTab></TraitsTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Audiances">
-                    <AudiancesTab></AudiancesTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Identities">
-                    <IdentitiesTab></IdentitiesTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Opt In/Opt Out">
-                    <OptInOutTab></OptInOutTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Memberships">
-                    <MembershipsTab></MembershipsTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Rewards">
-                    <RewardsTab></RewardsTab>       
-                </b-tab>
-            </b-tabs>
-        </TabModal>
+        <Modal modalId="configureEditTraits" title="Edit Persona Trait">
+            <template v-slot:default>
+                <div class="validation_mark">
+                    <img
+                        class="mr-2"
+                        src="../../../../assets/icons/validation_mandatory.svg"
+                    />
+                    <span>MANDATORY</span>
+                </div>
+                <b-row class="m-1">
+                    <label class="trait-source">Source</label>
+                    <b-form-select
+                        id="event-source"
+                        name="event-source"
+                        v-model="selected"
+                        :options="transformActiveIntegrations"
+                        class="mb-3"
+                        aria-placeholder="select event source"
+                    >
+                    </b-form-select>
+                </b-row>
+                <b-form-group id="input-group-1" class="trait-form mx-1 mb-3" label="Name" label-for="input-2">
+                    <b-form-input
+                        id="input-1"
+                        v-model="form.name"
+                        placeholder="Propensity to buy"
+                        required
+                    ></b-form-input>
+                </b-form-group>
+                <b-form-group id="input-group-2" class="trait-form mx-1 mb-3" label="Default value" label-for="input-2">
+                    <b-form-input
+                        id="input-2"
+                        v-model="form.value"
+                        placeholder="50"
+                        required
+                    ></b-form-input>
+                </b-form-group>
+                <b-form-group id="input-group-3" class="trait-form mx-1 mb-3" label="Unit measure" label-for="input-3">
+                    <b-form-input
+                        id="input-3"
+                        v-model="form.unit"
+                        placeholder="%"
+                        required
+                    ></b-form-input>
+                </b-form-group>
+            </template>
+        </Modal>
+
+        <Modal modalId="addPersonas" title="Add Persona Trait">
+            <template v-slot:default>
+                <div class="validation_mark">
+                    <img
+                        class="mr-2"
+                        src="../../../../assets/icons/validation_mandatory.svg"
+                    />
+                    <span>MANDATORY</span>
+                </div>
+                <b-row class="m-1">
+                    <label><small>Source</small></label>
+                    <b-form-select
+                        id="event-source"
+                        name="event-source"
+                        v-model="selected"
+                        :options="transformActiveIntegrations"
+                        class="mb-3"
+                        aria-placeholder="select event source"
+                    >
+                    </b-form-select>
+                </b-row>
+                <b-form-group id="input-group-1" label="Name" label-for="input-2">
+                    <b-form-input
+                        id="input-1"
+                        v-model="form.name"
+                        placeholder="Propensity to buy"
+                        required
+                    ></b-form-input>
+                </b-form-group>
+                <b-form-group id="input-group-2" label="Default Value" label-for="input-2">
+                    <b-form-input
+                        id="input-2"
+                        v-model="form.value"
+                        placeholder="50%"
+                        required
+                    ></b-form-input>
+                </b-form-group>
+            </template>
+        </Modal>
 
         <!-- <DeleteConfirmModal
             :persona="selectedPersona"
             @confirm="confirmDeletePersona"
         /> -->
-
-        <b-modal
-            id="modal-1"
-                header-border-variant="light"
-                footer-border-variant="light"
-                centered
-                hide-footer
-            >
-                <template #modal-title>
-                    <div class="d-flex justify-content-left w-100 ">
-                        <div class="persona-trait-title col-sm-12">
-                            <div class="title text-left">
-                                This persona will be removed from the list.
-                                <br/>
-                                Please specify an option
-                            </div>
-                        </div>
-                    </div>
-                </template >
-            <div
-                class="d-block text-center p-0"
-                style="width: 360px; margin: 0px"
-            >
-                <b-form-group v-slot="{ ariaDescribedby }">
-                    <b-form-checkbox-group
-                        id="checkbox-group-2"
-                        v-model="selectedValue"
-                        :aria-describedby="ariaDescribedby"
-                        name="flavour-2"
-                    >
-                        <b-form-checkbox value="wipe">Wipe</b-form-checkbox>
-                        <b-form-checkbox value="deactivate" selected>Deactivate</b-form-checkbox>
-                    </b-form-checkbox-group>
-                </b-form-group>
-            </div>
-
-            <template>
-                <div class="d-flex justify-content-center w-100 pb-3">
-                    <b-btn
-                        variant="outline-brand"
-                        @click="confirm"
-                        size="lg"
-                        class="mr-2"
-                        style="width: 196px; font-size:12px;"
-                        >confirm</b-btn
-                    >
-                    <b-btn
-                        size="lg"
-                        variant="brand"
-                        @click="cancel"
-                        style="width: 196px; font-size:12px;"
-                        >Cancel and go back</b-btn
-                    >
-                </div>
-            </template>
-        </b-modal>
     </div>
 </template>
 
 <script>
-import DateRangePicker from 'vue2-daterange-picker';
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
-import TabModal from './TabModal.vue';
-import EventTab from './EventTab.vue';
-import TraitsTab from './TraitsTab.vue';
-import AudiancesTab from './AudiancesTab.vue';
-import IdentitiesTab from './IdentitiesTab.vue';
-import OptInOutTab from './OptInOutTab.vue';
-import MembershipsTab from './MembershipsTab.vue';
-import RewardsTab from './RewardsTab.vue'
-import Modal from './modal.vue';
+import Modal from '../modal.vue';
 
 import dayjs from 'dayjs';
 
-import DeleteConfirmModal from './DeleteConfirmModal.vue';
+import DeleteConfirmModal from '../DeleteConfirmModal.vue';
 import { mapGetters } from 'vuex';
-import PersonasAPI from '../../../api/PersonasAPI';
+// import PersonasAPI from '../../../api/PersonasAPI';
 
 import _ from 'lodash';
 
 export default {
-    name: 'personas-table',
+    name: 'customerTraits',
     components: {
         DeleteConfirmModal,
-        TabModal,
-        EventTab,
-        TraitsTab,
-        AudiancesTab,
-        IdentitiesTab,
-        OptInOutTab,
-        MembershipsTab,
-        RewardsTab,
         Modal
     },
     data: () => ({
@@ -594,7 +468,6 @@ export default {
             value: '',
             unit: '',
         },
-        selectedValue: [],
         selected: '',
         tableTitle: '',
         totalClicks: 0,
@@ -639,57 +512,41 @@ export default {
         currentPageForPersonas: 1,
         fieldsForPersonas: [
             {
-                key: 'email',
+                key: 'source',
                 sortable: false,
-                label: 'EMAIL',
+                label: 'SOURCE',
                 thStyle: {
                     paddingLeft: '40px'
                 }
             },
             {
-                key: 'firstName',
+                key: 'name',
                 sortable: false,
-                label: 'FIRST NAME',
+                label: 'NAME',
                 thStyle: {
                     textAlign: 'center'
                 }
             },
             {
-                key: 'lastName',
+                key: 'defaultValue',
                 sortable: false,
-                label: 'LAST NAME',
+                label: 'DEFAULT VALUE',
                 thStyle: {
                     textAlign: 'center'
                 }
             },
             {
-                key: 'residence',
+                key: 'dataType',
                 sortable: false,
-                label: 'COUNTRY OF RESIDENCE',
+                label: 'DATA TYPE',
                 thStyle: {
                     textAlign: 'center'
                 }
             },
             {
-                key: 'createdAt',
+                key: 'unitOfMeasure',
                 sortable: false,
-                label: 'DATE CREATED',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'redirects',
-                sortable: false,
-                label: '',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'status',
-                sortable: false,
-                label: 'STATUS',
+                label: 'UNIT OF MEASURE',
                 thStyle: {
                     textAlign: 'center'
                 }
@@ -780,66 +637,49 @@ export default {
     },
     computed: {
         // ...mapGetters(['getAllPersonas']),
+
         itemsForPersonas: {
             get: function() {
                 return [
                     {
                         "_id":"61b172d29aa3ac001d5216ca",
-                        "email":"samjanssen@gmail.com",
-                        "firstName":"Sam",
-                        "lastName":"Janssen",
-                        "residence":"Netherlands",
-                        "status":"Active",
-                        "createdAt":"2021-12-09T03:06:58.983Z",
+                        "source":"Event",
+                        "name":"Last purchase",
+                        "defaultValue":"-",
+                        "dataType":"number",
                     },
                     {
-                        "_id":"61b172d29aa3ac001d5312cb",
-                        "email":"plangkoAnssen@gmail.com",
-                        "firstName":"Plango",
-                        "lastName":"Anssen",
-                        "residence":"Netherlands",
-                        "status":"Active",
-                        "createdAt":"2021-12-09T03:06:58.983Z",
-
+                        "_id":"61b172d29aa3ac001d5312ca",
+                        "source":"Analytics",
+                        "name":"Life time value",
+                        "defaultValue":"0",
+                        "dataType":"no",
                     },
                     {
-                        "_id":"61b172d29aa3ac001d5216cc",
-                        "email":"samjanssen@gmail.com",
-                        "firstName":"Sam",
-                        "lastName":"Janssen",
-                        "residence":"Netherlands",
-                        "status":"Active",
-                        "createdAt":"2021-12-09T03:06:58.983Z",
+                        "_id":"61b172d29aa3ac001d5312ca",
+                        "source":"User input",
+                        "name":"-",
+                        "defaultValue":"-",
+                        "dataType":"no",
                     },
                     {
-                        "_id":"61b172d29aa3ac001d5312cd",
-                        "email":"plangkoAnssen@gmail.com",
-                        "firstName":"Plango",
-                        "lastName":"Anssen",
-                        "residence":"Netherlands",
-                        "status":"Active",
-                        "createdAt":"2021-12-09T03:06:58.983Z",
-
+                        "_id":"61b172d29aa3ac001d5312ca",
+                        "source":"Consumer Input",
+                        "name":"Last consumer support contact",
+                        "defaultValue":"0",
+                        "dataType":"no",
                     },
                     {
-                        "_id":"61b172d29aa3ac001d5216ca",
-                        "email":"samjanssen@gmail.com",
-                        "firstName":"Sam",
-                        "lastName":"Janssen",
-                        "residence":"Netherlands",
-                        "status":"Active",
-                        "createdAt":"2021-12-09T03:06:58.983Z",
-                    },
+                        "_id":"61b172d29aa3ac001d5312ca",
+                        "source":"Event",
+                        "name":"Newsletter subscribe",
+                        "defaultValue":"False",
+                        "dataType":"yes",
+                    }
                 ];
                 // return JSON.parse(JSON.stringify(this.getAllPersonas));
             },
             set: function() {}
-        },
-
-        confirm() {
-        },
-        cancel() {
-
         },
 
         dateRange() {
@@ -858,6 +698,7 @@ export default {
 
             );
         },
+        
     },
     methods: {
         showConfigureTraits() {
@@ -898,21 +739,22 @@ export default {
             //         id: this.selectedPersona._id
             //     }
             // });
+            
+            this.$bvModal.show('configureEditTraits');
         },
         removeRow(data) {
             // const route = this.findRouteById(data.item._id);
             // this.selectedPersona = route;
-            
-            this.$bvModal.show('delete-confirm-modal');
+            // this.$bvModal.show('delete-confirm-modal');
         },
-        confirmDeletePersona(value) {
-            if (value) {
-                this.itemsForPersonas = this.itemsForPersonas.filter(
-                    item => item._id !== this.selectedPersona._id
-                );
-                // this.isShowRecentRedirectsTable = false;
-            }
-        },
+        // confirmDeletePersona(value) {
+        //     if (value) {
+        //         this.itemsForPersonas = this.itemsForPersonas.filter(
+        //             item => item._id !== this.selectedPersona._id
+        //         );
+        //         // this.isShowRecentRedirectsTable = false;
+        //     }
+        // },
         stringToHslColor(str, s, l) {
             let hash = 0;
             for (let i = 0; i < str.length; i++) {
@@ -1061,13 +903,14 @@ export default {
     border-radius: 50%;
 }
 
-.Active {
+.published {
     background: #9fe364 0% 0% no-repeat padding-box;
 }
 
-.deActive {
+.unpublished {
     background: #c6c6c6 0% 0% no-repeat padding-box;
 }
+
 .draft {
     border: 1px solid #707070;
 }
@@ -1214,16 +1057,5 @@ table {
 
 div.nav-wrapper-class {
     padding-left: 10px !important;
-}
-
-.persona-trait-title {
-    color: #2f3380;
-    font-family: 'Poppins', sans-serif;
-    .title {
-        box-sizing: border-box;
-        font-size: 16px !important;
-        line-height: 20px !important;
-        padding-left: 18px;
-    }
 }
 </style>

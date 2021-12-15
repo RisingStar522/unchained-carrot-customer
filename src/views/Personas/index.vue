@@ -17,8 +17,8 @@
                     <b-col>
                         <b-button class="personas-index-btn" variant="outline-brand">
                             Read Guide
-                            </b-button>
-                        </b-col>
+                        </b-button>
+                    </b-col>
                     <b-col>
                         <b-button
                             class="personas-index-btn"
@@ -104,13 +104,11 @@
 </template>
 
 <script>
-// import Modal from '../../views/Personas/components/modal';
 // import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'personas',
     // components: {
-    //     Modal
     // },
     data() {
         return {
@@ -174,27 +172,11 @@ export default {
 }
 
 .personas-index-btn {
-    width: 200px;
+    width: 200px !important;
     font-size: 14px;
 }
 
 .content-list {
     background-color: #f0f0f7;
-}
-
-.validation_mark {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    margin-left: 15px;
-    margin-top: -80px;
-
-    span {
-        color: #a3a0fb;
-        font-size: 12px;
-        line-height: 20px;
-    }
 }
 </style>

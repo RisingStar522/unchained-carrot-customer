@@ -13,6 +13,7 @@
                         justify-content-between
                         align-items-center
                         pl-2 pt-3 pb-3 pr-3
+                        add-persona
                     "
                 >
                     <h3>Add Persona</h3>
@@ -338,6 +339,24 @@
                                             src="../../assets/icons/noun_Info.svg"
                                         />
                                     </a>
+                                    <div class="d-flex align-items-center ml-auto">
+                        <div class="">
+                            <router-link :to="{ name: 'AddPersonas' }">
+                                <img
+                                    src="../../assets/icons/add_circle_icon.svg"
+                                />
+                                <span
+                                    class="text-brand ml-3"
+                                    style="
+                                        text-decoration: underline;
+                                        font-size: 18px;
+                                        line-height: 22px;
+                                    "
+                                    >Add trait to Persona</span
+                                >
+                            </router-link>
+                        </div>
+                    </div>
                                 </div>
 
                                 <p>You can configure multiple traits for your persona.</p>
@@ -346,29 +365,29 @@
                                     <b-row class="justify-content-left">
                                         <b-col sm="12">
                                             <div class="input-with-icon">
-                                                <b-form-input placeholder="Search program" />
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                    width="16"
-                                                    height="16"
-                                                    viewBox="0 0 16 16"
-                                                >
-                                                    <defs>
-                                                        <clipPath id="a">
-                                                            <rect
-                                                                width="16"
-                                                                height="16"
-                                                                fill="none"
+                                                <b-form-input placeholder="Search key" />
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        width="16"
+                                                        height="16"
+                                                        viewBox="0 0 16 16"
+                                                    >
+                                                        <defs>
+                                                            <clipPath id="a">
+                                                                <rect
+                                                                    width="16"
+                                                                    height="16"
+                                                                    fill="none"
+                                                                />
+                                                            </clipPath>
+                                                        </defs>
+                                                        <g clip-path="url(#a)">
+                                                            <path
+                                                                d="M12.7,11.23a6.777,6.777,0,0,0,1.4-4.174A7.02,7.02,0,0,0,7.1,0,7.105,7.105,0,0,0,0,7.056a7.105,7.105,0,0,0,7.1,7.056,6.667,6.667,0,0,0,4.2-1.391l3,2.981a.971.971,0,0,0,1.4,0,.957.957,0,0,0,0-1.391Zm-5.6.8A5.022,5.022,0,0,1,2,7.056a5.1,5.1,0,0,1,10.2,0A5.022,5.022,0,0,1,7.1,12.025Z"
                                                             />
-                                                        </clipPath>
-                                                    </defs>
-                                                    <g clip-path="url(#a)">
-                                                        <path
-                                                            d="M12.7,11.23a6.777,6.777,0,0,0,1.4-4.174A7.02,7.02,0,0,0,7.1,0,7.105,7.105,0,0,0,0,7.056a7.105,7.105,0,0,0,7.1,7.056,6.667,6.667,0,0,0,4.2-1.391l3,2.981a.971.971,0,0,0,1.4,0,.957.957,0,0,0,0-1.391Zm-5.6.8A5.022,5.022,0,0,1,2,7.056a5.1,5.1,0,0,1,10.2,0A5.022,5.022,0,0,1,7.1,12.025Z"
-                                                        />
-                                                    </g>
-                                                </svg>
+                                                        </g>
+                                                    </svg>
                                             </div>
                                         </b-col>
                                     </b-row>
@@ -439,14 +458,12 @@
 </template>
 
 <script>
-import QrcodeVue from 'qrcode.vue';
 import { Validator } from 'vee-validate';
 import Search from '../../components/search';
 
 export default {
     name: 'add-traffic-route',
     components: {
-        QrcodeVue,
         Search
     },
     data() {
@@ -840,5 +857,8 @@ export default {
 }
 .calendar-class {
     width: 29%;
+}
+.add-persona h3 {
+    color: #2f3380;
 }
 </style>

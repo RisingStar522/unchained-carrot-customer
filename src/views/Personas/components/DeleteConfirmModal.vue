@@ -1,9 +1,9 @@
 <template>
-    <div v-if="selectedTrafficRoute">
+    <div v-if="selectedPersona">
         <b-modal
             id="delete-confirm-modal"
             ref="modal"
-            title="Delete Traffic Route"
+            title="Delete Persona"
             centered
             header-class="custom-header"
             :hide-footer="true"
@@ -12,10 +12,10 @@
             <form ref="form" @submit.prevent="handleSubmit">
                 <b-form-group
                     label-for="title-input"
-                    invalid-feedback="Traffic Route is required"
+                    invalid-feedback="Persona is required"
                 >
                     <div class="text-center mb-4">
-                        Enter {{ selectedTrafficRoute.title }} for delete
+                        Enter {{ selectedPersona.title }} for delete
                         confirmation
                     </div>
                     <div class="route-name-field">
@@ -51,7 +51,7 @@ import { submitTrackingEvent } from '../../../services/TrackingService';
 export default {
     name: 'deleteConfirm-modal-component',
     props: {
-        trafficRoute: {
+        persona: {
             required: true
         }
     },
@@ -60,7 +60,7 @@ export default {
             formData: {
                 routeName: ''
             },
-            selectedTrafficRoute: null
+            selectedPersona: null
         };
     },
     methods: {
@@ -81,16 +81,16 @@ export default {
             if (this.validation) {
                 this.$store
                     .dispatch(
-                        'deleteTrafficRoute',
-                        this.selectedTrafficRoute._id
+                        'deletePersona',
+                        this.selectedPersona._id
                     )
                     .then(resp => {
                         // Send Tracking Event With UCC SDK
-                        submitTrackingEvent(
-                            'TRAFFIC-ROUTE-DELETED',
-                            { trafficRouteId: this.selectedTrafficRoute._id },
-                            this.$store.getters['customerData']
-                        );
+                        // submitTrackingEvent(
+                        //     'TRAFFIC-ROUTE-DELETED',
+                        //     { trafficRouteId: this.selectedPersona._id },
+                        //     this.$store.getters['customerData']
+                        // );
                         // Hide the modal manually
                         this.$nextTick(() => {
                             this.$emit('confirm', this.formData);
@@ -105,12 +105,12 @@ export default {
     },
     computed: {
         validation() {
-            return this.formData.routeName === this.selectedTrafficRoute.title;
+            return this.formData.routeName === this.selectedPersona.title;
         }
     },
     watch: {
-        trafficRoute(newValue) {
-            this.selectedTrafficRoute = newValue;
+        persona(newValue) {
+            this.selectedPersona = newValue;
         }
     }
 };

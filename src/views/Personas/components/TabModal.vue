@@ -1,20 +1,25 @@
 <style lang="scss" scope>
-.dialog-class .content-class{
-    max-width: 860px !important;
-    width: 860px !important;
-    margin-top: 120px;
-    margin-left: -100px;
-    background-color: #f0f0f7;
-}
-.body-class {
-    padding-top: 0px !important;
-    height: 340px;
-}
-.header-class {
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 0px; 
-    background-color: #f0f0f7 !important; 
-    border-bottom: none !important;
+#viewEmployees {
+    .dialog-class .content-class{
+        max-width: 860px !important;
+        width: 860px !important;
+        margin-top: 120px;
+        margin-left: -100px;
+        background-color: #f0f0f7;
+    }
+    .body-class {
+        padding-top: 0px !important;
+        height: 340px;
+        .nav-wrapper-class {
+            padding-left: 10px;
+        }
+    }
+    .header-class {
+        padding: 1rem 2.25rem;
+        margin-bottom: 0px; 
+        background-color: #f0f0f7 !important; 
+        border-bottom: none !important;
+    }
 }
 </style>
 <template>
@@ -32,12 +37,11 @@
         <template #modal-title>
             <div class="row">
                 <div class="persona-trait-img col-sm-2">
-                    
                     <img
                         src="../../../assets/images/personas/UCC_icon_frog.png"
                         alt="Frog"
                         width="70%"
-                        class="trait-img"
+                        class="trait-img ml-2"
                     />                    
                 </div>
                 <div class="persona-trait-title col-sm-8">
@@ -102,6 +106,6 @@ export default {
     padding-right: 6px;
     padding-top: 3px;
     padding-bottom: 3px;
-    width: 15%;
+    width: 13%;
 }
 </style>

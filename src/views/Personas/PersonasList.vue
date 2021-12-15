@@ -10,42 +10,6 @@
             >
                 <PersonasTable />
             </div>
-            <div class="personas-container" v-else>
-                <!-- <h2>Personas</h2> -->
-                <router-link to="/traffic-routes/add-route">
-                    <img
-                        to="/traffic-routes/add-route"
-                        class="mb-4 route-img"
-                        src="../../assets/images/UC_traffic-routes.png"
-                    />
-                </router-link>
-                <h3>Direct your traffic, split test, measure and learn.</h3>
-                <p class="mt-2 mb-4">
-                    Define where you want your traffic to be directed, add
-                    parameters, test your campaign.
-                </p>
-                <b-button
-                    to="/traffic-routes/add-route"
-                    class="py-2 px-4"
-                    variant="primary"
-                    >Create your first traffic route</b-button
-                >
-                <div class="traffic-route-contents">
-                    <h3>What can you find here</h3>
-                    <b-list-group class="flex-row flex-wrap">
-                        <b-list-group-item
-                            v-for="(item, index) in trafficRouteContents"
-                            :key="index"
-                        >
-                            <img
-                                class="mr-2"
-                                src="../../assets/icons/right_check.svg"
-                            />
-                            <span>{{ item }}</span>
-                        </b-list-group-item>
-                    </b-list-group>
-                </div>
-            </div>
         </div>
     </div>
 </template>
@@ -55,22 +19,11 @@ import PersonasTable from './components/PersonasTable.vue';
 import { mapGetters } from 'vuex';
 
 export default {
-    name: 'traffic-routes-page',
+    name: 'personas-page',
     components: {
         PersonasTable
     },
     data: () => ({
-        trafficRouteContents: [
-            'Traffic routing',
-            'Link analytics',
-            'UTM builder',
-            'URL shortener',
-            'QR codes',
-            'Channel attribution',
-            'Campaign management',
-            'Custom domain',
-            'Custom URL'
-        ],
         loading: false
     }),
     async created() {
