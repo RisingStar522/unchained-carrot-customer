@@ -12,7 +12,6 @@ class BaseAPI {
         return new Promise(async (resolve, reject) => {
             // If user is offline, try to get response from APIStorage
             if (!window.navigator.onLine) {
-                // console.log('No internet connection');
             }
             axios.defaults.headers.common['Authorization'] =
                 'Bearer ' + (await AuthService.getAccessToken());

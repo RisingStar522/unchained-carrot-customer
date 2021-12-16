@@ -1,5 +1,5 @@
 <template>
-    <div class="content fullheight-container">
+    <div class="content">
         <b-container class="form_numeric_tab-form hidden-edit" fluid>
             <b-list-group>
                 <b-list-group-item v-for="list in lists" :key="list.key">

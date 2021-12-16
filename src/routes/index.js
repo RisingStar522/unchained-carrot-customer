@@ -553,6 +553,20 @@ export default [
                 component: () =>
                     import('../views/Personas/ConfigureTrait')
             },
+            
+
+            // Audiences
+            {
+                path: '/audiences',
+                name: 'Audiences',
+                component: () => import('../views/Audiences')
+            },
+            {
+                path: '/audiences-list',
+                name: 'AudiencesList',
+                component: () =>
+                    import('../views/Audiences/AudiencesList')
+            },
 
             // Apple Wallet
             {

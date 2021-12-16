@@ -56,7 +56,7 @@
 
 <script>
 export default {
-    name: 'event-tab-component',
+    name: 'opt-tab-component',
     data: () => ({
         text: `
           Persona Opted in for receiving newsletters, promotions and marketing communications also from the customer and from partners

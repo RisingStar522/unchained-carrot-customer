@@ -5,7 +5,7 @@
                 <img
                     src="@/assets/images/personas/UC_personas-05-05.png"
                     width="30%"
-                    alt="Pesonas Main Image"
+                    alt="Personas Main Image"
                 />
                 <h2>Personas are all your users, contacts and members</h2>
                 <div class="persons-index-p">

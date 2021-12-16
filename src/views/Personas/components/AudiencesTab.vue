@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-1">
                             <span class="bg-gray-300 text-gray-500" style="margin-right:15px">
-                                <StarIcon></StarIcon>
+                                <UsersIcon></UsersIcon>
                             </span> 
                         </div>
                         <div class="col-8">{{ list.text }}</div>
@@ -20,45 +20,33 @@
 
 <script>
 import {
-    StarIcon
+    UsersIcon
 } from "vue-feather-icons";
 
 export default {
-    name: 'membership-tab-component',
+    name: 'audiences-tab-component',
     components: {
-        StarIcon
+        UsersIcon
     },
     data: () => ({
         lists: [
                 {
                     key: 1,
-                    icon: StarIcon,
-                    text: 'Subscribed to loyalty program Winter 2021',
-                    unit: '10s'
+                    icon: UsersIcon,
+                    text: 'Real time cart abandoner',
+                    unit: '2s'
                 },
                 {
                     key: 2,
-                    icon: StarIcon,
-                    text: 'Subscribed to referral program Bring a friend campaign',
-                    unit: '12d'
+                    icon: UsersIcon,
+                    text: 'High propensity buyer',
+                    unit: '12m'
                 },
                 {
                     key: 3,
-                    icon: StarIcon,
-                    text: 'Subscribed to loyalty program Private sales',
-                    unit: '15d'
-                },
-                {
-                    key: 4,
-                    icon: StarIcon,
-                    text: 'Subscribed to loyalty program Private sales',
-                    unit: '15d'
-                },
-                {
-                    key: 5,
-                    icon: StarIcon,
-                    text: 'Subscribed to referral program Win a euro trip',
-                    unit: '4w'
+                    icon: UsersIcon,
+                    text: 'Holiday shopper',
+                    unit: '15m'
                 }
         ]
     }),

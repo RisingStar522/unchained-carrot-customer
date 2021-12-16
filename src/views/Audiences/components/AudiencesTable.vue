@@ -35,19 +35,10 @@ div.nav-wrapper-class {
 </style>
 <template>
     <div class="content">
-        <div class="personas">
+        <div class="audiences">
             <div class="d-flex align-items-center py-3">
                 <div class="d-flex align-items-center">
-                    <h4 class="text-brand">Personas</h4>
-                </div>
-                <div class="d-flex align-items-center ml-auto">
-                    <b-button
-                        class="personas-index-btn"
-                        variant="primary"
-                        :to="{ name: 'ConfigureTrait' }"
-                    >
-                        Configure Traits
-                    </b-button>
+                    <h4 class="text-brand">Audiences</h4>
                 </div>
             </div>
 
@@ -60,19 +51,15 @@ div.nav-wrapper-class {
                         <span class="text-brand mr-3 flex-grow">Order by</span>
                         <div>
                             <b-form-select
-                                @change="sortPersonas"
+                                @change="sortAudiences"
                                 v-model="selectedOrderByOption"
                             >
                                 <option selected value="dateCreated">
                                     Date Created
                                 </option>
-                                <option value="status">Status</option>
-                                <option value="firstName">
-                                    FIRST NAME
-                                </option>
-                                <option value="lastName">
-                                    LAST NAME
-                                </option>
+                                <option value="status">
+                                    Status
+                                    </option>
                             </b-form-select>
                         </div>
                         <b-col sm="5">
@@ -105,7 +92,7 @@ div.nav-wrapper-class {
                     </div>
                     <div class="d-flex align-items-center ml-auto">
                         <div class="">
-                            <router-link :to="{ name: 'AddPersonas' }">
+                            <router-link :to="{ name: 'AudiencesList' }">
                                 <img
                                     src="../../../assets/icons/add_circle_icon.svg"
                                 />
@@ -116,42 +103,41 @@ div.nav-wrapper-class {
                                         font-size: 18px;
                                         line-height: 22px;
                                     "
-                                    >Add Persona</span
+                                    >Add Audience</span
                                 >
                             </router-link>
                         </div>
                     </div>
                 </div>
 
-                <!-- :current-page="currentPageForPersonas" -->
-                <!-- :per-page="perPageForPersonas" -->
+                <!-- :current-page="currentPageForAudiences" -->
+                <!-- :per-page="perPageForAudiences" -->
                 <b-table
                     hover
-                    id="personas"
-                    :fields="fieldsForPersonas"
-                    :items="itemsForPersonas"
-                    @row-clicked="handleClickPersonasTableRow"
+                    id="audiences"
+                    :fields="fieldsForAudiences"
+                    :items="itemsForAudiences"
                     caption-top
                     responsive
                     head-variant="light"
-                    ref="personasTable"
+                    ref="audiencesTable"
                 >
-                    <template v-slot:cell(email)="data">
+                    <template v-slot:cell(name)="data">
                         <div class="pl-2">
                             {{ data.value }}
                         </div>
                     </template>
-                    <template v-slot:cell(firstName)="data">
+                    <template v-slot:cell(audiences)="data">
                         <div class="text-center">
                             {{ data.value }}
                         </div>
                     </template>
-                    <template v-slot:cell(lastName)="data">
+                    <template v-slot:cell(exclude)="data">
                         <div class="text-center">
                             {{ data.value }}
                         </div>
                     </template>
-                    <template v-slot:cell(residence)="data">
+                    <template v-slot:cell(include)="data">
                         <div class="text-center">
                             {{ data.value }}
                         </div>
@@ -201,6 +187,92 @@ div.nav-wrapper-class {
                                 justify-content-end
                             "
                         >
+                        <b-link
+                                class="action-icon mr-4"
+                                @click="downloadCSV(data)"
+                                data-toggle="tooltip"
+                                title="Download CSV"
+                            >
+                                <span class="default">
+                                    <svg 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        width="36.678" 
+                                        height="21" 
+                                        viewBox="0 0 36.678 21"
+                                    >
+                                        <g 
+                                            id="Raggruppa_1788" 
+                                            data-name="Raggruppa 1788" 
+                                            transform="translate(-1348.322 -295)"
+                                        >
+                                            <text id="csv" transform="translate(1374 310)" fill="#4d4f5c" font-size="15" font-family="SourceSansPro-Bold, Source Sans Pro" font-weight="700"><tspan x="-10" y="0">csv</tspan></text>
+                                            <path 
+                                                id="Tracciato_1298" 
+                                                data-name="Tracciato 1298" 
+                                                d="M30.574,33.136H21.781a.689.689,0,1,1,0-1.378h8.793a.689.689,0,1,1,0,1.378ZM29.94,24.46A.694.694,0,0,1,31,25.354v0l-4.3,5.023a.689.689,0,0,1-.973.061.637.637,0,0,1-.061-.061l-4.314-5.023a.69.69,0,1,1,1.051-.9l3.084,3.6V18.32a.689.689,0,1,1,1.378,0v9.744Z" 
+                                                transform="translate(1327.23 279.369)" 
+                                                fill="#4d4f5c"/>
+                                        </g>
+                                    </svg>
+                                </span>
+                                <span class="hover">
+                                    <svg 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        width="36.678" 
+                                        height="21" 
+                                        viewBox="0 0 36.678 21"
+                                    >
+                                        <g 
+                                            id="Raggruppa_1788" 
+                                            data-name="Raggruppa 1788" 
+                                            transform="translate(-1348.322 -295)"
+                                        >
+                                            <text id="csv" 
+                                                transform="translate(1374 310)" 
+                                                font-size="15" 
+                                                style="
+                                                    fill: #f49848;
+                                                    fill-rule: evenodd;
+                                                "
+                                                font-family="SourceSansPro-Bold, Source Sans Pro" 
+                                                font-weight="700">
+                                                <tspan x="-10" y="0">csv</tspan>
+                                            </text>
+                                            <path 
+                                                id="Tracciato_1298" 
+                                                data-name="Tracciato 1298" 
+                                                d="M30.574,33.136H21.781a.689.689,0,1,1,0-1.378h8.793a.689.689,0,1,1,0,1.378ZM29.94,24.46A.694.694,0,0,1,31,25.354v0l-4.3,5.023a.689.689,0,0,1-.973.061.637.637,0,0,1-.061-.061l-4.314-5.023a.69.69,0,1,1,1.051-.9l3.084,3.6V18.32a.689.689,0,1,1,1.378,0v9.744Z" 
+                                                transform="translate(1327.23 279.369)" 
+                                                style="
+                                                    fill: #f49848;
+                                                    fill-rule: evenodd;
+                                                "/>
+                                        </g>
+                                    </svg>
+                                </span>
+                                <span class="active">
+                                    <svg 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        width="36.678" 
+                                        height="21" 
+                                        viewBox="0 0 36.678 21"
+                                    >
+                                        <g 
+                                            id="Raggruppa_1788" 
+                                            data-name="Raggruppa 1788" 
+                                            transform="translate(-1348.322 -295)"
+                                        >
+                                            <text id="csv" transform="translate(1374 310)" fill="#4d4f5c" font-size="15" font-family="SourceSansPro-Bold, Source Sans Pro" font-weight="700"><tspan x="-10" y="0">csv</tspan></text>
+                                            <path 
+                                                id="Tracciato_1298" 
+                                                data-name="Tracciato 1298" 
+                                                d="M30.574,33.136H21.781a.689.689,0,1,1,0-1.378h8.793a.689.689,0,1,1,0,1.378ZM29.94,24.46A.694.694,0,0,1,31,25.354v0l-4.3,5.023a.689.689,0,0,1-.973.061.637.637,0,0,1-.061-.061l-4.314-5.023a.69.69,0,1,1,1.051-.9l3.084,3.6V18.32a.689.689,0,1,1,1.378,0v9.744Z" 
+                                                transform="translate(1327.23 279.369)" 
+                                                fill="#4d4f5c"/>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </b-link>
                             <b-link
                                 class="action-icon mr-2"
                                 @click="editRow(data)"
@@ -282,7 +354,7 @@ div.nav-wrapper-class {
                                 class="action-icon mr-2"
                                 v-b-modal.modal-1
                                 data-toggle="tooltip"
-                                title="Delete Persona"
+                                title="Delete Audience"
                             >
                                 <span class="default">
                                     <svg
@@ -373,27 +445,27 @@ div.nav-wrapper-class {
                     <div class="mr-3">
                         <span class="mr-3">Rows per page: </span>
                         <b-form-select
-                            v-model="perPageForPersonas"
+                            v-model="perPageForAudiences"
                             :options="rowsPerPageOptions"
                             style="width: 80px; height: 35px"
-                            @change="handlePersonasPageSizeChange($event)"
+                            @change="handleAudiencesPageSizeChange($event)"
                         >
                         </b-form-select>
                     </div>
                     <b-pagination
-                        v-model="currentPageForPersonas"
-                        aria-controls="personas"
+                        v-model="currentPageForAudiences"
+                        aria-controls="audiences"
                         align="right"
-                        :total-rows="personasTotal"
-                        :per-page="perPageForPersonas"
-                        @change="handlePersonasChange"
+                        :total-rows="audiencesTotal"
+                        :per-page="perPageForAudiences"
+                        @change="handleAudiencesChange"
                     ></b-pagination>
                 </div>
             </b-card>
 
         </div>
 
-        <Modal modalId="configureTraits" title="Add Persona Trait">
+        <!-- <Modal modalId="configureTraits" title="Add Audience Trait">
             <template v-slot:default>
                 <div class="validation_mark">
                     <img
@@ -439,9 +511,9 @@ div.nav-wrapper-class {
                     ></b-form-input>
                 </b-form-group>
             </template>
-        </Modal>
+        </Modal> -->
 
-        <TabModal modalId="viewEmployees" class="tab-modal" title="Add Persona Trait">
+        <!-- <TabModal modalId="viewEmployees" class="tab-modal" title="Add Audience Trait">
             <b-tabs fill
                 active-tab-class="active-tab-class"
                 nav-wrapper-class="nav-wrapper-class"
@@ -488,11 +560,11 @@ div.nav-wrapper-class {
                     <RewardsTab></RewardsTab>       
                 </b-tab>
             </b-tabs>
-        </TabModal>
+        </TabModal> -->
 
         <!-- <DeleteConfirmModal
-            :persona="selectedPersona"
-            @confirm="confirmDeletePersona"
+            :audience="selectedAudience"
+            @confirm="confirmDeleteAudience"
         /> -->
 
         <b-modal
@@ -504,9 +576,9 @@ div.nav-wrapper-class {
             >
                 <template #modal-title>
                     <div class="d-flex justify-content-left w-100 ">
-                        <div class="persona-trait-title col-sm-12">
+                        <div class="audience-trait-title col-sm-12">
                             <div class="title text-left">
-                                This persona will be removed from the list.
+                                This audience will be removed from the list.
                                 <br/>
                                 Please specify an option
                             </div>
@@ -554,39 +626,39 @@ div.nav-wrapper-class {
 </template>
 
 <script>
-import DateRangePicker from 'vue2-daterange-picker';
+// import DateRangePicker from 'vue2-daterange-picker';
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
-import TabModal from './TabModal.vue';
-import EventTab from './EventTab.vue';
-import TraitsTab from './TraitsTab.vue';
-import AudiencesTab from './AudiencesTab.vue';
-import IdentitiesTab from './IdentitiesTab.vue';
-import OptInOutTab from './OptInOutTab.vue';
-import MembershipsTab from './MembershipsTab.vue';
-import RewardsTab from './RewardsTab.vue'
-import Modal from './modal.vue';
+// import TabModal from './TabModal.vue';
+// import EventTab from './EventTab.vue';
+// import TraitsTab from './TraitsTab.vue';
+// import AudiencesTab from './AudiencesTab.vue';
+// import IdentitiesTab from './IdentitiesTab.vue';
+// import OptInOutTab from './OptInOutTab.vue';
+// import MembershipsTab from './MembershipsTab.vue';
+// import RewardsTab from './RewardsTab.vue'
+// import Modal from './modal.vue';
 
 import dayjs from 'dayjs';
 
-import DeleteConfirmModal from './DeleteConfirmModal.vue';
-import { mapGetters } from 'vuex';
-// import PersonasAPI from '../../../api/PersonasAPI';
+// import DeleteConfirmModal from './DeleteConfirmModal.vue';
+// import { mapGetters } from 'vuex';
+// import AudiencesAPI from '../../../api/AudiencesAPI';
 
 import _ from 'lodash';
 
 export default {
-    name: 'personas-table',
+    name: 'audiences-table',
     components: {
-        DeleteConfirmModal,
-        TabModal,
-        EventTab,
-        TraitsTab,
-        AudiencesTab,
-        IdentitiesTab,
-        OptInOutTab,
-        MembershipsTab,
-        RewardsTab,
-        Modal
+        // DeleteConfirmModal,
+        // TabModal,
+        // EventTab,
+        // TraitsTab,
+        // AudiencesTab,
+        // IdentitiesTab,
+        // OptInOutTab,
+        // MembershipsTab,
+        // RewardsTab,
+        // Modal
     },
     data: () => ({
         form: {
@@ -633,39 +705,39 @@ export default {
         },
         isShowEmployee: false,
         selectedOrderByOption: 'dateCreated',
-        selectedPersona: null,
+        selectedAudience: null,
         isShowRecentRedirectsTable: false,
-        perPageForPersonas: 5,
-        currentPageForPersonas: 1,
-        fieldsForPersonas: [
+        perPageForAudiences: 5,
+        currentPageForAudiences: 1,
+        fieldsForAudiences: [
             {
-                key: 'email',
+                key: 'name',
                 sortable: false,
-                label: 'EMAIL',
+                label: 'NAME',
                 thStyle: {
                     paddingLeft: '40px'
                 }
             },
             {
-                key: 'firstName',
+                key: 'audiences',
                 sortable: false,
-                label: 'FIRST NAME',
+                label: 'AUDIENCES',
                 thStyle: {
                     textAlign: 'center'
                 }
             },
             {
-                key: 'lastName',
+                key: 'exclude',
                 sortable: false,
-                label: 'LAST NAME',
+                label: 'EXCLUDE',
                 thStyle: {
                     textAlign: 'center'
                 }
             },
             {
-                key: 'residence',
+                key: 'include',
                 sortable: false,
-                label: 'COUNTRY OF RESIDENCE',
+                label: 'INCLUDE',
                 thStyle: {
                     textAlign: 'center'
                 }
@@ -686,14 +758,14 @@ export default {
                     textAlign: 'center'
                 }
             },
-            {
-                key: 'status',
-                sortable: false,
-                label: 'STATUS',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
+            // {
+            //     key: 'status',
+            //     sortable: false,
+            //     label: 'STATUS',
+            //     thStyle: {
+            //         textAlign: 'center'
+            //     }
+            // },
             {
                 key: 'action',
                 label: ''
@@ -769,69 +841,31 @@ export default {
         ],
         itemsForRecentRedirects: [],
         recentRedirectsTotal: 0,
-        personasTotal: 0,
+        audiencesTotal: 0,
         open: 'right',
         showDropdowns: true,
         linkedCalendars: true,
         selectedChartId: ''
     }),
     async created() {
-        await this.getPersonas();
+        await this.getAudiences();
     },
     computed: {
-        // ...mapGetters(['getAllPersonas']),
-        itemsForPersonas: {
+        // ...mapGetters(['getAllAudiences']),
+        itemsForAudiences: {
             get: function() {
                 return [
                     {
                         "_id":"61b172d29aa3ac001d5216ca",
-                        "email":"samjanssen@gmail.com",
-                        "firstName":"Sam",
-                        "lastName":"Janssen",
-                        "residence":"Netherlands",
-                        "status":"Active",
-                        "createdAt":"2021-12-09T03:06:58.983Z",
-                    },
-                    {
-                        "_id":"61b172d29aa3ac001d5312cb",
-                        "email":"plangkoAnssen@gmail.com",
-                        "firstName":"Plango",
-                        "lastName":"Anssen",
-                        "residence":"Netherlands",
-                        "status":"Active",
-                        "createdAt":"2021-12-09T03:06:58.983Z",
-
-                    },
-                    {
-                        "_id":"61b172d29aa3ac001d5216cc",
-                        "email":"samjanssen@gmail.com",
-                        "firstName":"Sam",
-                        "lastName":"Janssen",
-                        "residence":"Netherlands",
-                        "status":"Active",
-                        "createdAt":"2021-12-09T03:06:58.983Z",
-                    },
-                    {
-                        "_id":"61b172d29aa3ac001d5312cd",
-                        "email":"plangkoAnssen@gmail.com",
-                        "firstName":"Plango",
-                        "lastName":"Anssen",
-                        "residence":"Netherlands",
-                        "status":"Active",
-                        "createdAt":"2021-12-09T03:06:58.983Z",
-
-                    },
-                    {
-                        "_id":"61b172d29aa3ac001d5216ca",
-                        "email":"samjanssen@gmail.com",
-                        "firstName":"Sam",
-                        "lastName":"Janssen",
-                        "residence":"Netherlands",
+                        "name":"AUDIENCE1",
+                        "audiences":"All",
+                        "exclude":"Noorlander",
+                        "include":"Netherlands",
                         "status":"Active",
                         "createdAt":"2021-12-09T03:06:58.983Z",
                     },
                 ];
-                // return JSON.parse(JSON.stringify(this.getAllPersonas));
+                // return JSON.parse(JSON.stringify(this.getAllAudiences));
             },
             set: function() {}
         },
@@ -853,27 +887,24 @@ export default {
             return { startDate, endDate };
         },
         transformActiveIntegrations() {
-            return this.itemsForPersonas.map(({ externalSystem }) =>
+            return this.itemsForAudiences.map(({ externalSystem }) =>
                 this.capitalizeFirstLetter(externalSystem)
 
             );
         },
     },
     methods: {
-        showConfigureTraits() {
-            this.$bvModal.show('configureTraits');
-        },
         capitalizeFirstLetter(string) {
             return (
                 // string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
                 'ANALYTICS'
             );
         },
-        async handleClickPersonasTableRow(item) {
-            // this.selectedPersonas = item;
+        async handleClickAudiencesTableRow(item) {
+            // this.selectedAudiences = item;
 
-            // for (var i = 0; i < this.itemsForPersonas.length; i++) {
-            //     this.itemsForPersonas[i]._rowVariant = '';
+            // for (var i = 0; i < this.itemsForAudiences.length; i++) {
+            //     this.itemsForAudiences[i]._rowVariant = '';
             // }
 
             // item._rowVariant = 'active';
@@ -881,34 +912,34 @@ export default {
             // await this.getRecentRedirects();
 
             this.isShowEmployee = true;
-            this.$refs.personasTable.refresh();
+            this.$refs.audiencesTable.refresh();
 
             this.$root.$emit('bv::show::modal', 'viewEmployees')
         },
         findRouteById(id) {
-            return this.itemsForPersonas.find(item => item._id === id);
+            return this.itemsForAudiences.find(item => item._id === id);
         },
         editRow(data) {
             const route = this.findRouteById(data.item._id);
-            this.selectedPersona = route;
-            // this.$store.commit('SET_PERSONA', this.selectedPersona);
+            this.selectedAudience = route;
+            // this.$store.commit('SET_AUDIENCE', this.selectedAudience);
             // this.$router.push({
-            //     name: 'EditPersona',
+            //     name: 'EditAudience',
             //     params: {
-            //         id: this.selectedPersona._id
+            //         id: this.selectedAudience._id
             //     }
             // });
         },
         removeRow(data) {
             // const route = this.findRouteById(data.item._id);
-            // this.selectedPersona = route;
+            // this.selectedAudience = route;
             
             this.$bvModal.show('delete-confirm-modal');
         },
-        confirmDeletePersona(value) {
+        confirmDeleteAudience(value) {
             if (value) {
-                this.itemsForPersonas = this.itemsForPersonas.filter(
-                    item => item._id !== this.selectedPersona._id
+                this.itemsForAudiences = this.itemsForAudiences.filter(
+                    item => item._id !== this.selectedAudience._id
                 );
                 // this.isShowRecentRedirectsTable = false;
             }
@@ -922,19 +953,19 @@ export default {
             const h = hash % 360;
             return 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
         },
-        async getPersonas() {
-            // const routes = await this.$store.dispatch('getAllPersonas', {
+        async getAudiences() {
+            // const routes = await this.$store.dispatch('getAllAudiences', {
             //     sort_by: this.selectedOrderByOption,
-            //     limit: this.perPageForPersonas,
+            //     limit: this.perPageForAudiences,
             //     offset:
-            //         (this.currentPageForPersonas - 1) *
-            //         this.perPageForPersonas
+            //         (this.currentPageForAudiences - 1) *
+            //         this.perPageForAudiences
             // });
-            // this.personasTotal = routes.total;
+            // this.audiencesTotal = routes.total;
         },
         async getRecentRedirects() {
-            // var redirects = await new PersonasAPI().getRedirectsData(
-            //     this.selectedPersona._id,
+            // var redirects = await new AudiencesAPI().getRedirectsData(
+            //     this.selectedAudience._id,
             //     this.pageSizeForRecentRedirects,
             //     (this.pageForRecentRedirects - 1) *
             //         this.pageSizeForRecentRedirects
@@ -943,18 +974,18 @@ export default {
             // this.recentRedirectsTotal = redirects.data.total;
             // this.itemsForRecentRedirects = redirects.data.data;
         },
-        async handlePersonasChange(value) {
-            this.currentPageForPersonas = value;
-            await this.getPersonas();
+        async handleAudiencesChange(value) {
+            this.currentPageForAudiences = value;
+            await this.getAudiences();
         },
         async handleRecentRedirectsPageChange(value) {
             this.pageForRecentRedirects = value;
             await this.getRecentRedirects();
         },
-        async handlePersonasPageSizeChange(size) {
-            this.perPageForPersonas = size;
-            this.currentPageForPersonas = 1;
-            await this.getPersonas();
+        async handleAudiencesPageSizeChange(size) {
+            this.perPageForAudiences = size;
+            this.currentPageForAudiences = 1;
+            await this.getAudiences();
         },
         async handleRecentRedirectsPageSizeChange(size) {
             this.pageSizeForRecentRedirects = size;
@@ -970,9 +1001,9 @@ export default {
         dayjs(...args) {
             return dayjs(...args);
         },
-        async sortPersonas() {
-            this.currentPageForPersonas = 1;
-            await this.getPersonas();
+        async sortAudiences() {
+            this.currentPageForAudiences = 1;
+            await this.getAudiences();
         },
         hoverIcon(routeId) {
             this.hoverItemId = routeId;
@@ -1216,7 +1247,7 @@ div.nav-wrapper-class {
     padding-left: 10px !important;
 }
 
-.persona-trait-title {
+.audience-trait-title {
     color: #2f3380;
     font-family: 'Poppins', sans-serif;
     .title {

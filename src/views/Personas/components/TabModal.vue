@@ -9,7 +9,7 @@
     }
     .body-class {
         padding-top: 0px !important;
-        height: 340px;
+        // height: 340px;
         .nav-wrapper-class {
             padding-left: 10px;
         }

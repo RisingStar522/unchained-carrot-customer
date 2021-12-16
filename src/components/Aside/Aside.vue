@@ -67,7 +67,7 @@
 <script>
 import AsideNavItem from './AsideNavItem';
 import { mapGetters } from 'vuex';
-// import { isEnabled } from 'vue-feature-flipping';
+import { isEnabled } from 'vue-feature-flipping';
 import { submitTrackingEvent } from '../../services/TrackingService';
 
 export default {
@@ -80,12 +80,6 @@ export default {
             asideHide: false,
             navigation: [],
             adminNavigation: [
-                {
-                    name: 'Personas',
-                    icon: require('../../assets/icons/Surveys.svg'),
-                    hasSidenav: false,
-                    linkName: 'Personas'
-                },
                 {
                     name: 'Loyalty Programs',
                     icon: require('../../assets/icons/Reward Rules.svg'),
@@ -117,6 +111,12 @@ export default {
                     icon: require('../../assets/icons/Reward Rules.svg'),
                     hasSidenav: true,
                     linkName: 'RewardRules'
+                },
+                {
+                    name: 'Audiences',
+                    icon: require('../../assets/icons/Surveys.svg'),
+                    hasSidenav: false,
+                    linkName: 'Audiences'
                 },
                 {
                     name: 'Apple Wallet',
@@ -151,7 +151,7 @@ export default {
                 {
                     name: 'Traffic Routes',
                     icon: require('../../assets/icons/TrafficRoutes.svg'),
-                    hasSidenav: true,
+                    hasSidenav: false,
                     linkName: 'TrafficRoutes'
                 },
                 {
@@ -193,6 +193,12 @@ export default {
                     linkName: 'Webhooks'
                 },
                 {
+                    name: 'Personas',
+                    icon: require('../../assets/icons/Surveys.svg'),
+                    hasSidenav: false,
+                    linkName: 'Personas'
+                },
+                {
                     name: 'Social Media',
                     icon: require('../../assets/icons/Surveys.svg'),
                     hasSidenav: false,
@@ -200,6 +206,12 @@ export default {
                 }
             ],
             campaignNavigation: [
+                {
+                    name: 'Audiences',
+                    icon: require('../../assets/icons/Surveys.svg'),
+                    hasSidenav: true,
+                    linkName: 'Audiences'
+                },
                 {
                     name: 'Performance',
                     icon: require('../../assets/icons/performance.svg'),
@@ -248,8 +260,12 @@ export default {
             const nav = this.navigation;
 
             return nav.filter(element => {
-                return element.linkName;
-                // return isEnabled(element.linkName);
+                console.log(element.linkName);
+                console.log(isEnabled(element.linkName));
+                if ( element.linkName == "Audiences" ) 
+                    return true;
+                else 
+                    return isEnabled(element.linkName);
             });
         },
         isTestMode() {

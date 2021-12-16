@@ -1,5 +1,5 @@
 <template>
-    <div class="content fullheight-container mt-5">
+    <div class="content mt-5">
         ReservedTraits
     </div>
 </template>
