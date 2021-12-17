@@ -1,87 +1,95 @@
 <template>
     <div class="content with-sidebar" style="min-height: 90vh;">
+        <div class="loader" v-if="loading">
+            <b-spinner label="Loading..."></b-spinner>
+        </div>
         <!-- If no items in broadcast list -->
-        <div class="center-flex full-height" v-if="listEmpty === true">
-            <div class="no-emailbroadcasts">
-                <img
-                    src="@/assets/images/emailcampaign/mail-image.png"
-                    alt="Mail Image"
-                />
-                <h2>You don’t have any email broadcasts yet</h2>
-                <p>
-                    After you create your first email broadcast here you will
-                    see the list of all email broadcasts created and their
-                    details.
-                </p>
-                <b-button
-                    variant="primary"
-                    :to="{ name: 'EmailBroadcastsAddCampaign' }"
-                >
-                    Create Email Broadcast
-                </b-button>
-            </div>
-        </div>
-        <!-- If broadcast list contains items -->
-        <div v-else>
-            <div class="py-4">
-                <h4 class="text-brand">Email Campaigns</h4>
-            </div>
-            <div class="table-wrapper">
-                <div class="table-preheader">
-                    <div>
-                        <b-container fluid class="left-part">
-                            <b-row>
-                                <b-col sm="3" class="no-left-padding">
-                                    <h5>Sort&nbsp;by</h5>
-                                </b-col>
-                                <b-col sm="8">
-                                    <b-form-select
-                                        v-model="sortSelected"
-                                        :options="sortOptions"
-                                    >
-                                    </b-form-select>
-                                </b-col>
-                            </b-row>
-                        </b-container>
-                    </div>
-                    <div>
-                        <b-button
-                            class="transparent-button"
-                            variant="link"
-                            :to="{ name: 'EmailBroadcastsAddCampaign' }"
-                        >
-                            <span class="btn-icon btn-outline">
-                                <fa-icon
-                                    class="addIcon"
-                                    icon="plus-circle"
-                                /> </span
-                            >Create Email Broadcast
-                        </b-button>
-                    </div>
+        <template v-else>
+            <div class="center-flex full-height" v-if="listEmpty === true">
+                <div class="no-emailbroadcasts">
+                    <img
+                        src="@/assets/images/emailcampaign/mail-image.png"
+                        alt="Mail Image"
+                    />
+                    <h2>You don’t have any email broadcasts yet</h2>
+                    <p>
+                        After you create your first email broadcast here you
+                        will see the list of all email broadcasts created and
+                        their details.
+                    </p>
+                    <b-button
+                        variant="primary"
+                        :to="{ name: 'EmailBroadcastsAddCampaign' }"
+                    >
+                        Create Email Broadcast
+                    </b-button>
                 </div>
-                <b-table :items="items" :fields="fields">
-                    <template #cell(status)="row">
-                        <span
-                            class="status-circle"
-                            :class="row.value | statusClass"
-                        ></span>
-                        {{ row.value }}
-                    </template>
-                    <!-- Manually create cell for actions -->
-                    <template #cell(actions)>
-                        <b-button class="table-action" to="/emailbroadcasts/1">
-                            <DashboardIcon />
-                        </b-button>
-                        <b-button class="table-action">
-                            <CopyIcon />
-                        </b-button>
-                        <b-button class="table-action">
-                            <TrashIcon />
-                        </b-button>
-                    </template>
-                </b-table>
             </div>
-        </div>
+            <!-- If broadcast list contains items -->
+            <div v-else>
+                <div class="py-4">
+                    <h4 class="text-brand">Email Campaigns</h4>
+                </div>
+                <div class="table-wrapper">
+                    <div class="table-preheader">
+                        <div>
+                            <b-container fluid class="left-part">
+                                <b-row>
+                                    <b-col sm="3" class="no-left-padding">
+                                        <h5>Sort&nbsp;by</h5>
+                                    </b-col>
+                                    <b-col sm="8">
+                                        <b-form-select
+                                            v-model="sortSelected"
+                                            :options="sortOptions"
+                                        >
+                                        </b-form-select>
+                                    </b-col>
+                                </b-row>
+                            </b-container>
+                        </div>
+                        <div>
+                            <b-button
+                                class="transparent-button"
+                                variant="link"
+                                :to="{ name: 'EmailBroadcastsAddCampaign' }"
+                            >
+                                <span class="btn-icon btn-outline">
+                                    <fa-icon
+                                        class="addIcon"
+                                        icon="plus-circle"
+                                    /> </span
+                                >Create Email Broadcast
+                            </b-button>
+                        </div>
+                    </div>
+                    <b-table :items="items" :fields="fields">
+                        <template #cell(status)="row">
+                            <span
+                                class="status-circle"
+                                :class="row.value | statusClass"
+                            ></span>
+                            {{ row.value }}
+                        </template>
+                        <!-- Manually create cell for actions -->
+                        <template #cell(actions)>
+                            <b-button
+                                class="table-action"
+                                to="/emailbroadcasts/1"
+                            >
+                                <DashboardIcon />
+                            </b-button>
+                            <b-button class="table-action">
+                                <CopyIcon />
+                            </b-button>
+                            <b-button class="table-action">
+                                <TrashIcon />
+                            </b-button>
+                        </template>
+                    </b-table>
+                </div>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -100,6 +108,7 @@ export default {
     },
     data() {
         return {
+            loading: false,
             sortSelected: 'campaign',
             sortOptions: [
                 { value: 'name', text: 'Name' },

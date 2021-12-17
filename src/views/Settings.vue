@@ -26,12 +26,28 @@
                     :novalidation="true"
                 />
                 <form-input-element
+                    :options="StartView"
+                    placeholder="Choose Currency"
+                    :value.sync="setting.startView"
+                    :selected="settings && settings.startView"
+                    label="Start View"
+                    :novalidation="true"
+                />
+                <form-input-element
+                    :options="StartMode"
+                    placeholder="Choose Currency"
+                    :value.sync="setting.startMode"
+                    :selected="settings && settings.startMode"
+                    label="Start Mode"
+                    :novalidation="true"
+                />
+                <form-input-element
                     :options="POSSystemOptions"
                     placeholder="Choose POS System"
+                    :value.sync="setting.posSystem"
                     label="POS System"
-                    :selected="settings && is === 'COUNTR'"
+                    :selected="settings && settings.posSystem"
                     :novalidation="true"
-                    v-model="settings.posSystem"
                 />
                 <!-- :value.sync="setting.pos" -->
                 <!-- :selected="settings && settings.posSystem" -->
@@ -58,6 +74,7 @@
                     class="min-width-button"
                     size="lg"
                     type="submit"
+                    @click="submitForm()"
                 >
                     Save
                 </b-button>
@@ -81,6 +98,11 @@ export default {
                 { value: 'it-IT', text: 'Italian' }
             ],
             CurrencyOptions: [{ value: 'eur', text: 'EUR' }],
+            StartView: [
+                { value: 'admin', text: 'Admin' },
+                { value: 'campaign', text: 'Campaign' }
+            ],
+            StartMode: [{ value: 'test',text: 'Test' }],
             POSSystemOptions: [
                 { value: 'COUNTR', text: 'Countr' },
                 { value: 'SCLOBY', text: 'Scloby' },
@@ -96,13 +118,18 @@ export default {
                 // { value: 'n/a', text: 'N/A' }
             ],
             setting: {
-                language: 'italian',
+                language: 'en-US',
                 currency: 'eur',
-                pos: 'scloby',
+                startView: this.$store.getters['isAdmin']
+                    ? 'admin'
+                    : 'campaign',
+                startMode: 'test',
+                pos: 'COUNTR',
                 webshop: 'n/a'
             },
             settings: {
                 defaultCurrency: '',
+                startView: '',
                 posSystem: '',
                 webShopSystem: ''
             },
@@ -113,20 +140,15 @@ export default {
         ...mapGetters(['customerSettings'])
     },
     methods: {
-        // ...mapActions('customer', ['getCustomerSettings'])
         ...mapActions(['getCustomerSettings']),
         async getSettings() {
-            // const res = await this.getCustomerSettings();
             const res = await this.$store.dispatch('getCustomerSettings');
             if (!res) return false;
         }
     },
     async mounted() {
-        // if (this.getCustomerSettings === null) {
         await this.getCustomerSettings();
         this.settings = this.customerSettings;
-        // }
-        // this.getSettings();
     }
 };
 </script>

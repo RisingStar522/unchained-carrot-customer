@@ -22,6 +22,7 @@ import loyaltyprograms from './modules/loyaltyprograms';
 import landingpages from './modules/landingpages';
 import campaigns from './modules/campaigns';
 import userProfiles from './modules/userProfiles';
+import AudienceSegment from '../views/EmailCampaign/segments';
 
 Vue.use(Vuex);
 
@@ -46,7 +47,8 @@ export const store = new Vuex.Store({
         loyaltyprograms,
         landingpages,
         campaigns,
-        userProfiles
+        userProfiles,
+        AudienceSegment
     },
     state: {
         countries: require('../assets/countries.json'),
@@ -79,20 +81,28 @@ export const store = new Vuex.Store({
                 'LoyaltyPrograms',
                 'Performance',
                 'Goals',
+                'CampaignLandingPages',
                 'Promotion',
                 'Notifications',
-                'CampaignLandingPages',
                 'Personas',
                 'SocialMedia'
             ],
             Beta: [
-                'Loyalty',
+                // 'Loyalty',
+                'TrafficRoutes',
+                'PageBuilder',
+                'EmailBuilder',
+                'Personas',
+                'EmailRules',
+                'EmailBroadcasts',
+                //AUDIENCE SEGMENT NOT DISPLAYNNG
+                'AudienceSegment',
                 'Surveys',
                 'Quizzes',
-                'RewardClasses',
-                'Rewards',
+                // 'RewardClasses',
+                // 'Rewards',
                 'ReviewByMe',
-                'Integrations'
+                // 'Integrations'
             ],
             Prod: [
                 // 'Surveys',
@@ -101,7 +111,7 @@ export const store = new Vuex.Store({
                 // 'Integrations',
                 // 'RewardClasses',
                 'TrafficRoutes',
-                'SocialMedia'
+                // 'SocialMedia'
             ]
         }
     }

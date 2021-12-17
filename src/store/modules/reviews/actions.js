@@ -17,7 +17,8 @@ export default {
                     ReviewTransformer.fetchList(resp.data)
                 );
             })
-            .catch(err => {});
+            .catch(err => {
+            });
     },
     getAllReviewFolders({ commit }) {
         commit('CLEAR_REVIEW_LIST');
@@ -32,7 +33,8 @@ export default {
                     commit('SELECT_REVIEW_FOLDER', resp.data[0]._id);
                 }
             })
-            .catch(err => {});
+            .catch(err => {
+            });
     },
     createReviewFolder({ commit }, data) {
         const payload = ReviewFoldersTransformer.send(data);

@@ -548,7 +548,8 @@ export default {
                 const imageUrl = response.content;
 
                 return imageUrl;
-            } catch (error) {}
+            } catch (error) {
+            }
         },
         onChangeEmailServiceOption() {
             if (this.selectedEmailService !== null) {

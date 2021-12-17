@@ -65,7 +65,7 @@
                 <p class="font-size-0-8 mb-5">{{ subject }}</p>
             </div>
         </div>
-        <span class="font-size-0-8"
+        <span class="font-size-0-8" v-if="type === 'pages'"
             >last update: {{ new Date(updatedAt).toDateString() }}</span
         >
         <div class="mt-2">
@@ -73,8 +73,18 @@
                 :variant="status === 'published' ? 'outline-brand' : 'brand'"
                 @click="handlePublishOrUnpublishAction"
                 style="width: 120px; font-size: 14px"
+                v-if="type === 'pages'"
             >
                 {{ status === 'published' ? 'Unpublish' : 'Publish' }}
+            </b-btn>
+            <b-btn
+                :variant="'brand'"
+                :size="'sm'"
+                @click="handleUseThisTemplate"
+                style="font-size: 14px"
+                v-if="type === 'templates'"
+            >
+                Use this template
             </b-btn>
         </div>
     </div>
@@ -90,10 +100,15 @@ export default {
             this.toPublishOrToUnpublish === 'Publish'
                 ? this.publishAction()
                 : this.unpublishAction();
-        }
+        },
+        handleUseThisTemplate() {}
     },
     props: {
         name: {
+            type: String,
+            required: true
+        },
+        type: {
             type: String,
             required: true
         },

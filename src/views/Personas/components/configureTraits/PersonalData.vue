@@ -34,7 +34,7 @@
                                 class="action-icon mr-2"
                                 @click="removeRow(data)"
                                 data-toggle="tooltip"
-                                title="Delete Route"
+                                title="Delete Persona Data"
                             >
                                 <span class="default">
                                     <svg
@@ -121,27 +121,16 @@
             </b-card>
 
         </div>
-        <!-- <DeleteConfirmModal
-            :persona="selectedPersona"
-            @confirm="confirmDeletePersona"
-        /> -->
     </div>
 </template>
 
 <script>
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
-import dayjs from 'dayjs';
-
-// import DeleteConfirmModal from './DeleteConfirmModal.vue';
-import { mapGetters } from 'vuex';
-// import PersonasAPI from '../../../api/PersonasAPI';
-
 import _ from 'lodash';
 
 export default {
     name: 'personas-table',
     components: {
-        // DeleteConfirmModal,
     },
     data: () => ({
         form: {
@@ -149,48 +138,7 @@ export default {
             value: '',
             unit: '',
         },
-        selected: '',
-        tableTitle: '',
-        totalClicks: 0,
-        hoverItemId: '',
-        options: {
-            legend: {
-                display: false
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            tooltips: {
-                callbacks: {
-                    label: function(tooltipItems) {
-                        return tooltipItems.yLabel.toString() + ' clicks';
-                    }
-                }
-            },
-            scales: {
-                xAxes: [
-                    {
-                        barPercentage: 0.4,
-                        gridLines: {
-                            drawOnChartArea: false
-                        }
-                    }
-                ],
-                yAxes: [
-                    {
-                        position: 'right',
-                        gridLines: {
-                            display: false
-                        }
-                    }
-                ]
-            }
-        },
-        isShowEmployee: false,
-        selectedOrderByOption: 'dateCreated',
         selectedPersona: null,
-        isShowRecentRedirectsTable: false,
-        perPageForPersonas: 5,
-        currentPageForPersonas: 1,
         fieldsForPersonas: [
             {
                 key: 'trait',
@@ -213,17 +161,8 @@ export default {
                 label: ''
             }
         ],
-        itemsForRecentRedirects: [],
-        recentRedirectsTotal: 0,
-        personasTotal: 0,
-        open: 'right',
-        showDropdowns: true,
-        linkedCalendars: true,
-        selectedChartId: ''
     }),
     computed: {
-        // ...mapGetters(['getAllPersonas']),
-
         itemsForPersonas: {
             get: function() {
                 return [
@@ -238,29 +177,13 @@ export default {
                         "value":"50%"
                     }
                 ];
-                // return JSON.parse(JSON.stringify(this.getAllPersonas));
             },
             set: function() {}
         },
     },
     methods: {
-        showConfigureTraits() {
-            this.$bvModal.show('configureTraits');
-        },
         removeRow(data) {
-            // const route = this.findRouteById(data.item._id);
-            // this.selectedPersona = route;
-            // this.$bvModal.show('delete-confirm-modal');
         },
-
-        hoverIcon(routeId) {
-            this.hoverItemId = routeId;
-        },
-        unhoverIcon(routeId) {
-            if (routeId === this.hoverItemId) {
-                this.hoverItemId = '';
-            }
-        }
     }
 };
 </script>
@@ -272,14 +195,6 @@ export default {
 
 .card-body {
     padding: 0;
-}
-
-.published {
-    background: #9fe364 0% 0% no-repeat padding-box;
-}
-
-.unpublished {
-    background: #c6c6c6 0% 0% no-repeat padding-box;
 }
 
 .draft {

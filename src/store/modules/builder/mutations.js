@@ -7,15 +7,15 @@ export default {
     },
     UPDATE_TEMPLATE_LIST(state, { _id }) {
         state.templates = state.templates.filter(
-            template => template._id != _id
+            template => template._id !== _id
         );
     },
     UPDATE_PAGE_LIST(state, { _id }) {
-        state.pages = state.pages.filter(page => page._id != _id);
+        state.pages = state.pages.filter(page => page._id !== _id);
     },
     UPDATE_TEMPLATE(state, data) {
         state.templates = [
-            ...state.templates.filter(template => template._id != data._id),
+            ...state.templates.filter(template => template._id !== data._id),
             data
         ];
     },

@@ -1,68 +1,75 @@
 <template>
     <div class="content">
-        <!-- programs -->
-        <div class="py-4">
-            <h4 class="text-brand">Loyalty Programs</h4>
+        <div class="loader" v-if="loading">
+            <b-spinner label="Loading..."></b-spinner>
         </div>
-        <div class="table-wrapper">
-            <div class="table-preheader">
-                <div />
-                <div>
-                    <b-button
-                        class="transparent-button"
-                        variant="link"
-                        :to="{ name: 'LoyaltyProgramsAddProgram' }"
-                    >
-                        <span class="btn-icon btn-outline">
-                            <fa-icon
-                                class="addIcon"
-                                icon="plus-circle"
-                            /> </span
-                        >Add program
-                    </b-button>
-                </div>
+
+        <template v-else>
+            <!-- programs -->
+            <div class="py-4">
+                <h4 class="text-brand">Loyalty Programs</h4>
             </div>
-            <b-table
-                :items="loyaltyPrograms"
-                :fields="fields"
-                select-mode="single"
-                selectable
-                @row-selected="onRowSelected"
-                empty-text="You have no Loyalty Programs yet"
-                show-empty
-            >
-                <!-- Manually create cell for actions -->
-                <template #cell(actions)="row">
-                    <b-button class="table-action">
-                        <DashboardIcon />
-                    </b-button>
-                    <b-button
-                        class="table-action"
-                        :to="{
-                            name: 'LoyaltyProgramsEditProgram',
-                            params: { id: row.item._id }
-                        }"
-                    >
-                        <PencilIcon />
-                    </b-button>
-                    <b-button
-                        class="table-action"
-                        @click="openDeleteProgram(row)"
-                    >
-                        <TrashIcon />
-                    </b-button>
-                </template>
-            </b-table>
-        </div>
-        <div class="clearfix">
-            <b-pagination
-                v-model="currentPage"
-                :total-rows="loyaltyProgramsPagination.total"
-                :per-page="3"
-                first-number
-                last-number
-            ></b-pagination>
-        </div>
+            <div class="table-wrapper">
+                <div class="table-preheader">
+                    <div />
+                    <div>
+                        <b-button
+                            class="transparent-button"
+                            variant="link"
+                            :to="{ name: 'LoyaltyProgramsAddProgram' }"
+                        >
+                            <span class="btn-icon btn-outline">
+                                <fa-icon
+                                    class="addIcon"
+                                    icon="plus-circle"
+                                /> </span
+                            >Add program
+                        </b-button>
+                    </div>
+                </div>
+                <b-table
+                    :items="loyaltyPrograms"
+                    :fields="fields"
+                    select-mode="single"
+                    selectable
+                    @row-selected="onRowSelected"
+                    empty-text="You have no Loyalty Programs yet"
+                    show-empty
+                >
+                    <!-- Manually create cell for actions -->
+                    <template #cell(actions)="row">
+                        <b-button class="table-action">
+                            <DashboardIcon />
+                        </b-button>
+                        <b-button
+                            class="table-action"
+                            :to="{
+                                name: 'LoyaltyProgramsEditProgram',
+                                params: { id: row.item._id }
+                            }"
+                        >
+                            <PencilIcon />
+                        </b-button>
+                        <b-button
+                            class="table-action"
+                            @click="openDeleteProgram(row)"
+                        >
+                            <TrashIcon />
+                        </b-button>
+                    </template>
+                </b-table>
+            </div>
+            <div class="clearfix">
+                <b-pagination
+                    v-model="currentPage"
+                    :total-rows="loyaltyProgramsPagination.total"
+                    :per-page="3"
+                    first-number
+                    last-number
+                ></b-pagination>
+            </div>
+        </template>
+
         <!-- members -->
         <template v-if="selectedProgram !== null">
             <div class="py-4">
@@ -212,6 +219,7 @@ export default {
     },
     data() {
         return {
+            loading: false,
             // object to send to deactivation modal component
             selectedProgram: null,
             programForDeactivation: {},
@@ -327,10 +335,25 @@ export default {
             }
         },
         updateProgramsList() {
+            this.loading = true;
+            console.log(this.loading);
             const offset = this.currentOffset;
             const limit = 3;
-            this.$store.dispatch('getLoyaltyPrograms', { limit, offset });
+            this.$store
+                .dispatch('getLoyaltyPrograms', { limit, offset })
+                .then(() => {
+                    this.loading = false;
+                });
         }
     }
 };
 </script>
+
+<style scoped>
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>

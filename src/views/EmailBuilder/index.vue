@@ -1,6 +1,10 @@
 <template>
     <div class="content">
-        <div class="email-builder">
+        <div class="loader" v-if="loading">
+            <b-spinner label="Loading..."></b-spinner>
+        </div>
+
+        <div class="email-builder" v-else>
             <div
                 class="center-flex full-height"
                 v-if="filteredEmailTemplates.length === 0"
@@ -113,7 +117,7 @@
                             <router-link
                                 :to="{
                                     name: 'EmailBuilder/builder',
-                                    params: { templateId: null },
+                                    params: { templateId: null }
                                 }"
                             >
                                 <div class="mr-5">
@@ -231,7 +235,7 @@
                                 <span
                                     class="dot"
                                     :class="{
-                                        active: data.value === 'published',
+                                        active: data.value === 'published'
                                     }"
                                 ></span>
                                 {{ data.value | capitalize }}
@@ -405,9 +409,15 @@
                                     </span>
                                 </a>
                                 <b-btn
-                                    :variant="data.item.status === 'published' ? 'outline-brand' : 'brand'"
+                                    :variant="
+                                        data.item.status === 'published'
+                                            ? 'outline-brand'
+                                            : 'brand'
+                                    "
                                     @click="
-                                        handlePublishEmailTemplate(data.item._id)
+                                        handlePublishEmailTemplate(
+                                            data.item._id
+                                        )
                                     "
                                     style="width: 120px; font-size: 14px"
                                 >
@@ -437,7 +447,7 @@
                                     typeOfCard="template"
                                     :to="{
                                         name: 'EmailBuilder/builder',
-                                        params: { templateId: template._id },
+                                        params: { templateId: template._id }
                                     }"
                                     :editAction="
                                         editTemplate.bind(null, template._id)
@@ -445,7 +455,12 @@
                                     :deleteAction="
                                         deleteTemplate.bind(null, template._id)
                                     "
-                                    :publishEmailTemplate="handlePublishEmailTemplate.bind(null, template._id)"
+                                    :publishEmailTemplate="
+                                        handlePublishEmailTemplate.bind(
+                                            null,
+                                            template._id
+                                        )
+                                    "
                                 />
                             </div>
                         </div>
@@ -574,6 +589,13 @@
 </template>
 
 <style scoped lang="scss">
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .rowBetween {
     display: flex;
     justify-content: space-between;
@@ -695,7 +717,7 @@ export default {
     components: {
         // Loading,
         EmailCard,
-        DeleteConfirmModal,
+        DeleteConfirmModal
     },
     data: () => ({
         loading: false,
@@ -707,16 +729,16 @@ export default {
         orderByOptions: [
             {
                 value: 'name',
-                text: 'Name',
+                text: 'Name'
             },
             {
                 value: 'updatedAt',
-                text: 'Last Update',
+                text: 'Last Update'
             },
             {
                 value: 'subject',
-                text: 'Subject',
-            },
+                text: 'Subject'
+            }
         ],
         selectedOrderByOption: 'updatedAt',
         fieldsForEmailTemplate: [
@@ -724,27 +746,27 @@ export default {
                 key: 'name',
                 sortable: false,
                 label: 'Name',
-                thStyle: { paddingLeft: '40px' },
+                thStyle: { paddingLeft: '40px' }
             },
             {
                 key: 'subject',
                 sortable: false,
                 label: 'Subject',
-                thStyle: { textAlign: 'center' },
+                thStyle: { textAlign: 'center' }
             },
             {
                 key: 'updatedAt',
                 sortable: false,
                 label: 'Last Update',
-                thStyle: { textAlign: 'center' },
+                thStyle: { textAlign: 'center' }
             },
             {
                 key: 'status',
                 sortable: false,
                 label: 'Status',
-                thStyle: { textAlign: 'center' },
+                thStyle: { textAlign: 'center' }
             },
-            { key: 'action', label: '' },
+            { key: 'action', label: '' }
         ],
         searchTerm: '',
         rowsPerPageOptions: [
@@ -753,24 +775,24 @@ export default {
             { value: 15, text: '15' },
             { value: 20, text: '20' },
             { value: 50, text: '50' },
-            { value: 100, text: '100' },
+            { value: 100, text: '100' }
         ],
         emailTemplateTypes: [
             {
                 text: 'MARKETING',
-                value: 'marketing',
+                value: 'marketing'
             },
             {
                 text: 'TRANSACTIONAL',
-                value: 'transactional',
-            },
+                value: 'transactional'
+            }
         ],
         selectedTemplateType: 'marketing',
         emailTemplateContents: [
             'Email templates for marketing purposes (e.g.newsletters)',
             'Email templates for transactional (e.g.notifications)',
-            'Options to publish/unpublish a template with a certain email provider',
-        ],
+            'Options to publish/unpublish a template with a certain email provider'
+        ]
     }),
     computed: {
         ...mapGetters(['emailTemplates']),
@@ -784,19 +806,20 @@ export default {
                     template.description.toLowerCase().includes(searchTerm)
                 );
             }
-            return this.emailTemplates.filter((template) =>
+            return this.emailTemplates.filter(template =>
                 findMatch(template, searchTerm)
             );
         },
         numOfTemplates() {
             return this.filteredEmailTemplates.length;
-        },
+        }
     },
     methods: {
         async getEmailTemplates() {
             try {
                 return await this.$store.dispatch('getEmailTemplates');
             } catch (error) {
+                this.loading = false;
             }
         },
         handlePublishSubmit() {},
@@ -806,7 +829,7 @@ export default {
         handleClickEmailTemplateTableRow(item) {
             this.$router.push({
                 name: 'EmailBuilder/builder',
-                params: { templateId: item._id },
+                params: { templateId: item._id }
             });
         },
         handleChangeViewType(type) {
@@ -817,12 +840,12 @@ export default {
             }
         },
         findEmailTemplateById(id) {
-            return this.filteredEmailTemplates.find((item) => item._id === id);
+            return this.filteredEmailTemplates.find(item => item._id === id);
         },
         editTemplate(templateId) {
             this.$router.push({
                 name: 'EmailBuilder/builder',
-                params: { purpose: 'update', templateId },
+                params: { purpose: 'update', templateId }
             });
         },
         async deleteTemplate(templateId) {
@@ -832,25 +855,26 @@ export default {
         },
         confirmDeleteEmailTemplate(value) {
             if (value) {
-                this.filteredEmailTemplates =
-                    this.filteredEmailTemplates.filter(
-                        (item) => item._id !== this.selectedEmailTemplate._id
-                    );
+                this.filteredEmailTemplates = this.filteredEmailTemplates.filter(
+                    item => item._id !== this.selectedEmailTemplate._id
+                );
                 this.$notify({
                     title: 'Success',
                     text: 'Successfully deleted the Email Template',
-                    type: 'success',
+                    type: 'success'
                 });
             }
-        },
+        }
     },
     async mounted() {
         try {
             this.isLoading = true;
+            this.loading = true;
             const templatesList = await this.getEmailTemplates();
 
             if (templatesList) {
                 this.$store.commit('SET_TEMPLATES', templatesList);
+                this.loading = false;
             }
         } catch (error) {
             // this.$notify({
@@ -860,17 +884,18 @@ export default {
             // });
         } finally {
             this.isLoading = false;
+            this.loading = false;
         }
     },
     filters: {
-        formatDate: function (value) {
+        formatDate: function(value) {
             return moment(value).format('DD/MM/YYYY');
         },
-        capitalize: function (value) {
+        capitalize: function(value) {
             if (!value) return '';
             value = value.toString();
             return value.charAt(0).toUpperCase() + value.slice(1);
-        },
-    },
+        }
+    }
 };
 </script>

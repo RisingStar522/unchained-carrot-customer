@@ -114,7 +114,7 @@ export default {
                 },
                 {
                     name: 'Audiences',
-                    icon: require('../../assets/icons/Surveys.svg'),
+                    icon: require('../../assets/icons/Audiences.svg'),
                     hasSidenav: false,
                     linkName: 'Audiences'
                 },
@@ -194,7 +194,7 @@ export default {
                 },
                 {
                     name: 'Personas',
-                    icon: require('../../assets/icons/Surveys.svg'),
+                    icon: require('../../assets/icons/Personas.svg'),
                     hasSidenav: false,
                     linkName: 'Personas'
                 },
@@ -206,12 +206,6 @@ export default {
                 }
             ],
             campaignNavigation: [
-                {
-                    name: 'Audiences',
-                    icon: require('../../assets/icons/Surveys.svg'),
-                    hasSidenav: true,
-                    linkName: 'Audiences'
-                },
                 {
                     name: 'Performance',
                     icon: require('../../assets/icons/performance.svg'),
@@ -260,12 +254,7 @@ export default {
             const nav = this.navigation;
 
             return nav.filter(element => {
-                console.log(element.linkName);
-                console.log(isEnabled(element.linkName));
-                if ( element.linkName == "Audiences" ) 
-                    return true;
-                else 
-                    return isEnabled(element.linkName);
+                return isEnabled(element.linkName);
             });
         },
         isTestMode() {

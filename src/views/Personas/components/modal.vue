@@ -5,7 +5,6 @@
         width: 400px !important;
         margin-top: 120px;
         margin-left: 100px;
-        // background-color: #f0f0f7;
     }
     .body-class {
         padding-top: 0px !important;
@@ -30,7 +29,6 @@
         width: 400px !important;
         margin-top: 120px;
         margin-left: 100px;
-        // background-color: #f0f0f7;
     }
     .body-class {
         padding-top: 0px !important;

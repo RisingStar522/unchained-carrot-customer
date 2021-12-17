@@ -10,20 +10,24 @@
                 :to="{ name: nav.linkName }"
                 v-b-toggle="'nav-link-' + nav.linkName"
             >
-                <span class="nav-icon">
+                <span
+                    class="nav-icon"
+                    v-b-tooltip.hover.right
+                    :title="nav.linkName"
+                >
                     <img :src="nav.icon" alt="" />
                 </span>
                 <span class="nav-name">
                     {{ nav.name }}
                 </span>
-                <span class="nav-arrow" v-if="nav.pages && nav.pages.length">
+                <!-- <span class="nav-arrow" v-if="nav.pages && nav.pages.length">
                     <fa-icon
                         :icon="shownCollapse ? 'chevron-up' : 'chevron-down'"
                     />
                 </span>
                 <span class="nav-arrow" v-if="nav.hasSidenav">
                     <fa-icon icon="chevron-right" />
-                </span>
+                </span> -->
             </router-link>
         </div>
         <b-collapse

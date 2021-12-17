@@ -180,11 +180,11 @@ export default {
                 return { value: item._id, text: item.name };
             });
         },
-        integrationList() {
-            return this.allIntegration.map(item => {
-                return { value: item._id, text: item.externalSystem };
-            });
-        }
+        // integrationList() {
+        //     return this.allIntegration.map(item => {
+        //         return { value: item._id, text: item.externalSystem };
+        //     });
+        // }
     },
     watch: {
         templatesList(list) {

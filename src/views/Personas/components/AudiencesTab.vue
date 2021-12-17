@@ -6,7 +6,30 @@
                     <div class="row">
                         <div class="col-1">
                             <span class="bg-gray-300 text-gray-500" style="margin-right:15px">
-                                <UsersIcon></UsersIcon>
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 25 25">
+                                    <defs>
+                                        <clipPath id="clip-path">
+                                        <rect id="Rettangolo_1669" data-name="Rettangolo 1669" width="25" height="25" transform="translate(20 644)" fill="#2f3380" stroke="#707070" stroke-width="1"/>
+                                        </clipPath>
+                                    </defs>
+                                    <g id="Gruppo_di_maschere_13" data-name="Gruppo di maschere 13" transform="translate(-20 -644)" clip-path="url(#clip-path)">
+                                        <g id="UCC_icon_audiences-02" transform="translate(19.996 643.992)">
+                                        <path id="Tracciato_1202" data-name="Tracciato 1202" d="M12.5,11.351a2.037,2.037,0,1,0-1.987-2.037A2.015,2.015,0,0,0,12.5,11.351Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1203" data-name="Tracciato 1203" d="M14.341,11.434a2.7,2.7,0,0,1-3.673,0,2.009,2.009,0,0,0-1.3,1.9v4.393h6.269V13.338A2.009,2.009,0,0,0,14.341,11.434Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1204" data-name="Tracciato 1204" d="M7.986,11.418A1.789,1.789,0,0,0,9.753,9.656a3.415,3.415,0,0,1-.028-.342h0a1.776,1.776,0,1,0-1.745,2.1Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1205" data-name="Tracciato 1205" d="M6.36,11.623a2.009,2.009,0,0,0-1.189,1.845v3.348H8.586V13.338a2.834,2.834,0,0,1,.306-1.287,2.5,2.5,0,0,1-2.526-.428Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1206" data-name="Tracciato 1206" d="M15.255,9.656a1.814,1.814,0,1,0,.028-.342A3.415,3.415,0,0,1,15.255,9.656Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1207" data-name="Tracciato 1207" d="M18.648,11.623a2.5,2.5,0,0,1-2.531.428,2.834,2.834,0,0,1,.306,1.287v3.479h3.415V13.468a2.009,2.009,0,0,0-1.189-1.845Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1208" data-name="Tracciato 1208" d="M12.5,22.508a9.9,9.9,0,0,1-9.764-10A9.9,9.9,0,0,1,12.5,2.5a9.9,9.9,0,0,1,9.764,10A9.9,9.9,0,0,1,12.5,22.508Zm0-19.237A9.128,9.128,0,0,0,3.487,12.5,9.145,9.145,0,0,0,12.5,21.749,9.145,9.145,0,0,0,21.521,12.5,9.145,9.145,0,0,0,12.5,3.259Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1209" data-name="Tracciato 1209" d="M12.5,3.259a.375.375,0,0,1-.375-.375V.383a.375.375,0,1,1,.75,0v2.5a.375.375,0,0,1-.375.375Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1210" data-name="Tracciato 1210" d="M12.5,3.259a.375.375,0,0,1-.375-.375V.383a.375.375,0,1,1,.75,0v2.5a.375.375,0,0,1-.375.375Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1211" data-name="Tracciato 1211" d="M3.112,12.879H.661a.375.375,0,1,1,0-.75H3.112a.375.375,0,1,1,0,.75Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1212" data-name="Tracciato 1212" d="M12.5,25.008a.375.375,0,0,1-.375-.375v-2.5a.375.375,0,1,1,.75,0v2.5A.375.375,0,0,1,12.5,25.008Z" fill="#2f3380"/>
+                                        <path id="Tracciato_1213" data-name="Tracciato 1213" d="M24.347,12.879H21.9a.375.375,0,0,1,0-.75h2.451a.375.375,0,0,1,0,.75Z" fill="#2f3380"/>
+                                        </g>
+                                    </g>
+                                    </svg>
+
                             </span> 
                         </div>
                         <div class="col-8">{{ list.text }}</div>
@@ -19,46 +42,29 @@
 </template>
 
 <script>
-import {
-    UsersIcon
-} from "vue-feather-icons";
 
 export default {
     name: 'audiences-tab-component',
-    components: {
-        UsersIcon
-    },
     data: () => ({
         lists: [
                 {
                     key: 1,
-                    icon: UsersIcon,
                     text: 'Real time cart abandoner',
                     unit: '2s'
                 },
                 {
                     key: 2,
-                    icon: UsersIcon,
                     text: 'High propensity buyer',
                     unit: '12m'
                 },
                 {
                     key: 3,
-                    icon: UsersIcon,
                     text: 'Holiday shopper',
                     unit: '15m'
                 }
         ]
     }),
     props: {
-        // modalId: {
-        //     type: String,
-        //     required: true
-        // },
-        // title: {
-        //     type: String,
-        //     required: false
-        // }
     }
 };
 </script>

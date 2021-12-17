@@ -63,14 +63,6 @@ export default {
         `
     }),
     props: {
-        // modalId: {
-        //     type: String,
-        //     required: true
-        // },
-        // title: {
-        //     type: String,
-        //     required: false
-        // }
     }
 };
 </script>

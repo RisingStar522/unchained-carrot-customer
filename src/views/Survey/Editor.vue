@@ -102,8 +102,6 @@ export default {
         const EnglishId = this.$store.state.locales.filter(
             item => item.label === 'English'
         )[0].id;
-        console.log(languages.map(language => ({ ...language })));
-        console.log(EnglishId);
 
         return {
             formDateNameInjection: false,

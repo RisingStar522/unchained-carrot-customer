@@ -123,8 +123,6 @@ div.nav-wrapper-class {
                     </div>
                 </div>
 
-                <!-- :current-page="currentPageForPersonas" -->
-                <!-- :per-page="perPageForPersonas" -->
                 <b-table
                     hover
                     id="personas"
@@ -161,7 +159,7 @@ div.nav-wrapper-class {
                             {{ dayjs(data.value).format('DD/MM/YYYY') }}
                         </div>
                     </template>
-                    <template v-slot:cell(redirects)="data">
+                    <template v-slot:cell(employee)="data">
                         <div class="text-center">
                             <b-btn
                                 variant="outline-brand"
@@ -408,7 +406,7 @@ div.nav-wrapper-class {
                         id="event-source"
                         name="event-source"
                         v-model="selected"
-                        :options="transformActiveIntegrations"
+                        :options="transformActivePersonas"
                         class="mb-3"
                         aria-placeholder="select event source"
                     >
@@ -490,11 +488,6 @@ div.nav-wrapper-class {
             </b-tabs>
         </TabModal>
 
-        <!-- <DeleteConfirmModal
-            :persona="selectedPersona"
-            @confirm="confirmDeletePersona"
-        /> -->
-
         <b-modal
             id="modal-1"
                 header-border-variant="light"
@@ -554,7 +547,6 @@ div.nav-wrapper-class {
 </template>
 
 <script>
-import DateRangePicker from 'vue2-daterange-picker';
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
 import TabModal from './TabModal.vue';
 import EventTab from './EventTab.vue';
@@ -567,11 +559,7 @@ import RewardsTab from './RewardsTab.vue'
 import Modal from './modal.vue';
 
 import dayjs from 'dayjs';
-
 import DeleteConfirmModal from './DeleteConfirmModal.vue';
-import { mapGetters } from 'vuex';
-// import PersonasAPI from '../../../api/PersonasAPI';
-
 import _ from 'lodash';
 
 export default {
@@ -596,45 +584,9 @@ export default {
         },
         selectedValue: [],
         selected: '',
-        tableTitle: '',
-        totalClicks: 0,
-        hoverItemId: '',
-        options: {
-            legend: {
-                display: false
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            tooltips: {
-                callbacks: {
-                    label: function(tooltipItems) {
-                        return tooltipItems.yLabel.toString() + ' clicks';
-                    }
-                }
-            },
-            scales: {
-                xAxes: [
-                    {
-                        barPercentage: 0.4,
-                        gridLines: {
-                            drawOnChartArea: false
-                        }
-                    }
-                ],
-                yAxes: [
-                    {
-                        position: 'right',
-                        gridLines: {
-                            display: false
-                        }
-                    }
-                ]
-            }
-        },
         isShowEmployee: false,
         selectedOrderByOption: 'dateCreated',
         selectedPersona: null,
-        isShowRecentRedirectsTable: false,
         perPageForPersonas: 5,
         currentPageForPersonas: 1,
         fieldsForPersonas: [
@@ -679,7 +631,7 @@ export default {
                 }
             },
             {
-                key: 'redirects',
+                key: 'employee',
                 sortable: false,
                 label: '',
                 thStyle: {
@@ -699,8 +651,6 @@ export default {
                 label: ''
             }
         ],
-        pageSizeForRecentRedirects: 5,
-        pageForRecentRedirects: 1,
         rowsPerPageOptions: [
             { value: 5, text: '5' },
             { value: 10, text: '10' },
@@ -709,77 +659,12 @@ export default {
             { value: 50, text: '50' },
             { value: 100, text: '100' }
         ],
-        fieldsForRecentRedirects: [
-            {
-                key: 'date',
-                sortable: false,
-                label: 'DATE',
-                thStyle: {
-                    paddingLeft: '40px'
-                }
-            },
-            {
-                key: 'destinationUrl',
-                sortable: false,
-                label: 'DESTINATION URL',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'IPaddress',
-                sortable: false,
-                label: 'IP ADDRESS',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'publicIpCity',
-                sortable: false,
-                label: 'CITY',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'browserName',
-                sortable: false,
-                label: 'BROWSER',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'osName',
-                sortable: false,
-                label: 'OS',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'deviceModel',
-                sortable: false,
-                label: 'DEVICE',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            }
-        ],
-        itemsForRecentRedirects: [],
-        recentRedirectsTotal: 0,
         personasTotal: 0,
-        open: 'right',
-        showDropdowns: true,
-        linkedCalendars: true,
-        selectedChartId: ''
     }),
     async created() {
         await this.getPersonas();
     },
     computed: {
-        // ...mapGetters(['getAllPersonas']),
         itemsForPersonas: {
             get: function() {
                 return [
@@ -831,28 +716,14 @@ export default {
                         "createdAt":"2021-12-09T03:06:58.983Z",
                     },
                 ];
-                // return JSON.parse(JSON.stringify(this.getAllPersonas));
             },
             set: function() {}
         },
-
         confirm() {
         },
         cancel() {
-
         },
-
-        dateRange() {
-            const date = new Date();
-            const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-            const endDate = new Date(
-                date.getFullYear(),
-                date.getMonth() + 1,
-                0
-            );
-            return { startDate, endDate };
-        },
-        transformActiveIntegrations() {
+        transformActivePersonas() {
             return this.itemsForPersonas.map(({ externalSystem }) =>
                 this.capitalizeFirstLetter(externalSystem)
 
@@ -860,112 +731,36 @@ export default {
         },
     },
     methods: {
-        showConfigureTraits() {
-            this.$bvModal.show('configureTraits');
-        },
         capitalizeFirstLetter(string) {
             return (
-                // string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
                 'ANALYTICS'
             );
         },
         async handleClickPersonasTableRow(item) {
-            // this.selectedPersonas = item;
-
-            // for (var i = 0; i < this.itemsForPersonas.length; i++) {
-            //     this.itemsForPersonas[i]._rowVariant = '';
-            // }
-
-            // item._rowVariant = 'active';
-            // this.pageForRecentRedirects = 1;
-            // await this.getRecentRedirects();
-
             this.isShowEmployee = true;
             this.$refs.personasTable.refresh();
-
             this.$root.$emit('bv::show::modal', 'viewEmployees')
         },
-        findRouteById(id) {
+        findPersonById(id) {
             return this.itemsForPersonas.find(item => item._id === id);
         },
         editRow(data) {
-            const route = this.findRouteById(data.item._id);
-            this.selectedPersona = route;
-            // this.$store.commit('SET_PERSONA', this.selectedPersona);
-            // this.$router.push({
-            //     name: 'EditPersona',
-            //     params: {
-            //         id: this.selectedPersona._id
-            //     }
-            // });
+            const persona = this.findPersonById(data.item._id);
+            this.selectedPersona = persona;
         },
         removeRow(data) {
-            // const route = this.findRouteById(data.item._id);
-            // this.selectedPersona = route;
-            
             this.$bvModal.show('delete-confirm-modal');
         },
-        confirmDeletePersona(value) {
-            if (value) {
-                this.itemsForPersonas = this.itemsForPersonas.filter(
-                    item => item._id !== this.selectedPersona._id
-                );
-                // this.isShowRecentRedirectsTable = false;
-            }
-        },
-        stringToHslColor(str, s, l) {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                hash = str.charCodeAt(i) + ((hash << 5) - hash);
-            }
-
-            const h = hash % 360;
-            return 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
-        },
         async getPersonas() {
-            // const routes = await this.$store.dispatch('getAllPersonas', {
-            //     sort_by: this.selectedOrderByOption,
-            //     limit: this.perPageForPersonas,
-            //     offset:
-            //         (this.currentPageForPersonas - 1) *
-            //         this.perPageForPersonas
-            // });
-            // this.personasTotal = routes.total;
-        },
-        async getRecentRedirects() {
-            // var redirects = await new PersonasAPI().getRedirectsData(
-            //     this.selectedPersona._id,
-            //     this.pageSizeForRecentRedirects,
-            //     (this.pageForRecentRedirects - 1) *
-            //         this.pageSizeForRecentRedirects
-            // );
-
-            // this.recentRedirectsTotal = redirects.data.total;
-            // this.itemsForRecentRedirects = redirects.data.data;
         },
         async handlePersonasChange(value) {
             this.currentPageForPersonas = value;
             await this.getPersonas();
         },
-        async handleRecentRedirectsPageChange(value) {
-            this.pageForRecentRedirects = value;
-            await this.getRecentRedirects();
-        },
         async handlePersonasPageSizeChange(size) {
             this.perPageForPersonas = size;
             this.currentPageForPersonas = 1;
             await this.getPersonas();
-        },
-        async handleRecentRedirectsPageSizeChange(size) {
-            this.pageSizeForRecentRedirects = size;
-            this.pageForRecentRedirects = 1;
-            await this.getRecentRedirects();
-        },
-        dateFormat(classes, date) {
-            if (!classes.disabled) {
-                classes.disabled = date.getTime() < new Date();
-            }
-            return classes;
         },
         dayjs(...args) {
             return dayjs(...args);
@@ -974,31 +769,11 @@ export default {
             this.currentPageForPersonas = 1;
             await this.getPersonas();
         },
-        hoverIcon(routeId) {
-            this.hoverItemId = routeId;
-        },
-        unhoverIcon(routeId) {
-            if (routeId === this.hoverItemId) {
-                this.hoverItemId = '';
-            }
-        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-.disable--pointer {
-    cursor: not-allowed !important;
-}
-
-.cursor {
-    cursor: pointer !important;
-}
-
-.subtile-color {
-    color: #4d4f5c;
-}
-
 .card {
     margin-bottom: 10px;
 }
@@ -1009,26 +784,6 @@ export default {
 
 .hide {
     display: none;
-}
-
-.bar-container {
-    flex-grow: 1;
-    min-height: 0;
-
-    > div {
-        position: relative;
-        height: 180px;
-    }
-}
-
-.doughnut-container {
-    flex-grow: 1;
-    min-height: 0;
-
-    > div {
-        position: relative;
-        height: 340px;
-    }
 }
 
 .show {
@@ -1044,15 +799,6 @@ export default {
 }
 .custom-select {
     border: 1px solid #2f3380;
-}
-
-.first-cell-overflow {
-    padding-left: 27px;
-}
-
-.p-font {
-    font-size: 13px;
-    color: #4d4f5c;
 }
 
 .status-dot {
@@ -1111,63 +857,6 @@ table {
                     }
                 }
             }
-        }
-    }
-}
-
-::v-deep {
-    .b-dropdown {
-        width: 226px;
-    }
-
-    .btn-outline-primary.dropdown-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: #4e505d;
-        background-color: #ffffff;
-        border-color: #2f3380;
-        box-shadow: none;
-    }
-
-    .btn-outline-primary:not(:disabled):not(.disabled):active {
-        color: #4e505d;
-        background-color: #ffffff;
-        border-color: #2f3380;
-    }
-
-    .show > .btn-outline-primary.dropdown-toggle {
-        color: #4e505d;
-        background-color: #ffffff;
-        border-color: #2f3380;
-    }
-
-    .dropdown-menu {
-        padding: 0;
-    }
-
-    .dropdown-item {
-        color: #4d4f5c !important;
-        padding: 0.5rem 1.5rem;
-        border-bottom: 1px solid #e9e9f0;
-    }
-
-    .dropdown-item:active {
-        color: #ffffff !important;
-        background-color: #2f3380;
-    }
-
-    .pagination.b-pagination {
-        float: none;
-    }
-
-    .reportrange-text {
-        border: 1px solid #2f3380 !important;
-    }
-
-    .daterangepicker {
-        .calendars {
-            flex-wrap: nowrap;
         }
     }
 }

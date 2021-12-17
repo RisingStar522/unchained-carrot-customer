@@ -1,6 +1,10 @@
 <template>
     <div class="content">
-        <div class="apple-wallet">
+        <div class="loader" v-if="loading">
+            <b-spinner label="Loading..."></b-spinner>
+        </div>
+
+        <div class="apple-wallet" v-else>
             <div class="py-4">
                 <h4 class="text-brand">Apple Wallet</h4>
             </div>
@@ -31,7 +35,27 @@
                         <router-link :to="{ name: 'AddTemplate' }">
                             <div class="mr-5">
                                 <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m1 5h-2v4H7v2h4v4h2v-4h4v-2h-4V7z" fill="#2f3380"/><rect x="0" y="0" width="24" height="24" fill="rgba(0, 0, 0, 0)" /></svg>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24"
+                                        height="24"
+                                        preserveAspectRatio="xMidYMid meet"
+                                        viewBox="0 0 24 24"
+                                        style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                    >
+                                        <path
+                                            d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m1 5h-2v4H7v2h4v4h2v-4h4v-2h-4V7z"
+                                            fill="#2f3380"
+                                        />
+                                        <rect
+                                            x="0"
+                                            y="0"
+                                            width="24"
+                                            height="24"
+                                            fill="rgba(0, 0, 0, 0)"
+                                        />
+                                    </svg>
                                 </span>
                                 <span
                                     class="text-brand ml-2"
@@ -88,13 +112,133 @@
                         >
                             <a class="action-icon mr-2">
                                 <span class="default">
-                                    <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><g id="noun_growth_3025764-2" data-name="noun growth 3025764-2"><g id="Raggruppa_1052-2" data-name="Raggruppa 1052-2"><rect id="Rettangolo_1524-2" data-name="Rettangolo 1524-2" x="11.92" y="93.52" width="25.62" height="46.47" style="fill:#4d505d"/><rect id="Rettangolo_1525-2" data-name="Rettangolo 1525-2" x="53.57" y="68.63" width="25.62" height="71.36" style="fill:#4d505d"/><path id="Tracciato_867-2" data-name="Tracciato 867-2" d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z" style="fill:#4d505d"/></g></g></svg>
+                                    <svg
+                                        id="Livello_1"
+                                        data-name="Livello 1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 150 150"
+                                    >
+                                        <g
+                                            id="noun_growth_3025764-2"
+                                            data-name="noun growth 3025764-2"
+                                        >
+                                            <g
+                                                id="Raggruppa_1052-2"
+                                                data-name="Raggruppa 1052-2"
+                                            >
+                                                <rect
+                                                    id="Rettangolo_1524-2"
+                                                    data-name="Rettangolo 1524-2"
+                                                    x="11.92"
+                                                    y="93.52"
+                                                    width="25.62"
+                                                    height="46.47"
+                                                    style="fill:#4d505d"
+                                                />
+                                                <rect
+                                                    id="Rettangolo_1525-2"
+                                                    data-name="Rettangolo 1525-2"
+                                                    x="53.57"
+                                                    y="68.63"
+                                                    width="25.62"
+                                                    height="71.36"
+                                                    style="fill:#4d505d"
+                                                />
+                                                <path
+                                                    id="Tracciato_867-2"
+                                                    data-name="Tracciato 867-2"
+                                                    d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z"
+                                                    style="fill:#4d505d"
+                                                />
+                                            </g>
+                                        </g>
+                                    </svg>
                                 </span>
                                 <span class="hover">
-                                    <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><g id="noun_growth_3025764-2" data-name="noun growth 3025764-2"><g id="Raggruppa_1052-2" data-name="Raggruppa 1052-2"><rect id="Rettangolo_1524-2" data-name="Rettangolo 1524-2" x="11.92" y="93.52" width="25.62" height="46.47" style="fill:#f49848"/><rect id="Rettangolo_1525-2" data-name="Rettangolo 1525-2" x="53.57" y="68.63" width="25.62" height="71.36" style="fill:#f49848"/><path id="Tracciato_867-2" data-name="Tracciato 867-2" d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z" style="fill:#f49848"/></g></g></svg>
+                                    <svg
+                                        id="Livello_1"
+                                        data-name="Livello 1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 150 150"
+                                    >
+                                        <g
+                                            id="noun_growth_3025764-2"
+                                            data-name="noun growth 3025764-2"
+                                        >
+                                            <g
+                                                id="Raggruppa_1052-2"
+                                                data-name="Raggruppa 1052-2"
+                                            >
+                                                <rect
+                                                    id="Rettangolo_1524-2"
+                                                    data-name="Rettangolo 1524-2"
+                                                    x="11.92"
+                                                    y="93.52"
+                                                    width="25.62"
+                                                    height="46.47"
+                                                    style="fill:#f49848"
+                                                />
+                                                <rect
+                                                    id="Rettangolo_1525-2"
+                                                    data-name="Rettangolo 1525-2"
+                                                    x="53.57"
+                                                    y="68.63"
+                                                    width="25.62"
+                                                    height="71.36"
+                                                    style="fill:#f49848"
+                                                />
+                                                <path
+                                                    id="Tracciato_867-2"
+                                                    data-name="Tracciato 867-2"
+                                                    d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z"
+                                                    style="fill:#f49848"
+                                                />
+                                            </g>
+                                        </g>
+                                    </svg>
                                 </span>
                                 <span class="active">
-                                    <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><g id="noun_growth_3025764-2" data-name="noun growth 3025764-2"><g id="Raggruppa_1052-2" data-name="Raggruppa 1052-2"><rect id="Rettangolo_1524-2" data-name="Rettangolo 1524-2" x="11.92" y="93.52" width="25.62" height="46.47" style="fill:#fff"/><rect id="Rettangolo_1525-2" data-name="Rettangolo 1525-2" x="53.57" y="68.63" width="25.62" height="71.36" style="fill:#fff"/><path id="Tracciato_867-2" data-name="Tracciato 867-2" d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z" style="fill:#fff"/></g></g></svg>
+                                    <svg
+                                        id="Livello_1"
+                                        data-name="Livello 1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 150 150"
+                                    >
+                                        <g
+                                            id="noun_growth_3025764-2"
+                                            data-name="noun growth 3025764-2"
+                                        >
+                                            <g
+                                                id="Raggruppa_1052-2"
+                                                data-name="Raggruppa 1052-2"
+                                            >
+                                                <rect
+                                                    id="Rettangolo_1524-2"
+                                                    data-name="Rettangolo 1524-2"
+                                                    x="11.92"
+                                                    y="93.52"
+                                                    width="25.62"
+                                                    height="46.47"
+                                                    style="fill:#fff"
+                                                />
+                                                <rect
+                                                    id="Rettangolo_1525-2"
+                                                    data-name="Rettangolo 1525-2"
+                                                    x="53.57"
+                                                    y="68.63"
+                                                    width="25.62"
+                                                    height="71.36"
+                                                    style="fill:#fff"
+                                                />
+                                                <path
+                                                    id="Tracciato_867-2"
+                                                    data-name="Tracciato 867-2"
+                                                    d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z"
+                                                    style="fill:#fff"
+                                                />
+                                            </g>
+                                        </g>
+                                    </svg>
                                 </span>
                             </a>
                             <a
@@ -102,13 +246,64 @@
                                 @click="editRow(data.index)"
                             >
                                 <span class="default">
-                                    <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><g id="Raggruppa_1053" data-name="Raggruppa 1053"><path id="Tracciato_767-2" data-name="Tracciato 767-2" d="M60.27,113.16l2.57-2.57L39.41,87.09,92.26,34.24a12.48,12.48,0,0,1,17.64,0h0l5.86,5.86a12.48,12.48,0,0,1,0,17.64h0ZM57,116.45a12.34,12.34,0,0,1-8.1,3H32.7a2.1,2.1,0,0,1-2.11-2.11h0V101.05a12.64,12.64,0,0,1,3-8.1Z" style="fill:#4d505d;fill-rule:evenodd"/></g></svg>
+                                    <svg
+                                        id="Livello_1"
+                                        data-name="Livello 1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 150 150"
+                                    >
+                                        <g
+                                            id="Raggruppa_1053"
+                                            data-name="Raggruppa 1053"
+                                        >
+                                            <path
+                                                id="Tracciato_767-2"
+                                                data-name="Tracciato 767-2"
+                                                d="M60.27,113.16l2.57-2.57L39.41,87.09,92.26,34.24a12.48,12.48,0,0,1,17.64,0h0l5.86,5.86a12.48,12.48,0,0,1,0,17.64h0ZM57,116.45a12.34,12.34,0,0,1-8.1,3H32.7a2.1,2.1,0,0,1-2.11-2.11h0V101.05a12.64,12.64,0,0,1,3-8.1Z"
+                                                style="fill:#4d505d;fill-rule:evenodd"
+                                            />
+                                        </g>
+                                    </svg>
                                 </span>
                                 <span class="hover">
-                                    <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><g id="Raggruppa_1053" data-name="Raggruppa 1053"><path id="Tracciato_767-2" data-name="Tracciato 767-2" d="M60.27,113.16l2.57-2.57L39.41,87.09,92.26,34.24a12.48,12.48,0,0,1,17.64,0h0l5.86,5.86a12.48,12.48,0,0,1,0,17.64h0ZM57,116.45a12.34,12.34,0,0,1-8.1,3H32.7a2.1,2.1,0,0,1-2.11-2.11h0V101.05a12.64,12.64,0,0,1,3-8.1Z" style="fill:#f49848;fill-rule:evenodd"/></g></svg>
+                                    <svg
+                                        id="Livello_1"
+                                        data-name="Livello 1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 150 150"
+                                    >
+                                        <g
+                                            id="Raggruppa_1053"
+                                            data-name="Raggruppa 1053"
+                                        >
+                                            <path
+                                                id="Tracciato_767-2"
+                                                data-name="Tracciato 767-2"
+                                                d="M60.27,113.16l2.57-2.57L39.41,87.09,92.26,34.24a12.48,12.48,0,0,1,17.64,0h0l5.86,5.86a12.48,12.48,0,0,1,0,17.64h0ZM57,116.45a12.34,12.34,0,0,1-8.1,3H32.7a2.1,2.1,0,0,1-2.11-2.11h0V101.05a12.64,12.64,0,0,1,3-8.1Z"
+                                                style="fill:#f49848;fill-rule:evenodd"
+                                            />
+                                        </g>
+                                    </svg>
                                 </span>
                                 <span class="active">
-                                    <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><g id="Raggruppa_1053" data-name="Raggruppa 1053"><path id="Tracciato_767-2" data-name="Tracciato 767-2" d="M60.27,113.16l2.57-2.57L39.41,87.09,92.26,34.24a12.48,12.48,0,0,1,17.64,0h0l5.86,5.86a12.48,12.48,0,0,1,0,17.64h0ZM57,116.45a12.34,12.34,0,0,1-8.1,3H32.7a2.1,2.1,0,0,1-2.11-2.11h0V101.05a12.64,12.64,0,0,1,3-8.1Z" style="fill:#fff;fill-rule:evenodd"/></g></svg>
+                                    <svg
+                                        id="Livello_1"
+                                        data-name="Livello 1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 150 150"
+                                    >
+                                        <g
+                                            id="Raggruppa_1053"
+                                            data-name="Raggruppa 1053"
+                                        >
+                                            <path
+                                                id="Tracciato_767-2"
+                                                data-name="Tracciato 767-2"
+                                                d="M60.27,113.16l2.57-2.57L39.41,87.09,92.26,34.24a12.48,12.48,0,0,1,17.64,0h0l5.86,5.86a12.48,12.48,0,0,1,0,17.64h0ZM57,116.45a12.34,12.34,0,0,1-8.1,3H32.7a2.1,2.1,0,0,1-2.11-2.11h0V101.05a12.64,12.64,0,0,1,3-8.1Z"
+                                                style="fill:#fff;fill-rule:evenodd"
+                                            />
+                                        </g>
+                                    </svg>
                                 </span>
                             </a>
                             <a
@@ -116,13 +311,82 @@
                                 @click="removeRow(data.index)"
                             >
                                 <span class="default">
-                                    <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><g id="Raggruppa_1054" data-name="Raggruppa 1054"><path id="Tracciato_763-2" data-name="Tracciato 763-2" d="M112.11,30.15H88a9.69,9.69,0,0,0-9.6-9.68H71.94a9.69,9.69,0,0,0-9.67,9.68H38.18a9.69,9.69,0,0,0-9.68,9.6v1.41A1.81,1.81,0,0,0,30.29,43h89.37a1.81,1.81,0,0,0,1.83-1.79V39.75a9.27,9.27,0,0,0-8.95-9.59Z" style="fill:#4d505d"/><path id="Tracciato_764-2" data-name="Tracciato 764-2" d="M36.73,119.85a9.75,9.75,0,0,0,9.68,9.68h57.77a9.75,9.75,0,0,0,9.68-9.68V49.43H36.73Zm47-48.77A4.33,4.33,0,0,1,88,66.73h0a4.38,4.38,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,88,112h0a4.38,4.38,0,0,1-4.34-4.35Zm-25.54,0a4.34,4.34,0,0,1,4.34-4.35h0a4.39,4.39,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,62.5,112h0a4.4,4.4,0,0,1-4.35-4.35Z" style="fill:#4d505d"/></g></svg>
+                                    <svg
+                                        id="Livello_1"
+                                        data-name="Livello 1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 150 150"
+                                    >
+                                        <g
+                                            id="Raggruppa_1054"
+                                            data-name="Raggruppa 1054"
+                                        >
+                                            <path
+                                                id="Tracciato_763-2"
+                                                data-name="Tracciato 763-2"
+                                                d="M112.11,30.15H88a9.69,9.69,0,0,0-9.6-9.68H71.94a9.69,9.69,0,0,0-9.67,9.68H38.18a9.69,9.69,0,0,0-9.68,9.6v1.41A1.81,1.81,0,0,0,30.29,43h89.37a1.81,1.81,0,0,0,1.83-1.79V39.75a9.27,9.27,0,0,0-8.95-9.59Z"
+                                                style="fill:#4d505d"
+                                            />
+                                            <path
+                                                id="Tracciato_764-2"
+                                                data-name="Tracciato 764-2"
+                                                d="M36.73,119.85a9.75,9.75,0,0,0,9.68,9.68h57.77a9.75,9.75,0,0,0,9.68-9.68V49.43H36.73Zm47-48.77A4.33,4.33,0,0,1,88,66.73h0a4.38,4.38,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,88,112h0a4.38,4.38,0,0,1-4.34-4.35Zm-25.54,0a4.34,4.34,0,0,1,4.34-4.35h0a4.39,4.39,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,62.5,112h0a4.4,4.4,0,0,1-4.35-4.35Z"
+                                                style="fill:#4d505d"
+                                            />
+                                        </g>
+                                    </svg>
                                 </span>
                                 <span class="hover">
-                                    <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><g id="Raggruppa_1054" data-name="Raggruppa 1054"><path id="Tracciato_763-2" data-name="Tracciato 763-2" d="M112.11,30.15H88a9.69,9.69,0,0,0-9.6-9.68H71.94a9.69,9.69,0,0,0-9.67,9.68H38.18a9.69,9.69,0,0,0-9.68,9.6v1.41A1.81,1.81,0,0,0,30.29,43h89.37a1.81,1.81,0,0,0,1.83-1.79V39.75a9.27,9.27,0,0,0-8.95-9.59Z" style="fill:#f49848"/><path id="Tracciato_764-2" data-name="Tracciato 764-2" d="M36.73,119.85a9.75,9.75,0,0,0,9.68,9.68h57.77a9.75,9.75,0,0,0,9.68-9.68V49.43H36.73Zm47-48.77A4.33,4.33,0,0,1,88,66.73h0a4.38,4.38,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,88,112h0a4.38,4.38,0,0,1-4.34-4.35Zm-25.54,0a4.34,4.34,0,0,1,4.34-4.35h0a4.39,4.39,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,62.5,112h0a4.4,4.4,0,0,1-4.35-4.35Z" style="fill:#f49848"/></g></svg>
+                                    <svg
+                                        id="Livello_1"
+                                        data-name="Livello 1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 150 150"
+                                    >
+                                        <g
+                                            id="Raggruppa_1054"
+                                            data-name="Raggruppa 1054"
+                                        >
+                                            <path
+                                                id="Tracciato_763-2"
+                                                data-name="Tracciato 763-2"
+                                                d="M112.11,30.15H88a9.69,9.69,0,0,0-9.6-9.68H71.94a9.69,9.69,0,0,0-9.67,9.68H38.18a9.69,9.69,0,0,0-9.68,9.6v1.41A1.81,1.81,0,0,0,30.29,43h89.37a1.81,1.81,0,0,0,1.83-1.79V39.75a9.27,9.27,0,0,0-8.95-9.59Z"
+                                                style="fill:#f49848"
+                                            />
+                                            <path
+                                                id="Tracciato_764-2"
+                                                data-name="Tracciato 764-2"
+                                                d="M36.73,119.85a9.75,9.75,0,0,0,9.68,9.68h57.77a9.75,9.75,0,0,0,9.68-9.68V49.43H36.73Zm47-48.77A4.33,4.33,0,0,1,88,66.73h0a4.38,4.38,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,88,112h0a4.38,4.38,0,0,1-4.34-4.35Zm-25.54,0a4.34,4.34,0,0,1,4.34-4.35h0a4.39,4.39,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,62.5,112h0a4.4,4.4,0,0,1-4.35-4.35Z"
+                                                style="fill:#f49848"
+                                            />
+                                        </g>
+                                    </svg>
                                 </span>
                                 <span class="active">
-                                    <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><g id="Raggruppa_1054" data-name="Raggruppa 1054"><path id="Tracciato_763-2" data-name="Tracciato 763-2" d="M112.11,30.15H88a9.69,9.69,0,0,0-9.6-9.68H71.94a9.69,9.69,0,0,0-9.67,9.68H38.18a9.69,9.69,0,0,0-9.68,9.6v1.41A1.81,1.81,0,0,0,30.29,43h89.37a1.81,1.81,0,0,0,1.83-1.79V39.75a9.27,9.27,0,0,0-8.95-9.59Z" style="fill:#fff"/><path id="Tracciato_764-2" data-name="Tracciato 764-2" d="M36.73,119.85a9.75,9.75,0,0,0,9.68,9.68h57.77a9.75,9.75,0,0,0,9.68-9.68V49.43H36.73Zm47-48.77A4.33,4.33,0,0,1,88,66.73h0a4.38,4.38,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,88,112h0a4.38,4.38,0,0,1-4.34-4.35Zm-25.54,0a4.34,4.34,0,0,1,4.34-4.35h0a4.39,4.39,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,62.5,112h0a4.4,4.4,0,0,1-4.35-4.35Z" style="fill:#fff"/></g></svg>
+                                    <svg
+                                        id="Livello_1"
+                                        data-name="Livello 1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 150 150"
+                                    >
+                                        <g
+                                            id="Raggruppa_1054"
+                                            data-name="Raggruppa 1054"
+                                        >
+                                            <path
+                                                id="Tracciato_763-2"
+                                                data-name="Tracciato 763-2"
+                                                d="M112.11,30.15H88a9.69,9.69,0,0,0-9.6-9.68H71.94a9.69,9.69,0,0,0-9.67,9.68H38.18a9.69,9.69,0,0,0-9.68,9.6v1.41A1.81,1.81,0,0,0,30.29,43h89.37a1.81,1.81,0,0,0,1.83-1.79V39.75a9.27,9.27,0,0,0-8.95-9.59Z"
+                                                style="fill:#fff"
+                                            />
+                                            <path
+                                                id="Tracciato_764-2"
+                                                data-name="Tracciato 764-2"
+                                                d="M36.73,119.85a9.75,9.75,0,0,0,9.68,9.68h57.77a9.75,9.75,0,0,0,9.68-9.68V49.43H36.73Zm47-48.77A4.33,4.33,0,0,1,88,66.73h0a4.38,4.38,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,88,112h0a4.38,4.38,0,0,1-4.34-4.35Zm-25.54,0a4.34,4.34,0,0,1,4.34-4.35h0a4.39,4.39,0,0,1,4.35,4.35v36.57A4.35,4.35,0,0,1,62.5,112h0a4.4,4.4,0,0,1-4.35-4.35Z"
+                                                style="fill:#fff"
+                                            />
+                                        </g>
+                                    </svg>
                                 </span>
                             </a>
                         </div>
@@ -285,6 +549,7 @@ import { mapGetters } from 'vuex';
 export default {
     name: 'apple-wallet-page',
     data: () => ({
+        loading: false,
         selectedOrderByOption: 'Issued',
         selectedAppleWallet: null,
         orderByOptions: [
@@ -387,35 +652,35 @@ export default {
             }
         ],
         itemsForRecentIssued: [
-          {
-            date: '31-Jan-21 10:25',
-            firstName: 'Walter',
-            lastName: 'Thoen',
-            email: 'walter@flashboys.nl',
-            loyaltyProgram: 'n/a',
-            referralProgram: 'n/a',
-            campaign: 'Try This'
-          },
-          {
-            date: '31-Jan-21 09:36',
-            firstName: 'Mark',
-            lastName: 'Noorlander',
-            email: 'mark@flashboys.nl',
-            loyaltyProgram: 'n/a',
-            referralProgram: 'n/a',
-            campaign: 'Try This 2'
-          },
+            {
+                date: '31-Jan-21 10:25',
+                firstName: 'Walter',
+                lastName: 'Thoen',
+                email: 'walter@flashboys.nl',
+                loyaltyProgram: 'n/a',
+                referralProgram: 'n/a',
+                campaign: 'Try This'
+            },
+            {
+                date: '31-Jan-21 09:36',
+                firstName: 'Mark',
+                lastName: 'Noorlander',
+                email: 'mark@flashboys.nl',
+                loyaltyProgram: 'n/a',
+                referralProgram: 'n/a',
+                campaign: 'Try This 2'
+            }
         ],
         itemsForRecentRedeemed: [
-          {
-            date: '31-Jan-21 10:25',
-            firstName: 'Walter',
-            lastName: 'Thoen',
-            email: 'walter@flashboys.nl',
-            loyaltyProgram: 'n/a',
-            referralProgram: 'n/a',
-            campaign: 'Try This'
-          },
+            {
+                date: '31-Jan-21 10:25',
+                firstName: 'Walter',
+                lastName: 'Thoen',
+                email: 'walter@flashboys.nl',
+                loyaltyProgram: 'n/a',
+                referralProgram: 'n/a',
+                campaign: 'Try This'
+            }
         ]
     }),
     methods: {
@@ -428,10 +693,13 @@ export default {
             this.isShowRecentIssuedTable = true;
             this.isShowRecentRedeemedTable = true;
             this.$refs.applewallettable.refresh();
-        },
+        }
     },
-    async created() {
-        this.$store.dispatch('getAllPassTemplates');
+    async mounted() {
+        this.loading = true;
+        this.$store.dispatch('getAllPassTemplates').then(() => {
+            this.loading = false;
+        });
     },
     computed: {
         ...mapGetters(['getAllPassTemplates']),
@@ -442,6 +710,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .card {
     margin-bottom: 10px;
 }

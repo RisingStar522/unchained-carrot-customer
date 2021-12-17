@@ -29,46 +29,6 @@
                         </b-button>
                     </b-col>
                 </b-row>
-
-                <!-- <Modal modalId="addPersonas" title="Add Persona Trait">
-                    <template v-slot:default>
-                        <div class="validation_mark">
-                            <img
-                                class="mr-2"
-                                src="../../assets/icons/validation_mandatory.svg"
-                            />
-                            <span>MANDATORY</span>
-                        </div>
-                        <b-row class="m-1">
-                            <label><small>Source</small></label>
-                            <b-form-select
-                                id="event-source"
-                                name="event-source"
-                                v-model="selected"
-                                :options="transformActiveIntegrations"
-                                class="mb-3"
-                                aria-placeholder="select event source"
-                            >
-                            </b-form-select>
-                        </b-row>
-                        <b-form-group id="input-group-1" label="Name" label-for="input-2">
-                            <b-form-input
-                                id="input-1"
-                                v-model="form.name"
-                                placeholder="Propensity to buy"
-                                required
-                            ></b-form-input>
-                        </b-form-group>
-                        <b-form-group id="input-group-2" label="Default Value" label-for="input-2">
-                            <b-form-input
-                                id="input-2"
-                                v-model="form.value"
-                                placeholder="50%"
-                                required
-                            ></b-form-input>
-                        </b-form-group>
-                    </template>
-                </Modal> -->
             </div>
         </div>
         <div class="personas-main-find-content">
@@ -104,12 +64,8 @@
 </template>
 
 <script>
-// import { mapGetters, mapActions } from 'vuex';
-
 export default {
     name: 'personas',
-    // components: {
-    // },
     data() {
         return {
             personasMainFindContent: [
@@ -119,12 +75,6 @@ export default {
             ],
         };
     },
-    // computed: {
-    // },
-    // methods: {
-    // },
-    // async mounted() {
-    // }
 };
 </script>
 

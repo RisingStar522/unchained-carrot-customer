@@ -36,6 +36,7 @@ export default {
                 commit('ADD_QUIZ_FOLDERS', QuizFoldersTransformer.fetch(data));
             })
             .catch(err => {
+                console.error(err);
             });
     },
 
@@ -135,6 +136,7 @@ export default {
                 commit('SET_QUIZ_IMAGES', resp);
             })
             .catch(err => {
+                console.error(err);
             });
     },
 

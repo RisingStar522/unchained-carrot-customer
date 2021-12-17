@@ -18,11 +18,11 @@
                         Enter {{ selectedPersona.title }} for delete
                         confirmation
                     </div>
-                    <div class="route-name-field">
+                    <div class="persona-name-field">
                         <b-form-input
                             id="title-input"
                             type="text"
-                            v-model="formData.routeName"
+                            v-model="formData.personaName"
                             :state="validation"
                             required
                             autofocus
@@ -37,7 +37,7 @@
                         type="submit"
                         class="custom-button"
                         variant="brand"
-                        >Delete Route</b-button
+                        >Delete Persona</b-button
                     >
                 </div>
             </form>
@@ -46,8 +46,6 @@
 </template>
 
 <script>
-import { submitTrackingEvent } from '../../../services/TrackingService';
-
 export default {
     name: 'deleteConfirm-modal-component',
     props: {
@@ -58,7 +56,7 @@ export default {
     data() {
         return {
             formData: {
-                routeName: ''
+                personaName: ''
             },
             selectedPersona: null
         };
@@ -69,7 +67,7 @@ export default {
             return valid;
         },
         resetModal() {
-            this.formData.routeName = '';
+            this.formData.personaName = '';
             this.$validator.reset();
         },
         handleSubmit(event) {
@@ -85,17 +83,10 @@ export default {
                         this.selectedPersona._id
                     )
                     .then(resp => {
-                        // Send Tracking Event With UCC SDK
-                        // submitTrackingEvent(
-                        //     'TRAFFIC-ROUTE-DELETED',
-                        //     { trafficRouteId: this.selectedPersona._id },
-                        //     this.$store.getters['customerData']
-                        // );
-                        // Hide the modal manually
                         this.$nextTick(() => {
                             this.$emit('confirm', this.formData);
                             this.$bvModal.hide('delete-confirm-modal');
-                            this.formData.routeName = '';
+                            this.formData.personaName = '';
                             this.$validator.reset();
                         });
                     })
@@ -105,7 +96,7 @@ export default {
     },
     computed: {
         validation() {
-            return this.formData.routeName === this.selectedPersona.title;
+            return this.formData.personaName === this.selectedPersona.title;
         }
     },
     watch: {
@@ -135,7 +126,7 @@ export default {
     padding: 10px 30px;
 }
 
-.route-name-field {
+.persona-name-field {
     display: flex;
     flex-direction: column;
     align-items: center;

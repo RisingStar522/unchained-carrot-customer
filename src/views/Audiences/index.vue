@@ -46,12 +46,8 @@
 </template>
 
 <script>
-// import { mapGetters, mapActions } from 'vuex';
-
 export default {
     name: 'audiences',
-    // components: {
-    // },
     data() {
         return {
             audience: {
@@ -99,12 +95,6 @@ export default {
             ],
         };
     },
-    // computed: {
-    // },
-    // methods: {
-    // },
-    // async mounted() {
-    // }
 };
 </script>
 
@@ -163,8 +153,5 @@ export default {
     float: left;
     width: 260px;
     font-size: 13px !important;
-    // p {
-    //     font-size: 13px !important;
-    // }
 }
 </style>

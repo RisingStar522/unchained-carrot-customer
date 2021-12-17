@@ -16,30 +16,22 @@
 
 <script>
 import PersonasTable from './components/PersonasTable.vue';
-import { mapGetters } from 'vuex';
-
 export default {
-    name: 'personas-page',
+    name: 'personas-list-page',
     components: {
         PersonasTable
     },
     data: () => ({
         loading: false
     }),
-    async created() {
-        this.loading = true;
-        this.$store.dispatch('getAllTrafficRoutes', {}).then(() => {
-            this.loading = false;
-        });
-    },
     computed: {
-        ...mapGetters(['getAllTrafficRoutes']),
         itemsForPersonas() {
-            return JSON.parse(JSON.stringify(this.getAllTrafficRoutes));
+            // when you integrate with api, you have to alter following line.
+            this.getAllPersonas = [{a:2},{b:2}]
+            return JSON.parse(JSON.stringify(this.getAllPersonas));
         }
     },
     mounted() {
-        this.$store.commit('SET_INIT_REMAINING_DESTINATION_PERCENT', 100);
     }
 };
 </script>
@@ -66,46 +58,11 @@ export default {
         line-height: 25px;
         color: #43425d;
     }
-    .route-img {
-        height: 150px;
-    }
 }
 .loader {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-::v-deep {
-    .traffic-route-contents {
-        border: 1px solid #2f3380;
-        max-width: 981px;
-        margin: auto;
-        padding: 20px 70px;
-        margin-top: 35px;
-        .list-group {
-            .list-group-item {
-                background-color: transparent;
-                border: none;
-                width: 100%;
-                text-align: left;
-                padding: 6px 10px;
-
-                span {
-                    color: #2f3380;
-                    font-size: 17px;
-                    font-weight: bold;
-                }
-
-                @media (min-width: 576px) {
-                    width: 50%;
-                }
-
-                @media (min-width: 1200px) {
-                    width: 33.33%;
-                }
-            }
-        }
-    }
 }
 </style>

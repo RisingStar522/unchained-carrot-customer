@@ -30,6 +30,7 @@ import {
     faAward,
     faLayerGroup,
     faChevronUp,
+    faArrowCircleUp,
     faChevronDown,
     faChevronRight,
     faChevronLeft,
@@ -68,7 +69,9 @@ import {
     faHeart,
     faEllipsisH,
     faList,
-    faTh
+    faTh,
+    faPhone,
+    faMobileAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -83,6 +86,7 @@ library.add(
     faOutdent,
     faAward,
     faLayerGroup,
+    faArrowCircleUp,
     faChevronUp,
     faChevronDown,
     faChevronRight,
@@ -127,7 +131,9 @@ library.add(
     faTelegramPlane,
     faEllipsisH,
     faList,
-    faTh
+    faTh,
+    faPhone,
+    faMobileAlt
 );
 
 Vue.component('fa-icon', FontAwesomeIcon);

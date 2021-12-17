@@ -1,6 +1,9 @@
 <template>
     <div class="content">
-        <div class="leaderboards-wrapper">
+        <div class="loader" v-if="loading">
+            <b-spinner label="Loading..."></b-spinner>
+        </div>
+        <div class="leaderboards-wrapper" v-else>
             <div class="py-4">
                 <h4 class="text-brand">Leaderboards</h4>
             </div>
@@ -113,8 +116,10 @@
                             <div
                                 class="d-flex align-items-center justify-content-end"
                             >
-                                <a class="action-icon mr-2"
-                                @click="openLiveModal(data.index)">
+                                <a
+                                    class="action-icon mr-2"
+                                    @click="openLiveModal(data.index)"
+                                >
                                     <img
                                         class="default"
                                         src="../../assets/icons/broadcast_default_icon.svg"
@@ -184,7 +189,8 @@
                 ></b-pagination>
             </div>
 
-            <div id="designOption"
+            <div
+                id="designOption"
                 v-bind:class="{
                     hide: isShowDesignOptions === false,
                     show: isShowDesignOptions === true
@@ -193,7 +199,7 @@
                 <DesignOptions />
             </div>
 
-            <LiveModal/>
+            <LiveModal />
         </div>
     </div>
 </template>
@@ -208,6 +214,7 @@ export default {
         LiveModal
     },
     data: () => ({
+        loading: false,
         isShowDesignOptions: false,
         selectedOrderByOption: 'name',
         selectedLeaderboard: null,
@@ -303,12 +310,12 @@ export default {
             this.selectedLeaderboard = this.leaderboardsList[index];
         },
         removeRow(index) {
-            this.leaderboardsList.splice(index,1);
+            this.leaderboardsList.splice(index, 1);
         },
         openLiveModal(index) {
             this.selectedLeaderboard = this.leaderboardsList[index];
             this.$bvModal.show('live-design-modal');
-        },
+        }
     }
 };
 </script>

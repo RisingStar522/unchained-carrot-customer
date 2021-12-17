@@ -6,7 +6,7 @@ export default {
             new BuilderAPI()
                 .getLandingPageTemplates()
                 .then(resp => {
-                    commit('SET_TEMPLATES', resp.result.result);
+                    commit('SET_TEMPLATES', resp.result);
                     return resolve(resp);
                 })
                 .catch(error => {
@@ -52,7 +52,7 @@ export default {
             new BuilderAPI()
                 .getLandingPages()
                 .then(resp => {
-                    commit('SET_PAGES', resp.result.result);
+                    commit('SET_PAGES', resp.result);
                     return resolve(resp);
                 })
                 .catch(e => reject(e));
@@ -82,6 +82,7 @@ export default {
             new BuilderAPI()
                 .deleteLandingPage(pageId)
                 .then(resp => {
+                    console.log(resp);
                     commit('UPDATE_PAGE_LIST', resp.result);
                     return resolve(resp);
                 })
@@ -123,8 +124,7 @@ export default {
                             landingPageId
                         );
                         commit('UPDATE_PAGE', data);
-                    } catch (error) {
-                    }
+                    } catch (error) {}
 
                     return resolve(resp);
                 })
@@ -144,8 +144,7 @@ export default {
                             landingPageId
                         );
                         commit('UPDATE_PAGE', data);
-                    } catch (error) {
-                    }
+                    } catch (error) {}
 
                     return resolve(resp);
                 })

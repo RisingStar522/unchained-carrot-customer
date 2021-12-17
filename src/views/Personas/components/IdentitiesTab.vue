@@ -21,14 +21,6 @@ export default {
     name: 'identities-tab-component',
     data: () => ({}),
     props: {
-        // modalId: {
-        //     type: String,
-        //     required: true
-        // },
-        // title: {
-        //     type: String,
-        //     required: false
-        // }
     }
 };
 </script>

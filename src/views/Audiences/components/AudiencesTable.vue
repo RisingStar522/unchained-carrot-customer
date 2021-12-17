@@ -110,8 +110,6 @@ div.nav-wrapper-class {
                     </div>
                 </div>
 
-                <!-- :current-page="currentPageForAudiences" -->
-                <!-- :per-page="perPageForAudiences" -->
                 <b-table
                     hover
                     id="audiences"
@@ -465,108 +463,6 @@ div.nav-wrapper-class {
 
         </div>
 
-        <!-- <Modal modalId="configureTraits" title="Add Audience Trait">
-            <template v-slot:default>
-                <div class="validation_mark">
-                    <img
-                        class="mr-2"
-                        src="../../../assets/icons/validation_mandatory.svg"
-                    />
-                    <span>MANDATORY</span>
-                </div>
-                <b-row class="m-1">
-                    <label class="trait-source">Source</label>
-                    <b-form-select
-                        id="event-source"
-                        name="event-source"
-                        v-model="selected"
-                        :options="transformActiveIntegrations"
-                        class="mb-3"
-                        aria-placeholder="select event source"
-                    >
-                    </b-form-select>
-                </b-row>
-                <b-form-group id="input-group-1" class="trait-form mx-1 mb-3" label="Name" label-for="input-2">
-                    <b-form-input
-                        id="input-1"
-                        v-model="form.name"
-                        placeholder="Propensity to buy"
-                        required
-                    ></b-form-input>
-                </b-form-group>
-                <b-form-group id="input-group-2" class="trait-form mx-1 mb-3" label="Default value" label-for="input-2">
-                    <b-form-input
-                        id="input-2"
-                        v-model="form.value"
-                        placeholder="50"
-                        required
-                    ></b-form-input>
-                </b-form-group>
-                <b-form-group id="input-group-3" class="trait-form mx-1 mb-3" label="Unit measure" label-for="input-3">
-                    <b-form-input
-                        id="input-3"
-                        v-model="form.unit"
-                        placeholder="%"
-                        required
-                    ></b-form-input>
-                </b-form-group>
-            </template>
-        </Modal> -->
-
-        <!-- <TabModal modalId="viewEmployees" class="tab-modal" title="Add Audience Trait">
-            <b-tabs fill
-                active-tab-class="active-tab-class"
-                nav-wrapper-class="nav-wrapper-class"
-                active-nav-item-class="active-nav-item-class"
-                class="tabs-class"
-                nav-class="tabs-nav-class" 
-                style
-            >
-                <b-tab
-                    title-item-class="title-item-class"
-                    class="tab-item"
-                    title="Events"
-                >
-                    <EventTab></EventTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Traits">
-                    <TraitsTab></TraitsTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Audiences">
-                    <AudiencesTab></AudiencesTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Identities">
-                    <IdentitiesTab></IdentitiesTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Opt In/Opt Out">
-                    <OptInOutTab></OptInOutTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Memberships">
-                    <MembershipsTab></MembershipsTab>
-                </b-tab>
-                <b-tab 
-                    class="tab-item"
-                    title="Rewards">
-                    <RewardsTab></RewardsTab>       
-                </b-tab>
-            </b-tabs>
-        </TabModal> -->
-
-        <!-- <DeleteConfirmModal
-            :audience="selectedAudience"
-            @confirm="confirmDeleteAudience"
-        /> -->
-
         <b-modal
             id="modal-1"
                 header-border-variant="light"
@@ -626,39 +522,13 @@ div.nav-wrapper-class {
 </template>
 
 <script>
-// import DateRangePicker from 'vue2-daterange-picker';
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
-// import TabModal from './TabModal.vue';
-// import EventTab from './EventTab.vue';
-// import TraitsTab from './TraitsTab.vue';
-// import AudiencesTab from './AudiencesTab.vue';
-// import IdentitiesTab from './IdentitiesTab.vue';
-// import OptInOutTab from './OptInOutTab.vue';
-// import MembershipsTab from './MembershipsTab.vue';
-// import RewardsTab from './RewardsTab.vue'
-// import Modal from './modal.vue';
-
 import dayjs from 'dayjs';
-
-// import DeleteConfirmModal from './DeleteConfirmModal.vue';
-// import { mapGetters } from 'vuex';
-// import AudiencesAPI from '../../../api/AudiencesAPI';
-
 import _ from 'lodash';
 
 export default {
     name: 'audiences-table',
     components: {
-        // DeleteConfirmModal,
-        // TabModal,
-        // EventTab,
-        // TraitsTab,
-        // AudiencesTab,
-        // IdentitiesTab,
-        // OptInOutTab,
-        // MembershipsTab,
-        // RewardsTab,
-        // Modal
     },
     data: () => ({
         form: {
@@ -667,46 +537,9 @@ export default {
             unit: '',
         },
         selectedValue: [],
-        selected: '',
-        tableTitle: '',
-        totalClicks: 0,
-        hoverItemId: '',
-        options: {
-            legend: {
-                display: false
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            tooltips: {
-                callbacks: {
-                    label: function(tooltipItems) {
-                        return tooltipItems.yLabel.toString() + ' clicks';
-                    }
-                }
-            },
-            scales: {
-                xAxes: [
-                    {
-                        barPercentage: 0.4,
-                        gridLines: {
-                            drawOnChartArea: false
-                        }
-                    }
-                ],
-                yAxes: [
-                    {
-                        position: 'right',
-                        gridLines: {
-                            display: false
-                        }
-                    }
-                ]
-            }
-        },
         isShowEmployee: false,
         selectedOrderByOption: 'dateCreated',
         selectedAudience: null,
-        isShowRecentRedirectsTable: false,
         perPageForAudiences: 5,
         currentPageForAudiences: 1,
         fieldsForAudiences: [
@@ -758,21 +591,11 @@ export default {
                     textAlign: 'center'
                 }
             },
-            // {
-            //     key: 'status',
-            //     sortable: false,
-            //     label: 'STATUS',
-            //     thStyle: {
-            //         textAlign: 'center'
-            //     }
-            // },
             {
                 key: 'action',
                 label: ''
             }
         ],
-        pageSizeForRecentRedirects: 5,
-        pageForRecentRedirects: 1,
         rowsPerPageOptions: [
             { value: 5, text: '5' },
             { value: 10, text: '10' },
@@ -781,77 +604,12 @@ export default {
             { value: 50, text: '50' },
             { value: 100, text: '100' }
         ],
-        fieldsForRecentRedirects: [
-            {
-                key: 'date',
-                sortable: false,
-                label: 'DATE',
-                thStyle: {
-                    paddingLeft: '40px'
-                }
-            },
-            {
-                key: 'destinationUrl',
-                sortable: false,
-                label: 'DESTINATION URL',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'IPaddress',
-                sortable: false,
-                label: 'IP ADDRESS',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'publicIpCity',
-                sortable: false,
-                label: 'CITY',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'browserName',
-                sortable: false,
-                label: 'BROWSER',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'osName',
-                sortable: false,
-                label: 'OS',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'deviceModel',
-                sortable: false,
-                label: 'DEVICE',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            }
-        ],
-        itemsForRecentRedirects: [],
-        recentRedirectsTotal: 0,
         audiencesTotal: 0,
-        open: 'right',
-        showDropdowns: true,
-        linkedCalendars: true,
-        selectedChartId: ''
     }),
     async created() {
         await this.getAudiences();
     },
     computed: {
-        // ...mapGetters(['getAllAudiences']),
         itemsForAudiences: {
             get: function() {
                 return [
@@ -865,138 +623,34 @@ export default {
                         "createdAt":"2021-12-09T03:06:58.983Z",
                     },
                 ];
-                // return JSON.parse(JSON.stringify(this.getAllAudiences));
             },
             set: function() {}
         },
-
         confirm() {
         },
         cancel() {
-
-        },
-
-        dateRange() {
-            const date = new Date();
-            const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-            const endDate = new Date(
-                date.getFullYear(),
-                date.getMonth() + 1,
-                0
-            );
-            return { startDate, endDate };
-        },
-        transformActiveIntegrations() {
-            return this.itemsForAudiences.map(({ externalSystem }) =>
-                this.capitalizeFirstLetter(externalSystem)
-
-            );
         },
     },
     methods: {
-        capitalizeFirstLetter(string) {
-            return (
-                // string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
-                'ANALYTICS'
-            );
-        },
-        async handleClickAudiencesTableRow(item) {
-            // this.selectedAudiences = item;
-
-            // for (var i = 0; i < this.itemsForAudiences.length; i++) {
-            //     this.itemsForAudiences[i]._rowVariant = '';
-            // }
-
-            // item._rowVariant = 'active';
-            // this.pageForRecentRedirects = 1;
-            // await this.getRecentRedirects();
-
-            this.isShowEmployee = true;
-            this.$refs.audiencesTable.refresh();
-
-            this.$root.$emit('bv::show::modal', 'viewEmployees')
-        },
-        findRouteById(id) {
+        findAudienceById(id) {
             return this.itemsForAudiences.find(item => item._id === id);
         },
         editRow(data) {
-            const route = this.findRouteById(data.item._id);
-            this.selectedAudience = route;
-            // this.$store.commit('SET_AUDIENCE', this.selectedAudience);
-            // this.$router.push({
-            //     name: 'EditAudience',
-            //     params: {
-            //         id: this.selectedAudience._id
-            //     }
-            // });
+            const audience = this.findAudienceById(data.item._id);
+            this.selectedAudience = audience;
         },
         removeRow(data) {
-            // const route = this.findRouteById(data.item._id);
-            // this.selectedAudience = route;
-            
-            this.$bvModal.show('delete-confirm-modal');
-        },
-        confirmDeleteAudience(value) {
-            if (value) {
-                this.itemsForAudiences = this.itemsForAudiences.filter(
-                    item => item._id !== this.selectedAudience._id
-                );
-                // this.isShowRecentRedirectsTable = false;
-            }
-        },
-        stringToHslColor(str, s, l) {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                hash = str.charCodeAt(i) + ((hash << 5) - hash);
-            }
-
-            const h = hash % 360;
-            return 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
         },
         async getAudiences() {
-            // const routes = await this.$store.dispatch('getAllAudiences', {
-            //     sort_by: this.selectedOrderByOption,
-            //     limit: this.perPageForAudiences,
-            //     offset:
-            //         (this.currentPageForAudiences - 1) *
-            //         this.perPageForAudiences
-            // });
-            // this.audiencesTotal = routes.total;
-        },
-        async getRecentRedirects() {
-            // var redirects = await new AudiencesAPI().getRedirectsData(
-            //     this.selectedAudience._id,
-            //     this.pageSizeForRecentRedirects,
-            //     (this.pageForRecentRedirects - 1) *
-            //         this.pageSizeForRecentRedirects
-            // );
-
-            // this.recentRedirectsTotal = redirects.data.total;
-            // this.itemsForRecentRedirects = redirects.data.data;
         },
         async handleAudiencesChange(value) {
             this.currentPageForAudiences = value;
             await this.getAudiences();
         },
-        async handleRecentRedirectsPageChange(value) {
-            this.pageForRecentRedirects = value;
-            await this.getRecentRedirects();
-        },
         async handleAudiencesPageSizeChange(size) {
             this.perPageForAudiences = size;
             this.currentPageForAudiences = 1;
             await this.getAudiences();
-        },
-        async handleRecentRedirectsPageSizeChange(size) {
-            this.pageSizeForRecentRedirects = size;
-            this.pageForRecentRedirects = 1;
-            await this.getRecentRedirects();
-        },
-        dateFormat(classes, date) {
-            if (!classes.disabled) {
-                classes.disabled = date.getTime() < new Date();
-            }
-            return classes;
         },
         dayjs(...args) {
             return dayjs(...args);
@@ -1005,14 +659,6 @@ export default {
             this.currentPageForAudiences = 1;
             await this.getAudiences();
         },
-        hoverIcon(routeId) {
-            this.hoverItemId = routeId;
-        },
-        unhoverIcon(routeId) {
-            if (routeId === this.hoverItemId) {
-                this.hoverItemId = '';
-            }
-        }
     }
 };
 </script>

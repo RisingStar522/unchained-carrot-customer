@@ -47,7 +47,12 @@
             <b-form @submit="handleOnSaveSidebarFormSubmit" novalidate>
                 <b-form-group>
                     <label for="name" class="text-brand">Save file as</label>
-                    <b-input id="name" v-model="pageDetail.name" required />
+                    <b-input
+                        id="name"
+                        v-model="pageDetail.name"
+                        required
+                        placeholder="page.html"
+                    />
                     <p style="font-size: 11px">
                         This name will be visible in the URL
                     </p>
@@ -81,6 +86,7 @@
                     <b-form-select
                         id="locale"
                         v-model="selectedLocale"
+                        :value="test"
                         :options="localeOptions"
                     ></b-form-select>
                 </b-form-group>
@@ -124,12 +130,45 @@
                 </b-form-group>
             </b-form>
         </b-modal>
+
+        <b-modal
+            v-model="isPublishModal"
+            hide-footer
+            centered
+            hide-backdrop
+            body-class="pt-0"
+        >
+            <div class="text-center">
+                <h5 class="text-primary">Your page is not published yet.</h5>
+                <h5 class="mb-5 text-primary">
+                    Do you want to publish it now?
+                </h5>
+                <div class="rowSpace">
+                    <b-btn
+                        block
+                        variant="outline-primary"
+                        style="flex: 0.48"
+                        @click="onDiscardChanges"
+                    >
+                        Later
+                    </b-btn>
+                    <b-btn
+                        type="submit"
+                        block
+                        variant="brand"
+                        style="flex: 0.48"
+                        @click="handleOnPublishNow"
+                        >Publish Now
+                    </b-btn>
+                </div>
+            </div>
+        </b-modal>
     </div>
 </template>
 
 <script>
 import Bee from '@mailupinc/bee-plugin';
-import Modal from './components/modal';
+import Modal from './components/modal.vue';
 import Editor from 'vue2-ace-editor';
 import Loading from '../../components/Loading';
 import blankTemplate from './templates/blank-template.json';
@@ -151,21 +190,26 @@ export default {
         },
         selectedLocale: null,
         selectedPublish: null,
-        localeOptions: [{ value: 'test', text: 'test' }],
-        publishOptions: [{ value: 'test', text: 'test' }],
+        localeOptions: require('./localeOption.json'),
+        publishOptions: [
+            { value: null, text: 'pages.unchainedcarrot.com' }
+        ],
         beeToken: '',
         htmlFileContent: '',
         jsonFileContent: JSON.stringify(blankTemplate),
         copied: false,
         onSaveSidebarVisibility: false,
+        isPublishModal: false,
         beeObj: {},
         saveAs: 'page'
     }),
     methods: {
         onDiscardChanges() {
             this.onSaveSidebarVisibility = false;
+            this.isPublishModal = false;
             this.$router.push('/page-builder');
         },
+        handleOnPublishNow() {},
         async initializeBeePlugin() {
             const beeConfig = {
                 uid: 'A-S00062286', //needed for identify resources of the that user and billing stuff
@@ -188,8 +232,7 @@ export default {
                 onSend: htmlFile => {
                     this.htmlFileContent = htmlFile;
                 },
-                onError: errorMessage => {
-                },
+                onError: errorMessage => {},
                 onLoad: json => {
                     this.loading = false;
                 }
@@ -285,7 +328,7 @@ export default {
                         type: 'success'
                     });
 
-                    this.$bvModal.show('output');
+                    // this.$bvModal.show('output');
                 }
             } else {
                 // SAVING
@@ -327,7 +370,7 @@ export default {
                                 type: 'success'
                             });
 
-                            this.$bvModal.show('output');
+                            // this.$bvModal.show('output');
                         })
                         .catch(e => {
                             this.$notify({
@@ -344,6 +387,9 @@ export default {
                         .finally(() => (this.loading = false));
                 }
             }
+
+            this.onSaveSidebarVisibility = false;
+            this.isPublishModal = true;
         },
         showOnSaveSidebar(value) {
             this.onSaveSidebarVisibility = value;
@@ -353,8 +399,7 @@ export default {
                 await navigator.clipboard.writeText(this.htmlFileContent);
                 this.copied = true;
                 this.$children[0].$refs.copyBtn.setAttribute('title', 'copied');
-            } catch (error) {
-            }
+            } catch (error) {}
         },
         editorInit: function() {
             require('brace/ext/language_tools'); //language extension prerequsite...
@@ -406,8 +451,7 @@ export default {
                 const imageUrl = response.content;
 
                 return imageUrl;
-            } catch (error) {
-            }
+            } catch (error) {}
         }
     },
     async mounted() {

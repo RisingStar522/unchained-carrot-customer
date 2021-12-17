@@ -16,7 +16,6 @@
 
 <script>
 import AudiencesTable from './components/AudiencesTable.vue';
-import { mapGetters } from 'vuex';
 
 export default {
     name: 'audiences-page',
@@ -26,20 +25,14 @@ export default {
     data: () => ({
         loading: false
     }),
-    async created() {
-        this.loading = true;
-        this.$store.dispatch('getAllTrafficRoutes', {}).then(() => {
-            this.loading = false;
-        });
-    },
     computed: {
-        ...mapGetters(['getAllTrafficRoutes']),
         itemsForAudiences() {
-            return JSON.parse(JSON.stringify(this.getAllTrafficRoutes));
+            // when you integrate with api, you have to alter following line.
+            this.getAllAudiences = [{a:2},{b:2}]
+            return JSON.parse(JSON.stringify(this.getAllAudiences));
         }
     },
     mounted() {
-        this.$store.commit('SET_INIT_REMAINING_DESTINATION_PERCENT', 100);
     }
 };
 </script>

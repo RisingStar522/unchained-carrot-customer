@@ -13,10 +13,9 @@
                                 @change="sortPersonas"
                                 v-model="selectedOrderByOption"
                             >
-                                <option selected value="dateCreated">
+                                <option selected value="source">
                                     Source
                                 </option>
-                                <option value="status">Status</option>
                                 <option value="name">
                                     Name
                                 </option>
@@ -59,7 +58,6 @@
                                 src="../../../../assets/icons/add_circle_icon.svg"
                             />
                             <b-btn v-b-modal.configureTraits class="ml-2" variant="outline-brand">
-                                <!-- <fa-icon icon="plus-circle" class="mr-1" /> -->
                                 Add Trait
                             </b-btn>
                         </div>
@@ -98,7 +96,7 @@
                     </template>
                     <template v-slot:cell(unitOfMeasure)="data">
                         <div class="text-center">
-                            {{ dayjs(data.value).format('DD/MM/YYYY') }}
+                            {{ data.value }}
                         </div>
                     </template>
                     <template v-slot:cell(action)="data">
@@ -190,7 +188,7 @@
                                 class="action-icon mr-2"
                                 @click="removeRow(data)"
                                 data-toggle="tooltip"
-                                title="Delete Route"
+                                title="Delete Data"
                             >
                                 <span class="default">
                                     <svg
@@ -316,7 +314,7 @@
                         id="event-source"
                         name="event-source"
                         v-model="selected"
-                        :options="transformActiveIntegrations"
+                        :options="transformActivePersonas"
                         class="mb-3"
                         aria-placeholder="select event source"
                     >
@@ -364,7 +362,7 @@
                         id="event-source"
                         name="event-source"
                         v-model="selected"
-                        :options="transformActiveIntegrations"
+                        :options="transformActivePersonas"
                         class="mb-3"
                         aria-placeholder="select event source"
                     >
@@ -412,7 +410,7 @@
                         id="event-source"
                         name="event-source"
                         v-model="selected"
-                        :options="transformActiveIntegrations"
+                        :options="transformActivePersonas"
                         class="mb-3"
                         aria-placeholder="select event source"
                     >
@@ -436,30 +434,17 @@
                 </b-form-group>
             </template>
         </Modal>
-
-        <!-- <DeleteConfirmModal
-            :persona="selectedPersona"
-            @confirm="confirmDeletePersona"
-        /> -->
     </div>
 </template>
 
 <script>
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
 import Modal from '../modal.vue';
-
-import dayjs from 'dayjs';
-
-import DeleteConfirmModal from '../DeleteConfirmModal.vue';
-import { mapGetters } from 'vuex';
-// import PersonasAPI from '../../../api/PersonasAPI';
-
 import _ from 'lodash';
 
 export default {
     name: 'customerTraits',
     components: {
-        DeleteConfirmModal,
         Modal
     },
     data: () => ({
@@ -472,42 +457,9 @@ export default {
         tableTitle: '',
         totalClicks: 0,
         hoverItemId: '',
-        options: {
-            legend: {
-                display: false
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            tooltips: {
-                callbacks: {
-                    label: function(tooltipItems) {
-                        return tooltipItems.yLabel.toString() + ' clicks';
-                    }
-                }
-            },
-            scales: {
-                xAxes: [
-                    {
-                        barPercentage: 0.4,
-                        gridLines: {
-                            drawOnChartArea: false
-                        }
-                    }
-                ],
-                yAxes: [
-                    {
-                        position: 'right',
-                        gridLines: {
-                            display: false
-                        }
-                    }
-                ]
-            }
-        },
         isShowEmployee: false,
-        selectedOrderByOption: 'dateCreated',
+        selectedOrderByOption: 'source',
         selectedPersona: null,
-        isShowRecentRedirectsTable: false,
         perPageForPersonas: 5,
         currentPageForPersonas: 1,
         fieldsForPersonas: [
@@ -556,8 +508,6 @@ export default {
                 label: ''
             }
         ],
-        pageSizeForRecentRedirects: 5,
-        pageForRecentRedirects: 1,
         rowsPerPageOptions: [
             { value: 5, text: '5' },
             { value: 10, text: '10' },
@@ -566,78 +516,12 @@ export default {
             { value: 50, text: '50' },
             { value: 100, text: '100' }
         ],
-        fieldsForRecentRedirects: [
-            {
-                key: 'date',
-                sortable: false,
-                label: 'DATE',
-                thStyle: {
-                    paddingLeft: '40px'
-                }
-            },
-            {
-                key: 'destinationUrl',
-                sortable: false,
-                label: 'DESTINATION URL',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'IPaddress',
-                sortable: false,
-                label: 'IP ADDRESS',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'publicIpCity',
-                sortable: false,
-                label: 'CITY',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'browserName',
-                sortable: false,
-                label: 'BROWSER',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'osName',
-                sortable: false,
-                label: 'OS',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            },
-            {
-                key: 'deviceModel',
-                sortable: false,
-                label: 'DEVICE',
-                thStyle: {
-                    textAlign: 'center'
-                }
-            }
-        ],
-        itemsForRecentRedirects: [],
-        recentRedirectsTotal: 0,
         personasTotal: 0,
-        open: 'right',
-        showDropdowns: true,
-        linkedCalendars: true,
-        selectedChartId: ''
     }),
     async created() {
         await this.getPersonas();
     },
     computed: {
-        // ...mapGetters(['getAllPersonas']),
-
         itemsForPersonas: {
             get: function() {
                 return [
@@ -647,6 +531,7 @@ export default {
                         "name":"Last purchase",
                         "defaultValue":"-",
                         "dataType":"number",
+                        "unitOfMeasure": "",
                     },
                     {
                         "_id":"61b172d29aa3ac001d5312ca",
@@ -654,6 +539,7 @@ export default {
                         "name":"Life time value",
                         "defaultValue":"0",
                         "dataType":"no",
+                        "unitOfMeasure": "",
                     },
                     {
                         "_id":"61b172d29aa3ac001d5312ca",
@@ -661,6 +547,7 @@ export default {
                         "name":"-",
                         "defaultValue":"-",
                         "dataType":"no",
+                        "unitOfMeasure": "",
                     },
                     {
                         "_id":"61b172d29aa3ac001d5312ca",
@@ -668,6 +555,7 @@ export default {
                         "name":"Last consumer support contact",
                         "defaultValue":"0",
                         "dataType":"no",
+                        "unitOfMeasure": "",
                     },
                     {
                         "_id":"61b172d29aa3ac001d5312ca",
@@ -675,24 +563,14 @@ export default {
                         "name":"Newsletter subscribe",
                         "defaultValue":"False",
                         "dataType":"yes",
+                        "unitOfMeasure": "",
                     }
                 ];
-                // return JSON.parse(JSON.stringify(this.getAllPersonas));
             },
             set: function() {}
         },
 
-        dateRange() {
-            const date = new Date();
-            const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-            const endDate = new Date(
-                date.getFullYear(),
-                date.getMonth() + 1,
-                0
-            );
-            return { startDate, endDate };
-        },
-        transformActiveIntegrations() {
+        transformActivePersonas() {
             return this.itemsForPersonas.map(({ externalSystem }) =>
                 this.capitalizeFirstLetter(externalSystem)
 
@@ -701,128 +579,35 @@ export default {
         
     },
     methods: {
-        showConfigureTraits() {
-            this.$bvModal.show('configureTraits');
-        },
         capitalizeFirstLetter(string) {
             return (
-                // string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
                 'ANALYTICS'
             );
         },
-        async handleClickPersonasTableRow(item) {
-            // this.selectedPersonas = item;
-
-            // for (var i = 0; i < this.itemsForPersonas.length; i++) {
-            //     this.itemsForPersonas[i]._rowVariant = '';
-            // }
-
-            // item._rowVariant = 'active';
-            // this.pageForRecentRedirects = 1;
-            // await this.getRecentRedirects();
-
-            this.isShowEmployee = true;
-            this.$refs.personasTable.refresh();
-
-            this.$root.$emit('bv::show::modal', 'viewEmployees')
-        },
-        findRouteById(id) {
+        findPersonById(id) {
             return this.itemsForPersonas.find(item => item._id === id);
         },
         editRow(data) {
-            const route = this.findRouteById(data.item._id);
-            this.selectedPersona = route;
-            // this.$store.commit('SET_PERSONA', this.selectedPersona);
-            // this.$router.push({
-            //     name: 'EditPersona',
-            //     params: {
-            //         id: this.selectedPersona._id
-            //     }
-            // });
-            
+            const persona = this.findPersonById(data.item._id);
+            this.selectedPersona = persona;
             this.$bvModal.show('configureEditTraits');
         },
         removeRow(data) {
-            // const route = this.findRouteById(data.item._id);
-            // this.selectedPersona = route;
-            // this.$bvModal.show('delete-confirm-modal');
-        },
-        // confirmDeletePersona(value) {
-        //     if (value) {
-        //         this.itemsForPersonas = this.itemsForPersonas.filter(
-        //             item => item._id !== this.selectedPersona._id
-        //         );
-        //         // this.isShowRecentRedirectsTable = false;
-        //     }
-        // },
-        stringToHslColor(str, s, l) {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                hash = str.charCodeAt(i) + ((hash << 5) - hash);
-            }
-
-            const h = hash % 360;
-            return 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
         },
         async getPersonas() {
-            // const routes = await this.$store.dispatch('getAllPersonas', {
-            //     sort_by: this.selectedOrderByOption,
-            //     limit: this.perPageForPersonas,
-            //     offset:
-            //         (this.currentPageForPersonas - 1) *
-            //         this.perPageForPersonas
-            // });
-            // this.personasTotal = routes.total;
-        },
-        async getRecentRedirects() {
-            var redirects = await new PersonasAPI().getRedirectsData(
-                this.selectedPersona._id,
-                this.pageSizeForRecentRedirects,
-                (this.pageForRecentRedirects - 1) *
-                    this.pageSizeForRecentRedirects
-            );
-
-            this.recentRedirectsTotal = redirects.data.total;
-            this.itemsForRecentRedirects = redirects.data.data;
         },
         async handlePersonasChange(value) {
             this.currentPageForPersonas = value;
             await this.getPersonas();
-        },
-        async handleRecentRedirectsPageChange(value) {
-            this.pageForRecentRedirects = value;
-            await this.getRecentRedirects();
         },
         async handlePersonasPageSizeChange(size) {
             this.perPageForPersonas = size;
             this.currentPageForPersonas = 1;
             await this.getPersonas();
         },
-        async handleRecentRedirectsPageSizeChange(size) {
-            this.pageSizeForRecentRedirects = size;
-            this.pageForRecentRedirects = 1;
-            await this.getRecentRedirects();
-        },
-        dateFormat(classes, date) {
-            if (!classes.disabled) {
-                classes.disabled = date.getTime() < new Date();
-            }
-            return classes;
-        },
-        dayjs(...args) {
-            return dayjs(...args);
-        },
         async sortPersonas() {
             this.currentPageForPersonas = 1;
             await this.getPersonas();
-        },
-        hoverIcon(routeId) {
-            this.hoverItemId = routeId;
-        },
-        unhoverIcon(routeId) {
-            if (routeId === this.hoverItemId) {
-                this.hoverItemId = '';
-            }
         }
     }
 };

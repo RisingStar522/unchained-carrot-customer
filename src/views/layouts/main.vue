@@ -103,15 +103,7 @@ export default {
                 'TemplateAppSettings',
                 'TemplateNFCSettings'
             ],
-            slideBarEmails: [
-                'EmailBroadcasts',
-                'EmailBroadcastsAddCampaign',
-                'EmailBroadcastsStatistics',
-                'AudienceSegments',
-                'AudienceSegmentsAdd',
-                'EmailSenders',
-                'EmailSendersAdd'
-            ],
+            slideBarEmails: [],
             slideBarEmailsRules: ['EmailRules', 'EmailRulesEventAdd'],
             slideBarGoals: [
                 'Goals',

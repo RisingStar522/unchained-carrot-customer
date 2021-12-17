@@ -25,7 +25,6 @@ export default {
                     );
                 })
                 .catch(err => {
-                    console.log(err);
                     return this.$notify({
                         title: 'QUCIKSIGHT INTEGRATION UNAVAILABLE',
                         text: 'Please add a Quicksight integration',
@@ -56,7 +55,6 @@ export default {
                     }
                 })
                 .then(resp => {
-                    console.log(resp, 'URL');
 
                     var options = {
                         url: resp.data.EmbedUrl,
@@ -74,7 +72,6 @@ export default {
                     embedDashboard(options);
                 })
                 .catch(err => {
-                    console.log(err.message, 'ERROR');
                 });
         }
     }
