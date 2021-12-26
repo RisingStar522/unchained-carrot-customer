@@ -487,6 +487,13 @@ export default [
                 component: () => import('../views/Leaderboard/ImagesSettings')
             },
 
+            // Event & Associated Rules
+            {
+                path: '/event',
+                name: 'Event',
+                component: () => import('../views/Event')
+            },
+
             // Traffic Routes
             {
                 path: '/traffic-routes',

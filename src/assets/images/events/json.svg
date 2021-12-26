@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="45" height="20" viewBox="0 0 45 20">
+  <g id="Raggruppa_1795" data-name="Raggruppa 1795" transform="translate(0.998 -0.062)">
+    <text id="_" data-name="{" transform="translate(2.002 16.062)" fill="#4d4f5c" font-size="16" font-family="Source Sans Pro"><tspan x="-2" y="0">{</tspan></text>
+    <text id="_2" data-name="{" transform="translate(41.002 4.062) rotate(180)" fill="#4d4f5c" font-size="16" font-family="Source Sans Pro"><tspan x="-2" y="0">{</tspan></text>
+    <g id="Raggruppa_1794" data-name="Raggruppa 1794" transform="translate(5.839 5.672)">
+      <rect id="Rettangolo_166" data-name="Rettangolo 166" width="31" height="11" rx="2" transform="translate(0.163 0.39)" fill="#4d4f5c"/>
+      <text id="JSON" transform="translate(15.163 8.39)" fill="#fff" font-size="8" font-family="Source Sans Pro"><tspan x="-9" y="0">JSON</tspan></text>
+    </g>
+  </g>
+</svg>

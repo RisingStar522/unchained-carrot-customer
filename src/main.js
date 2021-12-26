@@ -13,6 +13,7 @@ import './plugins/vue-upload';
 import './plugins/vue-datetime';
 import './plugins/auth';
 import './plugins/vue-clipboard';
+import './plugins/vue-tree-list';
 
 /* Import Service Worker */
 import './registerServiceWorker';
