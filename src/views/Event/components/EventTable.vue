@@ -313,7 +313,7 @@ export default {
           address: 'name'
         },
         eventTitle: 'Name of the event',
-        totalClicks: 0,
+        totalClicks: 6587,
         hoverItemId: '',
         options: {
             legend: {
@@ -331,7 +331,7 @@ export default {
             scales: {
                 xAxes: [
                     {
-                        barPercentage: 0.4,
+                        barPercentage: 0.1,
                         gridLines: {
                             drawOnChartArea: false
                         }
@@ -340,6 +340,7 @@ export default {
                 yAxes: [
                     {
                         position: 'right',
+                        max: 75,
                         gridLines: {
                             display: false
                         }
@@ -486,6 +487,9 @@ export default {
             return this.statusPublished;
         }
     },
+    mounted() {
+        this.getChartData();
+    },
     methods: {
         changeStateJson() {
           this.isShowJson = true;
@@ -518,7 +522,94 @@ export default {
         },
         async refreshEvent() {
         },
+        getChartData(eventId = 0) {
+            try {
+                const data = {
+                    week: [
+                        {
+                            year: 2021,
+                            weekNumber: 43,
+                            events: 1
+                        },
+                        {
+                            year: 2022,
+                            weekNumber: 43,
+                            events: 1
+                        }
+                    ],
+                    day: [
+                        {
+                            year: 2021,
+                            month: 10,
+                            day: 19,
+                            events: 35
+                        },
+                        {
+                            year: 2021,
+                            month: 11,
+                            day: 18,
+                            events: 70
+                        }
+                    ],
+                    hour: [
+                        {
+                            year: 2021,
+                            month: 10,
+                            day: 19,
+                            hour: 8,
+                            events: 1
+                        },
+                        {
+                            year: 2021,
+                            month: 11,
+                            day: 19,
+                            hour: 8,
+                            events: 1
+                        }
+                    ],
+                };
+                const monthNames = [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December'
+                ];
+                const monthLabels = data['day'].map(c => {
+                    const today = new Date(c.year, c.month, c.day);
+                    return (
+                        monthNames[today.getMonth() - 1] + ' ' + today.getDate()
+                    );
+                });
+
+                const monthEvents = data['day'].map(c => c.events);
+                const monthDatasets = {
+                    labels: _.uniq(monthLabels),
+                    datasets: [
+                        {
+                            label: 'Month x Redirects',
+                            data: monthEvents,
+                            backgroundColor: '#39CB89',
+                            borderColor: '#39CB89',
+                            borderWidth: 1
+                        }
+                    ]
+                };
+
+                this.chartData.monthDatasets = monthDatasets;
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
         async showChartForEvent(item) {
+            this.getChartData();
             this.eventTitle = item.title;
 
             this.isShowPublishedTreeDiagram = false;
