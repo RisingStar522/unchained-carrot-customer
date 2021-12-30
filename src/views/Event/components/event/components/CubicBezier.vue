@@ -45,7 +45,7 @@
             "
         />
 
-        <rect :x="halfSize + 300" :y="yPosition - 50" :height="100" :width="480" style="fill: #FFFFFF"/>
+        <rect :x="halfSize + 300" :y="yPosition - 70" :height="140" :width="480" style="fill: #FFFFFF"/>
         <svg v-if="item.iconStyle == 'emailGreen' && item.state">
             <svg  :x="halfSize+370"  :y="yPosition-40" width="80" height="80" >
                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +100,17 @@
                     </g>
                 </svg>
             </svg>
-
+            <svg  :x="halfSize-76"  :y="yPosition-80" width="175" height="175" >
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="174" height="174" viewBox="0 0 174 174">
+                    <circle id="Ellisse_1" data-name="Ellisse 1" cx="87" cy="87" r="87" fill="#2f3380" opacity="0.27"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" :x="16"  :y="16" width="142" height="142" viewBox="0 0 142 142">
+                    <circle id="Ellisse_1" data-name="Ellisse 1" cx="71" cy="71" r="71" fill="#2f3380" opacity="0.56"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="81" height="81" :x="47.5"  :y="47.5" viewBox="0 0 81 81">
+                    <circle id="Ellisse_2" data-name="Ellisse 2" cx="40.5" cy="40.5" r="40.5" fill="#2f3380" opacity="0.97"/>
+                </svg>
+            </svg>
             <svg   :x="halfSize+320"  :y="yPosition-15" width="30" height="30" >
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
                     <defs>
@@ -120,7 +130,17 @@
             </svg>
         </svg>
         <svg v-else-if="item.iconStyle == 'emailYellow' && !item.state ">
-
+            <svg  :x="halfSize-76"  :y="yPosition-80" width="175" height="175" >
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="174" height="174" viewBox="0 0 174 174">
+                    <circle id="Ellisse_1" data-name="Ellisse 1" cx="87" cy="87" r="87" fill="#2f3380" opacity="0.27"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" :x="16"  :y="16" width="142" height="142" viewBox="0 0 142 142">
+                    <circle id="Ellisse_1" data-name="Ellisse 1" cx="71" cy="71" r="71" fill="#2f3380" opacity="0.56"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="81" height="81" :x="47.5"  :y="47.5" viewBox="0 0 81 81">
+                    <circle id="Ellisse_2" data-name="Ellisse 2" cx="40.5" cy="40.5" r="40.5" fill="#2f3380" opacity="0.97"/>
+                </svg>
+            </svg>
             <svg  :x="halfSize+370"  :y="yPosition-40" width="80" height="80" >
                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 104.000000 94.000000"
@@ -174,18 +194,18 @@
                     </g>
                 </svg>
             </svg>
-            <svg   :x="halfSize+320"  :y="yPosition-15" width="30" height="30" >
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+            <svg   :x="halfSize+320"  :y="yPosition-15" width="40" height="40" >
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30" viewBox="0 0 16 16">
                     <defs>
                         <clipPath id="clip-path">
-                        <rect id="Rettangolo_1730" data-name="Rettangolo 1730" width="16" height="16" transform="translate(20 235.667)" fill="#f79946"/>
+                        <rect id="Rettangolo_1730" data-name="Rettangolo 1730" width="30" height="30" transform="translate(20 235.667)" fill="#f79946"/>
                         </clipPath>
                     </defs>
                     <g id="Gruppo_di_maschere_43" data-name="Gruppo di maschere 43" transform="translate(-20 -235.667)" clip-path="url(#clip-path)">
                         <g id="Raggruppa_1094" transform="translate(20.001 237.875)">
                         <g id="Raggruppa_1783" data-name="Raggruppa 1783" transform="translate(0 0)">
-                            <path id="Tracciato_1300" data-name="Tracciato 1300" d="M4.351,7.9l7.228,4.033a.244.244,0,0,0,.072.029.123.123,0,0,0,.116,0c.029-.014.058-.014.072-.029L19.068,7.9a.827.827,0,0,0-.4-1.547H4.741a.824.824,0,0,0-.824.824A.806.806,0,0,0,4.351,7.9Z" transform="translate(-3.917 -6.349)" fill="#f79946"/>
-                            <path id="Tracciato_1301" data-name="Tracciato 1301" d="M19.448,10.233a.357.357,0,0,0-.492-.13l-7.113,4.033a.4.4,0,0,1-.26,0L4.47,10.1a.357.357,0,0,0-.492.13h0a.4.4,0,0,0-.043.188v8.168a.358.358,0,0,0,.361.361H19.13a.358.358,0,0,0,.361-.361V10.421a.219.219,0,0,0-.043-.188Z" transform="translate(-3.921 -7.168)" fill="#f79946"/>
+                            <path class="icon-yellow" id="Tracciato_1300" data-name="Tracciato 1300" d="M4.351,7.9l7.228,4.033a.244.244,0,0,0,.072.029.123.123,0,0,0,.116,0c.029-.014.058-.014.072-.029L19.068,7.9a.827.827,0,0,0-.4-1.547H4.741a.824.824,0,0,0-.824.824A.806.806,0,0,0,4.351,7.9Z" transform="translate(-3.917 -6.349)" fill="#f79946"/>
+                            <path class="icon-yellow" id="Tracciato_1301" data-name="Tracciato 1301" d="M19.448,10.233a.357.357,0,0,0-.492-.13l-7.113,4.033a.4.4,0,0,1-.26,0L4.47,10.1a.357.357,0,0,0-.492.13h0a.4.4,0,0,0-.043.188v8.168a.358.358,0,0,0,.361.361H19.13a.358.358,0,0,0,.361-.361V10.421a.219.219,0,0,0-.043-.188Z" transform="translate(-3.921 -7.168)" fill="#f79946"/>
                         </g>
                         </g>
                     </g>
@@ -194,8 +214,8 @@
         </svg>
         <svg v-else-if="item.iconStyle == 'enrichmentGreen' && item.state">
             <svg   :x="halfSize+320"  :y="yPosition-15" width="30" height="30" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 13.875 19.5">
-                    <path class="icon-green" id="Icon_ionic-ios-calculator" data-name="Icon ionic-ios-calculator" d="M19.969,3.375H9.094a1.5,1.5,0,0,0-1.5,1.5v16.5a1.5,1.5,0,0,0,1.5,1.5H19.969a1.5,1.5,0,0,0,1.5-1.5V4.875A1.5,1.5,0,0,0,19.969,3.375Zm-.563,12.75v3.75A1.122,1.122,0,0,1,18.281,21h0a1.122,1.122,0,0,1-1.125-1.125v-3.75A1.122,1.122,0,0,1,18.281,15h0A1.122,1.122,0,0,1,19.406,16.125Zm0-3.75h0A1.122,1.122,0,0,1,18.281,13.5h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,19.406,12.375Zm-3.75,7.5h0A1.122,1.122,0,0,1,14.531,21h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,15.656,19.875Zm0-3.75h0a1.122,1.122,0,0,1-1.125,1.125h0a1.122,1.122,0,0,1-1.125-1.125h0A1.122,1.122,0,0,1,14.531,15h0A1.122,1.122,0,0,1,15.656,16.125Zm0-3.75h0A1.122,1.122,0,0,1,14.531,13.5h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,15.656,12.375Zm-3.75,7.5h0A1.122,1.122,0,0,1,10.781,21h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,11.906,19.875Zm0-3.75h0a1.122,1.122,0,0,1-1.125,1.125h0a1.122,1.122,0,0,1-1.125-1.125h0A1.122,1.122,0,0,1,10.781,15h0A1.122,1.122,0,0,1,11.906,16.125Zm0-3.75h0A1.122,1.122,0,0,1,10.781,13.5h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,11.906,12.375Zm-2.25-3.75V6.375a.752.752,0,0,1,.75-.75h8.25a.752.752,0,0,1,.75.75v2.25a.752.752,0,0,1-.75.75h-8.25A.752.752,0,0,1,9.656,8.625Z" transform="translate(-7.594 -3.375)" fill="#f79946"/>
+                <svg  class="icon-green" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 14.645 18.766">
+                    <path id="Tracciato_419"  class="icon-green"  d="M12.072,7.638a1.941,1.941,0,0,1-.58-.534h0a2.652,2.652,0,0,1-.2.229h0a2.027,2.027,0,0,1-.4.32h0v5.736H4.17V8.523A1.439,1.439,0,0,1,5.619,7.073H7.191L7.114,7a3.358,3.358,0,0,1-.763-1.129A3,3,0,0,1,6.077,4.6a2.893,2.893,0,0,1,.168-.961A2.413,2.413,0,0,1,7.618,2.253a2.327,2.327,0,0,1,.961-.168A2.934,2.934,0,0,1,9.83,2.36a3.4,3.4,0,0,1,1.129.778,3.071,3.071,0,0,1,.519.656A4.262,4.262,0,0,1,12,3.138h0a3.358,3.358,0,0,1,1.129-.763A2.984,2.984,0,0,1,14.376,2.1a2.552,2.552,0,0,1,.961.168,2.4,2.4,0,0,1,1.388,1.388,2.327,2.327,0,0,1,.168.961,3.053,3.053,0,0,1-.275,1.266,3.4,3.4,0,0,1-.778,1.129l-.076.076h1.571a1.439,1.439,0,0,1,1.449,1.449V13.4H12.072Zm.763-3.676a2.719,2.719,0,0,1,.778-.534,2.056,2.056,0,0,1,.793-.168,1.571,1.571,0,0,1,.534.092,1.223,1.223,0,0,1,.7.7,1.571,1.571,0,0,1,.092.534,2,2,0,0,1-.168.793,2.444,2.444,0,0,1-.534.778,2.186,2.186,0,0,1-.763.519,2,2,0,0,1-.793.168,1.66,1.66,0,0,1-.549-.092,1.223,1.223,0,0,1-.7-.7,1.571,1.571,0,0,1-.092-.534,2,2,0,0,1,.168-.793,3.273,3.273,0,0,1,.534-.763ZM10.47,6.494a1.144,1.144,0,0,1-.427.275,1.571,1.571,0,0,1-.534.092,2,2,0,0,1-.793-.168,2.67,2.67,0,0,1-.778-.519A2.719,2.719,0,0,1,7.4,5.4,2.056,2.056,0,0,1,7.236,4.6a1.571,1.571,0,0,1,.092-.534,1.223,1.223,0,0,1,.7-.7,1.571,1.571,0,0,1,.534-.092,2,2,0,0,1,.793.168,2.227,2.227,0,0,1,.763.534,2.336,2.336,0,0,1,.519.763,2,2,0,0,1,.168.793,1.728,1.728,0,0,1-.092.549A.9.9,0,0,1,10.47,6.494Zm.442,14.355H5.619A1.439,1.439,0,0,1,4.17,19.4h0V14.548h6.743v6.3Zm1.175,0v-6.3h6.727V19.4h0a1.449,1.449,0,0,1-1.449,1.449Z" transform="translate(-4.17 -2.083)" fill="#39cb89"/>
                 </svg>
             </svg>
         </svg>

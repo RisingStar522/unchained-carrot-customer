@@ -66,78 +66,99 @@
                             {{ dayjs(data.value).format('DD-MM-YYYY hh:mm') }}
                         </div>
                     </template>
-                    <template v-slot:cell(rules)>
+                    <template v-slot:cell(rules) = "data">
                         <div
                             class="
                                 d-flex
                                 align-items-center
-                                justify-content-center
+                                justify-content-left
                             "
+                        >
+                        <div 
+                        class="action-icon mr-2"
+                                data-toggle="tooltip"
+                                v-for="rule in data.value"
+                                :value="rule['mark']"
+                                :key="rule['mark']"
                         >
                             <div
                                 class="action-icon mr-2"
                                 data-toggle="tooltip"
+                                v-if="rule['mark']=='email_green'"
                             >
                                 <span class="default">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
-                                        <defs>
-                                            <clipPath id="clip-path">
-                                            <rect id="Rettangolo_1731" data-name="Rettangolo 1731" width="16" height="16" transform="translate(20 235.667)" fill="#39cb89"/>
-                                            </clipPath>
-                                        </defs>
-                                        <g id="Gruppo_di_maschere_44" data-name="Gruppo di maschere 44" transform="translate(-20 -235.667)" clip-path="url(#clip-path)">
-                                            <g id="Raggruppa_1094" transform="translate(20.001 237.875)">
-                                            <g id="Raggruppa_1784" data-name="Raggruppa 1784" transform="translate(0 0)">
-                                                <path class="icon-green" id="Tracciato_1302" data-name="Tracciato 1302" d="M4.351,7.9l7.228,4.033a.244.244,0,0,0,.072.029.123.123,0,0,0,.116,0c.029-.014.058-.014.072-.029L19.068,7.9a.827.827,0,0,0-.4-1.547H4.741a.824.824,0,0,0-.824.824A.806.806,0,0,0,4.351,7.9Z" transform="translate(-3.917 -6.349)" fill="#5bbaa1"/>
-                                                <path class="icon-green" id="Tracciato_1303" data-name="Tracciato 1303" d="M19.448,10.233a.357.357,0,0,0-.492-.13l-7.113,4.033a.4.4,0,0,1-.26,0L4.47,10.1a.357.357,0,0,0-.492.13h0a.4.4,0,0,0-.043.188v8.168a.358.358,0,0,0,.361.361H19.13a.358.358,0,0,0,.361-.361V10.421a.219.219,0,0,0-.043-.188Z" transform="translate(-3.921 -7.168)" fill="#5bbaa1"/>
-                                            </g>
-                                            </g>
-                                        </g>  
-                                    </svg>
+                                    <img    
+                                        class="mr-2"
+                                        src="../../../assets/images/events/email_green.svg"/>
                                 </span>
                             </div>
                             <div
                                 class="action-icon mr-2"
                                 data-toggle="tooltip"
+                                v-if="rule['mark']=='enrichment_green'"
                             >
                                 <span class="default">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 13.875 19.5">
-                                        <path class="icon-green" id="Icon_ionic-ios-calculator" data-name="Icon ionic-ios-calculator" d="M19.969,3.375H9.094a1.5,1.5,0,0,0-1.5,1.5v16.5a1.5,1.5,0,0,0,1.5,1.5H19.969a1.5,1.5,0,0,0,1.5-1.5V4.875A1.5,1.5,0,0,0,19.969,3.375Zm-.563,12.75v3.75A1.122,1.122,0,0,1,18.281,21h0a1.122,1.122,0,0,1-1.125-1.125v-3.75A1.122,1.122,0,0,1,18.281,15h0A1.122,1.122,0,0,1,19.406,16.125Zm0-3.75h0A1.122,1.122,0,0,1,18.281,13.5h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,19.406,12.375Zm-3.75,7.5h0A1.122,1.122,0,0,1,14.531,21h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,15.656,19.875Zm0-3.75h0a1.122,1.122,0,0,1-1.125,1.125h0a1.122,1.122,0,0,1-1.125-1.125h0A1.122,1.122,0,0,1,14.531,15h0A1.122,1.122,0,0,1,15.656,16.125Zm0-3.75h0A1.122,1.122,0,0,1,14.531,13.5h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,15.656,12.375Zm-3.75,7.5h0A1.122,1.122,0,0,1,10.781,21h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,11.906,19.875Zm0-3.75h0a1.122,1.122,0,0,1-1.125,1.125h0a1.122,1.122,0,0,1-1.125-1.125h0A1.122,1.122,0,0,1,10.781,15h0A1.122,1.122,0,0,1,11.906,16.125Zm0-3.75h0A1.122,1.122,0,0,1,10.781,13.5h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,11.906,12.375Zm-2.25-3.75V6.375a.752.752,0,0,1,.75-.75h8.25a.752.752,0,0,1,.75.75v2.25a.752.752,0,0,1-.75.75h-8.25A.752.752,0,0,1,9.656,8.625Z" transform="translate(-7.594 -3.375)" fill="#f79946"/>
-                                    </svg>
+                                    <img    
+                                        class="mr-2"
+                                        src="../../../assets/images/events/enrichment_green.svg"/>
                                 </span>
                             </div>
                             <div
                                 class="action-icon mr-2"
                                 data-toggle="tooltip"
+                                v-if="rule['mark']=='analytics_green'"
                             >
                                 <span class="default">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 13.875 19.5">
-                                        <path class="icon-green" id="Icon_ionic-ios-calculator" data-name="Icon ionic-ios-calculator" d="M19.969,3.375H9.094a1.5,1.5,0,0,0-1.5,1.5v16.5a1.5,1.5,0,0,0,1.5,1.5H19.969a1.5,1.5,0,0,0,1.5-1.5V4.875A1.5,1.5,0,0,0,19.969,3.375Zm-.563,12.75v3.75A1.122,1.122,0,0,1,18.281,21h0a1.122,1.122,0,0,1-1.125-1.125v-3.75A1.122,1.122,0,0,1,18.281,15h0A1.122,1.122,0,0,1,19.406,16.125Zm0-3.75h0A1.122,1.122,0,0,1,18.281,13.5h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,19.406,12.375Zm-3.75,7.5h0A1.122,1.122,0,0,1,14.531,21h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,15.656,19.875Zm0-3.75h0a1.122,1.122,0,0,1-1.125,1.125h0a1.122,1.122,0,0,1-1.125-1.125h0A1.122,1.122,0,0,1,14.531,15h0A1.122,1.122,0,0,1,15.656,16.125Zm0-3.75h0A1.122,1.122,0,0,1,14.531,13.5h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,15.656,12.375Zm-3.75,7.5h0A1.122,1.122,0,0,1,10.781,21h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,11.906,19.875Zm0-3.75h0a1.122,1.122,0,0,1-1.125,1.125h0a1.122,1.122,0,0,1-1.125-1.125h0A1.122,1.122,0,0,1,10.781,15h0A1.122,1.122,0,0,1,11.906,16.125Zm0-3.75h0A1.122,1.122,0,0,1,10.781,13.5h0a1.122,1.122,0,0,1-1.125-1.125h0a1.122,1.122,0,0,1,1.125-1.125h0A1.122,1.122,0,0,1,11.906,12.375Zm-2.25-3.75V6.375a.752.752,0,0,1,.75-.75h8.25a.752.752,0,0,1,.75.75v2.25a.752.752,0,0,1-.75.75h-8.25A.752.752,0,0,1,9.656,8.625Z" transform="translate(-7.594 -3.375)" fill="#f79946"/>
-                                    </svg>
+                                    <img    
+                                        class="mr-2"
+                                        src="../../../assets/images/events/analytics_green.svg"/>
                                 </span>
                             </div>
                             <div
                                 class="action-icon mr-2"
                                 data-toggle="tooltip"
+                                v-if="rule['mark']=='email_yellow'"
                             >
                                 <span class="default">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
-                                        <defs>
-                                            <clipPath id="clip-path">
-                                            <rect id="Rettangolo_1731" data-name="Rettangolo 1731" width="16" height="16" transform="translate(20 235.667)" fill="#39cb89"/>
-                                            </clipPath>
-                                        </defs>
-                                        <g id="Gruppo_di_maschere_44" data-name="Gruppo di maschere 44" transform="translate(-20 -235.667)" clip-path="url(#clip-path)">
-                                            <g id="Raggruppa_1094" transform="translate(20.001 237.875)">
-                                            <g id="Raggruppa_1784" data-name="Raggruppa 1784" transform="translate(0 0)">
-                                                <path class="icon-yellow" id="Tracciato_1302" data-name="Tracciato 1302" d="M4.351,7.9l7.228,4.033a.244.244,0,0,0,.072.029.123.123,0,0,0,.116,0c.029-.014.058-.014.072-.029L19.068,7.9a.827.827,0,0,0-.4-1.547H4.741a.824.824,0,0,0-.824.824A.806.806,0,0,0,4.351,7.9Z" transform="translate(-3.917 -6.349)" fill="#f79946"/>
-                                                <path class="icon-yellow" id="Tracciato_1303" data-name="Tracciato 1303" d="M19.448,10.233a.357.357,0,0,0-.492-.13l-7.113,4.033a.4.4,0,0,1-.26,0L4.47,10.1a.357.357,0,0,0-.492.13h0a.4.4,0,0,0-.043.188v8.168a.358.358,0,0,0,.361.361H19.13a.358.358,0,0,0,.361-.361V10.421a.219.219,0,0,0-.043-.188Z" transform="translate(-3.921 -7.168)" fill="#f79946"/>
-                                            </g>
-                                            </g>
-                                        </g>  
-                                    </svg>
+                                    <img    
+                                        class="mr-2"
+                                        src="../../../assets/images/events/email_yellow.svg"/>
                                 </span>
                             </div>
+                            <div
+                                class="action-icon mr-2"
+                                data-toggle="tooltip"
+                                v-if="rule['mark']=='enrichment_yellow'"
+                            >
+                                <span class="default">
+                                    <img    
+                                        class="mr-2"
+                                        src="../../../assets/images/events/enrichment_yellow.svg"/>
+                                </span>
+                            </div>
+                            <div
+                                class="action-icon mr-2"
+                                data-toggle="tooltip"
+                                v-if="rule['mark']=='analytics_yellow'"
+                            >
+                                <span class="default">
+                                    <img    
+                                        class="mr-2"
+                                        src="../../../assets/images/events/analytics_yellow.svg"/>
+                                </span>
+                            </div>
+                            <div
+                                class="action-icon mr-2"
+                                data-toggle="tooltip"
+                                v-if="rule['mark']=='reward_yellow'"
+                            >
+                                <span class="default">
+                                    <img    
+                                        class="mr-2"
+                                        src="../../../assets/images/events/reward_yellow.svg"/>
+                                </span>
+                            </div>
+                        </div>
                         </div>
                     </template>
                 </b-table>
@@ -168,6 +189,21 @@
         </div>
 
         <div>
+            <div v-if="isShowCloseBtn"
+                class="d-flex  justify-content-end"
+            >
+                <div class="justify-content-end"
+                    
+                >
+                    <b-button
+                        type="button"
+                        variant="brand"
+                        size="lg"
+                        @click="closeCharts"
+                        >Close</b-button
+                    >
+                </div>
+            </div>
             <Event
                 class="show-published"
                 v-bind:class="{
@@ -229,15 +265,7 @@
                     </date-range-picker>
                 </div>
 
-                <div>
-                    <b-button
-                        type="button"
-                        variant="brand"
-                        size="lg"
-                        @click="closeCharts"
-                        >Close</b-button
-                    >
-                </div>
+                
             </div>
 
             <b-card class="pt-4 mt-3 mb-4">
@@ -280,7 +308,7 @@
                 style="margin-top: 10px"
             >
             </div>
-            <TreeView class="content-json"/>
+            <!-- <TreeView class="content-json"/> -->
         </div>
     </div>
 </template>
@@ -348,6 +376,7 @@ export default {
                 ]
             }
         },
+        isShowCloseBtn: false,
         isShowCharts: false,
         isShowJson: false,
         chartData: {
@@ -430,6 +459,12 @@ export default {
                         "project":"MyShop.com",
                         "status":"published",
                         "lastSeen":"2021-12-15T07:01:42.909Z",
+                        "rules": [
+                            {'mark':'email_green'}, 
+                            {'mark':'enrichment_green'},
+                            {'mark':'analytics_green'},
+                            {'mark':'reward_yellow'}
+                        ]
                     },
                     {
                         "_id":"61b992d61b1979001d18baa1",
@@ -438,6 +473,10 @@ export default {
                         "project":"",
                         "status":"published",
                         "lastSeen":"2021-12-15T07:01:42.909Z",
+                        "rules": [
+                            {'mark':'email_yellow'}, 
+                            {'mark':'reward_yellow'}
+                        ]
                     },
                     {
                         "_id":"61b992d61b1979001d18baa2",
@@ -446,6 +485,11 @@ export default {
                         "project":"Landing Page",
                         "status":"published",
                         "lastSeen":"2021-12-15T07:01:42.909Z",
+                        "rules": [
+                            {'mark':'email_green'}, 
+                            {'mark':'enrichment_yellow'},
+                            {'mark':'reward_yellow'}
+                        ]
                     },
                     {
                         "_id":"61b992d61b1979001d18baa3",
@@ -454,6 +498,11 @@ export default {
                         "project":"myrefprog",
                         "status":"published",
                         "lastSeen":"2021-12-15T07:01:42.909Z",
+                        "rules": [
+                            {'mark':'enrichment_green'}, 
+                            {'mark':'analytics_yellow'},
+                            {'mark':'reward_yellow'}
+                        ]
                     }
                ]
             },
@@ -507,6 +556,7 @@ export default {
             console.log('--------------------Validate------------------');
         },
         async handleClickEventTableRow(item) {
+            this.isShowCloseBtn = true;
             this.isShowPublishedTreeDiagram = true;
             this.isShowUnpublishedTreeDiagram = false;
             this.statusPublished = true;
@@ -514,6 +564,7 @@ export default {
             this.isShowJson = false;
         },
         async handleDblClickEventTableRow(item) {
+            this.isShowCloseBtn = true;
             this.isShowPublishedTreeDiagram = false;
             this.isShowUnpublishedTreeDiagram = true;
             this.isShowCharts = false;
@@ -626,10 +677,19 @@ export default {
             this.isShowJson = true;
         },
         closeCharts() {
-            if ( this.isShowCharts )
+            if ( this.isShowPublishedTreeDiagram || this.isShowUnpublishedTreeDiagram) {
+                this.isShowCloseBtn = false;
+                this.isShowPublishedTreeDiagram = false;
+                this.isShowUnpublishedTreeDiagram = false;
+            }
+
+            if ( this.isShowCharts ) {
                 this.isShowPublishedTreeDiagram = true;
-            else if ( this.isShowJson )
+                this.isShowUnpublishedTreeDiagram = false;
+            } else if ( this.isShowJson ) {
                 this.isShowUnpublishedTreeDiagram = true;
+                this.isShowPublishedTreeDiagram = false;
+            }
             this.isShowCharts = false;
             this.isShowJson = false;
         },

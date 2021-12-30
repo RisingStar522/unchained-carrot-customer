@@ -20,7 +20,7 @@
                 />
             </mask>
         </defs>
-        <image
+        <!-- <image
             mask="url(#svg-mask)"
             :x="halfSize - radius"
             :y="topHeight - radius"
@@ -37,10 +37,10 @@
             :width="topHeight"
             xlink:href="https://s3-ap-southeast-2.amazonaws.com/kruties-diagrams/misc/guardians-of-the-galaxy.jpg"
         >
-        </image>
+        </image> -->
 
-        <circle class="circle" :r="radius" :cx="halfSize" :cy="topHeight">
-        </circle>
+        <!-- <circle class="circle" :r="radius" :cx="halfSize" :cy="topHeight">
+        </circle> -->
         <text class="title" :x="halfSize" :y="topHeight / 4">
             {{ title }}
         </text>

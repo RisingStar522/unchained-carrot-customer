@@ -4,19 +4,19 @@
       <svg xmlns="http://www.w3.org/2000/svg" :view-box.camel="viewbox">
         <g>
           <g>
-            <rect :x="halfSize-770" :y="topHeight-50" :height="100" :width="480" style="fill: #FFFFFF"/>
-            <text :x="halfSize-670"  :y="topHeight-10">
+            <rect :x="halfSize-770" :y="topHeight-70" :height="140" :width="480" style="fill: #FFFFFF"/>
+            <text :x="halfSize-670"  :y="topHeight-30">
                 <tspan font-size="18px" font-weight="bold">
                     {{ name }}
                 </tspan>
             </text>
             
-            <text :x="halfSize-685"  :y="topHeight+25">
+            <text :x="halfSize-685"  :y="topHeight+5">
                 <tspan font-size="18px">
                     {{ project }}
                 </tspan>
             </text>
-            <text :x="halfSize-390"  :y="topHeight-20">
+            <text :x="halfSize-390"  :y="topHeight-30">
                 <tspan font-size="20px" font-weight="bold">
                     Order Placed
                 </tspan>
@@ -31,9 +31,9 @@
             </g>
             
             <g >
-            <image id="show-json" ref="child" @click="showJson" :x="halfSize-430" :y="topHeight+12" width="30"  xlink:href="https://img.icons8.com/fluency-systems-filled/48/000000/json.png"/>
+            <image id="show-json" ref="child" @click="showJson" :x="halfSize-430" :y="topHeight+22" width="30"  xlink:href="https://img.icons8.com/fluency-systems-filled/48/000000/json.png"/>
             </g>
-            <image id="show-growth" :x="halfSize-370" :y="topHeight+12" width="30" @click="showCharts" xlink:href="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-growth-infographic-elements-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-1.png"/>
+            <image id="show-growth" :x="halfSize-370" :y="topHeight+22" width="30" @click="showCharts" xlink:href="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-growth-infographic-elements-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-1.png"/>
             <text :x="halfSize-370"  :y="topHeight+6">
                 <tspan font-size="18px">
                     {{ lastSeen }}
@@ -186,7 +186,7 @@ export default {
       return this.size * 0.5
     },
     distance() {
-      return Math.round(this.width / this.items.length)
+      return Math.round(this.width * 1.5 / this.items.length)
     },
     radius() {
       return this.topHeight * 0.5
@@ -213,6 +213,7 @@ export default {
 }
 .line {
   stroke: #2F3380;
+  opacity: 0.27;
   fill: none;
   stroke-width: 3;
   stroke-linecap: round;
@@ -224,7 +225,7 @@ export default {
 .icon-green {
  fill: #39cb89;
 }
-.icon-yello {
+.icon-yellow {
  fill: #f79946;
 }
 path {
