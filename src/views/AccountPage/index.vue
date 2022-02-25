@@ -17,7 +17,12 @@
                 </div>
                 <div>
                     <b-button variant="outline-primary">Cancel</b-button>
-                    <b-button variant="primary ml-4">Save</b-button>
+                    <b-button
+                        variant="primary ml-4"
+                        type="submit"
+                        :form="FORM_TYPE[selectedButton]"
+                        >Save</b-button
+                    >
                 </div>
             </div>
 
@@ -35,9 +40,11 @@
                     >
                 </b-button-group>
 
-                <organization
-                    v-if="selectedButton === ACCOUNT_TYPE.ORGANIZATION"
-                />
+                <b-form id="organization-form">
+                    <organization
+                        v-if="selectedButton === ACCOUNT_TYPE.ORGANIZATION"
+                    />
+                </b-form>
                 <employee v-if="selectedButton === ACCOUNT_TYPE.EMPLOYEES" />
                 <data-export
                     v-if="selectedButton === ACCOUNT_TYPE.DATA_EXPORTS"
@@ -45,7 +52,10 @@
                 <certificate
                     v-if="selectedButton === ACCOUNT_TYPE.CERTIFICATES"
                 />
+                <wallet v-if="selectedButton === ACCOUNT_TYPE.WALLET" />
                 <domain v-if="selectedButton === ACCOUNT_TYPE.DOMAINS" />
+                <resources v-if="selectedButton === ACCOUNT_TYPE.RESOURCES" />
+                <api-keys v-if="selectedButton === ACCOUNT_TYPE.API_KEYS" />
                 <subscription
                     v-if="selectedButton === ACCOUNT_TYPE.SUBSCRIPTIONS"
                 />
@@ -58,7 +68,7 @@
 <script>
 import moment from 'moment';
 import Loading from '../../components/Loading.vue';
-import { BUTTON_GROUP, ACCOUNT_TYPE } from './constant';
+import { BUTTON_GROUP, ACCOUNT_TYPE, FORM_TYPE } from './constant';
 import Organization from './tabs/Organization.vue';
 import Employee from './tabs/Employee.vue';
 import DataExport from './tabs/DataExport.vue';
@@ -66,6 +76,9 @@ import Certificate from './tabs/Certificate.vue';
 import Domain from './tabs/Domain.vue';
 import Subscription from './tabs/Subscription.vue';
 import Billing from './tabs/Billing.vue';
+import Wallet from './tabs/Wallet.vue';
+import Resources from './tabs/Resources.vue';
+import ApiKeys from './tabs/ApiKeys.vue';
 
 export default {
     name: 'organization-home',
@@ -73,7 +86,8 @@ export default {
         loading: false,
         buttonGroup: BUTTON_GROUP,
         selectedButton: ACCOUNT_TYPE.ORGANIZATION,
-        ACCOUNT_TYPE
+        ACCOUNT_TYPE,
+        FORM_TYPE
     }),
     components: {
         Loading,
@@ -83,7 +97,10 @@ export default {
         Certificate,
         Subscription,
         Billing,
-        Domain
+        Domain,
+        Wallet,
+        Resources,
+        ApiKeys
     },
     computed: {},
     methods: {

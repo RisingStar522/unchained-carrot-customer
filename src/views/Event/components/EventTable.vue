@@ -18,21 +18,37 @@
                                 v-model="selectedOrderByOption"
                             >
                                 <option selected value="lastSeen">
-                                    LAST SEEN
+                                    Last Seen
+                                </option>
+                                <option value="projectId">
+                                    Project
+                                </option>
+                                <option value="event">
+                                    Name
                                 </option>
                             </b-form-select>
                         </div>
                     </div>
                     <div class="d-flex align-items-center ml-4">
-                        <div class="">
+                        <!-- <div class="">
                             <b-link class="mr-4" @click="refreshEvent">
                                 <img
                                     src="../../../assets/icons/refresh_icon.svg"
                                 />
                             </b-link>
-                        </div>
+                        </div> -->
+                        <b-form-input
+                    v-model="search"
+                    @change="getLatestEvents()"
+                    id="tag-search-input"
+                    type="search"
+                    placeholder="Search by name...."
+                    size="lg"
+                    autocomplete="off"
+                ></b-form-input>
                     </div>
                 </div>
+              
 
                 <b-table
                     hover
@@ -47,13 +63,13 @@
                     ref="eventtable"
                 >
                     <template v-slot:cell(name)="data">
-                        <div class="pl-2">
+                        <div class="pl-1">
                             {{ data.value }}
                         </div>
                     </template>
                     <template v-slot:cell(source)="data">
                         <div class="text-center">
-                            {{data.value}}
+                            {{ data.value }}
                         </div>
                     </template>
                     <template v-slot:cell(project)="data">
@@ -66,7 +82,7 @@
                             {{ dayjs(data.value).format('DD-MM-YYYY hh:mm') }}
                         </div>
                     </template>
-                    <template v-slot:cell(rules) = "data">
+                    <template v-slot:cell(rules)="data">
                         <div
                             class="
                                 d-flex
@@ -74,91 +90,98 @@
                                 justify-content-left
                             "
                         >
-                        <div 
-                        class="action-icon mr-2"
+                            <div
+                                class="action-icon mr-2"
                                 data-toggle="tooltip"
                                 v-for="rule in data.value"
                                 :value="rule['mark']"
                                 :key="rule['mark']"
-                        >
-                            <div
-                                class="action-icon mr-2"
-                                data-toggle="tooltip"
-                                v-if="rule['mark']=='email_green'"
                             >
-                                <span class="default">
-                                    <img    
-                                        class="mr-2"
-                                        src="../../../assets/images/events/email_green.svg"/>
-                                </span>
+                                <div
+                                    class="action-icon mr-2"
+                                    data-toggle="tooltip"
+                                    v-if="rule['mark'] == 'email_green'"
+                                >
+                                    <span class="default">
+                                        <img
+                                            class="mr-2"
+                                            src="../../../assets/images/events/email_green.svg"
+                                        />
+                                    </span>
+                                </div>
+                                <div
+                                    class="action-icon mr-2"
+                                    data-toggle="tooltip"
+                                    v-if="rule['mark'] == 'enrichment_green'"
+                                >
+                                    <span class="default">
+                                        <img
+                                            class="mr-2"
+                                            src="../../../assets/images/events/enrichment_green.svg"
+                                        />
+                                    </span>
+                                </div>
+                                <div
+                                    class="action-icon mr-2"
+                                    data-toggle="tooltip"
+                                    v-if="rule['mark'] == 'analytics_green'"
+                                >
+                                    <span class="default">
+                                        <img
+                                            class="mr-2"
+                                            src="../../../assets/images/events/analytics_green.svg"
+                                        />
+                                    </span>
+                                </div>
+                                <div
+                                    class="action-icon mr-2"
+                                    data-toggle="tooltip"
+                                    v-if="rule['mark'] == 'email_yellow'"
+                                >
+                                    <span class="default">
+                                        <img
+                                            class="mr-2"
+                                            src="../../../assets/images/events/email_yellow.svg"
+                                        />
+                                    </span>
+                                </div>
+                                <div
+                                    class="action-icon mr-2"
+                                    data-toggle="tooltip"
+                                    v-if="rule['mark'] == 'enrichment_yellow'"
+                                >
+                                    <span class="default">
+                                        <img
+                                            class="mr-2"
+                                            src="../../../assets/images/events/enrichment_yellow.svg"
+                                        />
+                                    </span>
+                                </div>
+                                <div
+                                    class="action-icon mr-2"
+                                    data-toggle="tooltip"
+                                    v-if="rule['mark'] == 'analytics_yellow'"
+                                >
+                                    <span class="default">
+                                        <img
+                                            class="mr-2"
+                                            src="../../../assets/images/events/analytics_yellow.svg"
+                                        />
+                                    </span>
+                                </div>
+                                <div
+                                    class="action-icon mr-2"
+                                    data-toggle="tooltip"
+                                    v-if="rule['mark'] == 'reward_yellow'"
+                                >
+                                    <span class="default">
+                                        <img
+                                            class="mr-2"
+                                            src="../../../assets/images/events/reward_yellow.svg"
+                                        />
+                                    </span>
+                                </div>
                             </div>
-                            <div
-                                class="action-icon mr-2"
-                                data-toggle="tooltip"
-                                v-if="rule['mark']=='enrichment_green'"
-                            >
-                                <span class="default">
-                                    <img    
-                                        class="mr-2"
-                                        src="../../../assets/images/events/enrichment_green.svg"/>
-                                </span>
-                            </div>
-                            <div
-                                class="action-icon mr-2"
-                                data-toggle="tooltip"
-                                v-if="rule['mark']=='analytics_green'"
-                            >
-                                <span class="default">
-                                    <img    
-                                        class="mr-2"
-                                        src="../../../assets/images/events/analytics_green.svg"/>
-                                </span>
-                            </div>
-                            <div
-                                class="action-icon mr-2"
-                                data-toggle="tooltip"
-                                v-if="rule['mark']=='email_yellow'"
-                            >
-                                <span class="default">
-                                    <img    
-                                        class="mr-2"
-                                        src="../../../assets/images/events/email_yellow.svg"/>
-                                </span>
-                            </div>
-                            <div
-                                class="action-icon mr-2"
-                                data-toggle="tooltip"
-                                v-if="rule['mark']=='enrichment_yellow'"
-                            >
-                                <span class="default">
-                                    <img    
-                                        class="mr-2"
-                                        src="../../../assets/images/events/enrichment_yellow.svg"/>
-                                </span>
-                            </div>
-                            <div
-                                class="action-icon mr-2"
-                                data-toggle="tooltip"
-                                v-if="rule['mark']=='analytics_yellow'"
-                            >
-                                <span class="default">
-                                    <img    
-                                        class="mr-2"
-                                        src="../../../assets/images/events/analytics_yellow.svg"/>
-                                </span>
-                            </div>
-                            <div
-                                class="action-icon mr-2"
-                                data-toggle="tooltip"
-                                v-if="rule['mark']=='reward_yellow'"
-                            >
-                                <span class="default">
-                                    <img    
-                                        class="mr-2"
-                                        src="../../../assets/images/events/reward_yellow.svg"/>
-                                </span>
-                            </div>
-                        </div>
                         </div>
                     </template>
                 </b-table>
@@ -189,12 +212,8 @@
         </div>
 
         <div>
-            <div v-if="isShowCloseBtn"
-                class="d-flex  justify-content-end"
-            >
-                <div class="justify-content-end"
-                    
-                >
+            <div v-if="isShowCloseBtn" class="d-flex  justify-content-end">
+                <div class="justify-content-end">
                     <b-button
                         type="button"
                         variant="brand"
@@ -210,9 +229,9 @@
                     hide: isShowPublishedTreeDiagram === false,
                     show: isShowPublishedTreeDiagram === true
                 }"
-                :name="name"
-                :project="project"
-                :lastSeen="lastSeen"
+                :name="this.selectedRow.name"
+                :project="this.selectedRow.project"
+                :lastSeen="this.lastSeenDate"
                 :statusPublished="statePublished"
             ></Event>
 
@@ -246,7 +265,12 @@
                         <h2 class="text-brand mb-0">
                             Charts
                         </h2>
-                        <h4 class="text-sm p-0 subtile-color" style="font-size: 10px">Name of event</h4>
+                        <h4
+                            class="text-sm p-0 subtile-color"
+                            style="font-size: 10px"
+                        >
+                            Name of event
+                        </h4>
                     </div>
                     <date-range-picker
                         ref="picker"
@@ -264,8 +288,6 @@
                     >
                     </date-range-picker>
                 </div>
-
-                
             </div>
 
             <b-card class="pt-4 mt-3 mb-4">
@@ -290,9 +312,7 @@
                     </div>
                 </div>
             </b-card>
-
         </div>
-
 
         <div v-if="isShowJson" class="container-json">
             <EventChartJson
@@ -306,8 +326,7 @@
             <div
                 class="d-flex  justify-content-between align-items-center mb-3"
                 style="margin-top: 10px"
-            >
-            </div>
+            ></div>
             <!-- <TreeView class="content-json"/> -->
         </div>
     </div>
@@ -316,12 +335,14 @@
 <script>
 import DateRangePicker from 'vue2-daterange-picker';
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
-import TreeView from './event/components/TreeView.vue'
+import TreeView from './event/components/TreeView.vue';
 import dayjs from 'dayjs';
 
 import BarChart from './charts/Bar.vue';
 import Event from './event/Event.vue';
 import EventChartJson from './event/EventChartJson.vue';
+
+import CustomerEventAPI from '../../../api/CustomerEventAPI';
 
 import _ from 'lodash';
 
@@ -335,14 +356,24 @@ export default {
         TreeView
     },
     data: () => ({
-        treeData: [{"id": 2, "name": "Venus" , "children": [{"id": 3, "name": "Neptune"}, {"id": 4, "name": "Stratus"} ] } ],
-        itemIndex: "1",
-        itemForEvent: {        
-          address: 'name'
-        },
+        treeData: [
+            {
+                id: 2,
+                name: 'Venus',
+                children: [
+                    { id: 3, name: 'Neptune' },
+                    { id: 4, name: 'Stratus' }
+                ]
+            }
+        ],
+        itemIndex: '1',
+        selectedRow: {},
+        itemsForEvent: [],
         eventTitle: 'Name of the event',
         totalClicks: 6587,
         hoverItemId: '',
+        search : '',
+        lastSeenDate: '',
         options: {
             legend: {
                 display: false
@@ -406,7 +437,7 @@ export default {
                 sortable: false,
                 label: 'SOURCE',
                 thStyle: {
-                    paddingLeft: '40px'
+                    textAlign: 'center'
                 }
             },
             {
@@ -446,69 +477,9 @@ export default {
         open: 'right',
         showDropdowns: true,
         linkedCalendars: true,
-        selectedChartId: '',
+        selectedChartId: ''
     }),
     computed: {
-        itemsForEvent: {
-            get: function() {
-               return [
-                    {
-                        "_id":"61b992d61b1979001d18baa7",
-                        "name":"asdf",
-                        "source":"woocommerce",
-                        "project":"MyShop.com",
-                        "status":"published",
-                        "lastSeen":"2021-12-15T07:01:42.909Z",
-                        "rules": [
-                            {'mark':'email_green'}, 
-                            {'mark':'enrichment_green'},
-                            {'mark':'analytics_green'},
-                            {'mark':'reward_yellow'}
-                        ]
-                    },
-                    {
-                        "_id":"61b992d61b1979001d18baa1",
-                        "name":"Coupon Redeemed",
-                        "source":"countr",
-                        "project":"",
-                        "status":"published",
-                        "lastSeen":"2021-12-15T07:01:42.909Z",
-                        "rules": [
-                            {'mark':'email_yellow'}, 
-                            {'mark':'reward_yellow'}
-                        ]
-                    },
-                    {
-                        "_id":"61b992d61b1979001d18baa2",
-                        "name":"Survey completed",
-                        "source":"Unchained Carrot",
-                        "project":"Landing Page",
-                        "status":"published",
-                        "lastSeen":"2021-12-15T07:01:42.909Z",
-                        "rules": [
-                            {'mark':'email_green'}, 
-                            {'mark':'enrichment_yellow'},
-                            {'mark':'reward_yellow'}
-                        ]
-                    },
-                    {
-                        "_id":"61b992d61b1979001d18baa3",
-                        "name":"Referral Confirmed",
-                        "source":"ReferraledByMe",
-                        "project":"myrefprog",
-                        "status":"published",
-                        "lastSeen":"2021-12-15T07:01:42.909Z",
-                        "rules": [
-                            {'mark':'enrichment_green'}, 
-                            {'mark':'analytics_yellow'},
-                            {'mark':'reward_yellow'}
-                        ]
-                    }
-               ]
-            },
-            set: function() {}
-        },
-
         dateRange() {
             const date = new Date();
             const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -536,26 +507,81 @@ export default {
             return this.statusPublished;
         }
     },
-    mounted() {
+    async mounted() {
         this.getChartData();
+        this.getLatestEvents();
     },
     methods: {
+        getDateLastSeen(date) {
+            let newDate = new Date(date);
+            newDate =
+                newDate.getDate() +
+                '-' +
+                (newDate.getMonth() + 1) +
+                '-' +
+                newDate.getFullYear() +
+                ' ' +
+                newDate.getHours() +
+                ':' +
+                newDate.getMinutes();
+            return newDate;
+        },
+        async getLatestEvents() {
+            this.itemsForEvent = [];
+            const customerEvent = new CustomerEventAPI();
+            let filter = { event: { $regex: this.search } };
+            let sort = {
+                [this.selectedOrderByOption]: 1
+            };
+            let query = {
+                filter: 'filter=' + JSON.stringify(JSON.stringify(filter)),
+                sort_by: '&sort_by=' + JSON.stringify(JSON.stringify(sort)),
+                limit: '&limit=' + this.perPageForEvent,
+                offset:
+                    '&offset=' +
+                    (this.currentPageForEvent - 1) * this.perPageForEvent
+            };
+
+            console.log(query);
+            const events = await customerEvent.getCustomerEvents(query);
+
+            for (var i = 0; i < events.result.length; i++) {
+                let newEv = {
+                    _id: events.result[i]._id,
+                    name: events.result[i].event,
+                    source: 'Unchained Carrot',
+                    project: events.result[i].projectId,
+                    status: 'published',
+                    lastSeen: events.result[i].lastSeen,
+                    rules: [
+                        { mark: 'email_green' },
+                        { mark: 'enrichment_yellow' },
+                        { mark: 'reward_yellow' }
+                    ]
+                };
+                this.itemsForEvent.push(newEv);
+            }
+            this.EventTotal = events.total;
+        },
         changeStateJson() {
-          this.isShowJson = true;
-          this.isShowCharts = false;
-          this.isShowPublishedTreeDiagram = false;
-          this.isShowUnpublishedTreeDiagram = false;
+            this.isShowJson = true;
+            this.isShowCharts = false;
+            this.isShowPublishedTreeDiagram = false;
+            this.isShowUnpublishedTreeDiagram = false;
         },
         changeStateCharts() {
-          this.isShowJson = false;
-          this.isShowCharts = true;
-          this.isShowPublishedTreeDiagram = false;
-          this.isShowUnpublishedTreeDiagram = false;
+            this.isShowJson = false;
+            this.isShowCharts = true;
+            this.isShowPublishedTreeDiagram = false;
+            this.isShowUnpublishedTreeDiagram = false;
         },
         validate() {
             console.log('--------------------Validate------------------');
         },
         async handleClickEventTableRow(item) {
+            this.selectedRow = item;
+            console.log(item);
+            this.lastSeenDate = this.getDateLastSeen(this.selectedRow.lastSeen);
             this.isShowCloseBtn = true;
             this.isShowPublishedTreeDiagram = true;
             this.isShowUnpublishedTreeDiagram = false;
@@ -571,8 +597,7 @@ export default {
             this.isShowJson = false;
             this.statusPublished = false;
         },
-        async refreshEvent() {
-        },
+        async refreshEvent() {},
         getChartData(eventId = 0) {
             try {
                 const data = {
@@ -617,7 +642,7 @@ export default {
                             hour: 8,
                             events: 1
                         }
-                    ],
+                    ]
                 };
                 const monthNames = [
                     'January',
@@ -672,21 +697,24 @@ export default {
             this.eventTitle = item.title;
 
             this.isShowPublishedTreeDiagram = false;
-            this.isShowUnpublishedTreeDiagram = false;            
-            this.isShowCharts = false
+            this.isShowUnpublishedTreeDiagram = false;
+            this.isShowCharts = false;
             this.isShowJson = true;
         },
         closeCharts() {
-            if ( this.isShowPublishedTreeDiagram || this.isShowUnpublishedTreeDiagram) {
+            if (
+                this.isShowPublishedTreeDiagram ||
+                this.isShowUnpublishedTreeDiagram
+            ) {
                 this.isShowCloseBtn = false;
                 this.isShowPublishedTreeDiagram = false;
                 this.isShowUnpublishedTreeDiagram = false;
             }
 
-            if ( this.isShowCharts ) {
+            if (this.isShowCharts) {
                 this.isShowPublishedTreeDiagram = true;
                 this.isShowUnpublishedTreeDiagram = false;
-            } else if ( this.isShowJson ) {
+            } else if (this.isShowJson) {
                 this.isShowUnpublishedTreeDiagram = true;
                 this.isShowPublishedTreeDiagram = false;
             }
@@ -704,10 +732,12 @@ export default {
         },
         async handleEventChange(value) {
             this.currentPageForEvent = value;
+            await this.getLatestEvents();
         },
         async handleEventPageSizeChange(size) {
             this.perPageForEvent = size;
             this.currentPageForEvent = 1;
+            await this.getLatestEvents();
         },
         dateFormat(classes, date) {
             if (!classes.disabled) {
@@ -718,8 +748,11 @@ export default {
         dayjs(...args) {
             return dayjs(...args);
         },
-        async sortEvent() {
-        },
+        async sortEvent(event) {
+            this.selectedOrderByOption = event;
+            console.log(event);
+            await this.getLatestEvents();
+        }
     }
 };
 </script>
@@ -804,7 +837,6 @@ table {
         }
     }
 }
-
 
 .container-json {
     position: relative;

@@ -4,10 +4,7 @@
             <b-spinner label="Loading..."></b-spinner>
         </div>
         <div v-else>
-            <div
-                class="event-table-container"
-                v-if="itemsForEvent.length > 0"
-            >
+            <div class="event-table-container" v-if="itemsForEvent.length > 0">
                 <EventTable />
             </div>
         </div>
@@ -27,10 +24,10 @@ export default {
     }),
     computed: {
         itemsForEvent() {
-            this.getAllEvent = [{a: 'a'},{b: 'b'}]
+            this.getAllEvent = [{ a: 'a' }, { b: 'b' }];
             return JSON.parse(JSON.stringify(this.getAllEvent));
         }
-    },
+    }
 };
 </script>
 

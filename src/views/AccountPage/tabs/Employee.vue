@@ -18,7 +18,7 @@
                 <div
                     class="d-flex align-items-center ml-auto"
                     @click="handleShowModalAddEmployee"
-                    style="cursor: pointer;"
+                    style="cursor: pointer"
                 >
                     <div class="mr-5">
                         <span>
@@ -30,12 +30,12 @@
                                 preserveAspectRatio="xMidYMid meet"
                                 viewBox="0 0 24 24"
                                 style="
-                                                -ms-transform: rotate(360deg);
-                                                -webkit-transform: rotate(
-                                                    360deg
-                                                );
-                                                transform: rotate(360deg);
-                                            "
+                                    -ms-transform: rotate(360deg);
+                                    -webkit-transform: rotate(360deg);
+                                    transform: rotate(360deg);
+                                    width: 30px;
+                                    height: 30px
+                                "
                             >
                                 <path
                                     d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m1 5h-2v4H7v2h4v4h2v-4h4v-2h-4V7z"
@@ -87,319 +87,7 @@
                     </div>
                 </template>
                 <template v-slot:cell(action)="data">
-                    <div
-                        class="
-                                    d-flex
-                                    align-items-center
-                                    justify-content-end
-                                "
-                    >
-                        <b-link
-                            class="action-icon mr-2"
-                            @click.prevent="showChartForRoute(data.item)"
-                            data-toggle="tooltip"
-                            title="Show Chart"
-                        >
-                            <template
-                                v-if="
-                                    (selectedChartId && isChart) &
-                                        (data.item._id === selectedChartId)
-                                "
-                            >
-                                <span class="default">
-                                    <svg
-                                        id="Livello_1"
-                                        data-name="Livello 1"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 150 150"
-                                    >
-                                        <g
-                                            id="noun_growth_3025764-2"
-                                            data-name="noun growth 3025764-2"
-                                        >
-                                            <g
-                                                id="Raggruppa_1052-2"
-                                                data-name="Raggruppa 1052-2"
-                                            >
-                                                <rect
-                                                    id="Rettangolo_1524-2"
-                                                    data-name="Rettangolo 1524-2"
-                                                    x="11.92"
-                                                    y="93.52"
-                                                    width="25.62"
-                                                    height="46.47"
-                                                    style="fill: #f49848"
-                                                />
-                                                <rect
-                                                    id="Rettangolo_1525-2"
-                                                    data-name="Rettangolo 1525-2"
-                                                    x="53.57"
-                                                    y="68.63"
-                                                    width="25.62"
-                                                    height="71.36"
-                                                    style="fill: #f49848"
-                                                />
-                                                <path
-                                                    id="Tracciato_867-2"
-                                                    data-name="Tracciato 867-2"
-                                                    d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z"
-                                                    style="fill: #f49848"
-                                                />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </span>
-                                <span class="hover">
-                                    <svg
-                                        id="Livello_1"
-                                        data-name="Livello 1"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 150 150"
-                                    >
-                                        <g
-                                            id="noun_growth_3025764-2"
-                                            data-name="noun growth 3025764-2"
-                                        >
-                                            <g
-                                                id="Raggruppa_1052-2"
-                                                data-name="Raggruppa 1052-2"
-                                            >
-                                                <rect
-                                                    id="Rettangolo_1524-2"
-                                                    data-name="Rettangolo 1524-2"
-                                                    x="11.92"
-                                                    y="93.52"
-                                                    width="25.62"
-                                                    height="46.47"
-                                                    style="fill: #f49848"
-                                                />
-                                                <rect
-                                                    id="Rettangolo_1525-2"
-                                                    data-name="Rettangolo 1525-2"
-                                                    x="53.57"
-                                                    y="68.63"
-                                                    width="25.62"
-                                                    height="71.36"
-                                                    style="fill: #f49848"
-                                                />
-                                                <path
-                                                    id="Tracciato_867-2"
-                                                    data-name="Tracciato 867-2"
-                                                    d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z"
-                                                    style="fill: #f49848"
-                                                />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </span>
-                            </template>
-
-                            <template v-else>
-                                <span class="default">
-                                    <svg
-                                        id="Livello_1"
-                                        data-name="Livello 1"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 150 150"
-                                    >
-                                        <g
-                                            id="noun_growth_3025764-2"
-                                            data-name="noun growth 3025764-2"
-                                        >
-                                            <g
-                                                id="Raggruppa_1052-2"
-                                                data-name="Raggruppa 1052-2"
-                                            >
-                                                <rect
-                                                    id="Rettangolo_1524-2"
-                                                    data-name="Rettangolo 1524-2"
-                                                    x="11.92"
-                                                    y="93.52"
-                                                    width="25.62"
-                                                    height="46.47"
-                                                    style="fill: #4d505d"
-                                                />
-                                                <rect
-                                                    id="Rettangolo_1525-2"
-                                                    data-name="Rettangolo 1525-2"
-                                                    x="53.57"
-                                                    y="68.63"
-                                                    width="25.62"
-                                                    height="71.36"
-                                                    style="fill: #4d505d"
-                                                />
-                                                <path
-                                                    id="Tracciato_867-2"
-                                                    data-name="Tracciato 867-2"
-                                                    d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z"
-                                                    style="fill: #4d505d"
-                                                />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </span>
-                                <span class="hover">
-                                    <svg
-                                        id="Livello_1"
-                                        data-name="Livello 1"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 150 150"
-                                    >
-                                        <g
-                                            id="noun_growth_3025764-2"
-                                            data-name="noun growth 3025764-2"
-                                        >
-                                            <g
-                                                id="Raggruppa_1052-2"
-                                                data-name="Raggruppa 1052-2"
-                                            >
-                                                <rect
-                                                    id="Rettangolo_1524-2"
-                                                    data-name="Rettangolo 1524-2"
-                                                    x="11.92"
-                                                    y="93.52"
-                                                    width="25.62"
-                                                    height="46.47"
-                                                    style="fill: #f49848"
-                                                />
-                                                <rect
-                                                    id="Rettangolo_1525-2"
-                                                    data-name="Rettangolo 1525-2"
-                                                    x="53.57"
-                                                    y="68.63"
-                                                    width="25.62"
-                                                    height="71.36"
-                                                    style="fill: #f49848"
-                                                />
-                                                <path
-                                                    id="Tracciato_867-2"
-                                                    data-name="Tracciato 867-2"
-                                                    d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z"
-                                                    style="fill: #f49848"
-                                                />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </span>
-                                <span class="active">
-                                    <svg
-                                        id="Livello_1"
-                                        data-name="Livello 1"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 150 150"
-                                    >
-                                        <g
-                                            id="noun_growth_3025764-2"
-                                            data-name="noun growth 3025764-2"
-                                        >
-                                            <g
-                                                id="Raggruppa_1052-2"
-                                                data-name="Raggruppa 1052-2"
-                                            >
-                                                <rect
-                                                    id="Rettangolo_1524-2"
-                                                    data-name="Rettangolo 1524-2"
-                                                    x="11.92"
-                                                    y="93.52"
-                                                    width="25.62"
-                                                    height="46.47"
-                                                    style="fill: #fff"
-                                                />
-                                                <rect
-                                                    id="Rettangolo_1525-2"
-                                                    data-name="Rettangolo 1525-2"
-                                                    x="53.57"
-                                                    y="68.63"
-                                                    width="25.62"
-                                                    height="71.36"
-                                                    style="fill: #fff"
-                                                />
-                                                <path
-                                                    id="Tracciato_867-2"
-                                                    data-name="Tracciato 867-2"
-                                                    d="M138.08,48.22H120.8v91.87H95.1V48.22H78L108,9.91Z"
-                                                    style="fill: #fff"
-                                                />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </span>
-                            </template>
-                        </b-link>
-                        <a
-                            class="action-icon mr-2"
-                            @click="editTemplate(data.item._id)"
-                        >
-                            <span class="default">
-                                <svg
-                                    id="Livello_1"
-                                    data-name="Livello 1"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 150 150"
-                                >
-                                    <g
-                                        id="Raggruppa_1053"
-                                        data-name="Raggruppa 1053"
-                                    >
-                                        <path
-                                            id="Tracciato_767-2"
-                                            data-name="Tracciato 767-2"
-                                            d="M60.27,113.16l2.57-2.57L39.41,87.09,92.26,34.24a12.48,12.48,0,0,1,17.64,0h0l5.86,5.86a12.48,12.48,0,0,1,0,17.64h0ZM57,116.45a12.34,12.34,0,0,1-8.1,3H32.7a2.1,2.1,0,0,1-2.11-2.11h0V101.05a12.64,12.64,0,0,1,3-8.1Z"
-                                            style="
-                                                        fill: #4d505d;
-                                                        fill-rule: evenodd;
-                                                    "
-                                        />
-                                    </g>
-                                </svg>
-                            </span>
-                            <span class="hover">
-                                <svg
-                                    id="Livello_1"
-                                    data-name="Livello 1"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 150 150"
-                                >
-                                    <g
-                                        id="Raggruppa_1053"
-                                        data-name="Raggruppa 1053"
-                                    >
-                                        <path
-                                            id="Tracciato_767-2"
-                                            data-name="Tracciato 767-2"
-                                            d="M60.27,113.16l2.57-2.57L39.41,87.09,92.26,34.24a12.48,12.48,0,0,1,17.64,0h0l5.86,5.86a12.48,12.48,0,0,1,0,17.64h0ZM57,116.45a12.34,12.34,0,0,1-8.1,3H32.7a2.1,2.1,0,0,1-2.11-2.11h0V101.05a12.64,12.64,0,0,1,3-8.1Z"
-                                            style="
-                                                        fill: #f49848;
-                                                        fill-rule: evenodd;
-                                                    "
-                                        />
-                                    </g>
-                                </svg>
-                            </span>
-                            <span class="active">
-                                <svg
-                                    id="Livello_1"
-                                    data-name="Livello 1"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 150 150"
-                                >
-                                    <g
-                                        id="Raggruppa_1053"
-                                        data-name="Raggruppa 1053"
-                                    >
-                                        <path
-                                            id="Tracciato_767-2"
-                                            data-name="Tracciato 767-2"
-                                            d="M60.27,113.16l2.57-2.57L39.41,87.09,92.26,34.24a12.48,12.48,0,0,1,17.64,0h0l5.86,5.86a12.48,12.48,0,0,1,0,17.64h0ZM57,116.45a12.34,12.34,0,0,1-8.1,3H32.7a2.1,2.1,0,0,1-2.11-2.11h0V101.05a12.64,12.64,0,0,1,3-8.1Z"
-                                            style="
-                                                        fill: #fff;
-                                                        fill-rule: evenodd;
-                                                    "
-                                        />
-                                    </g>
-                                </svg>
-                            </span>
-                        </a>
+                    <div class="d-flex align-items-center justify-content-end">
                         <a
                             class="action-icon mr-2"
                             @click="deleteTemplate(data.item)"
@@ -490,13 +178,13 @@
             </b-table>
             <div
                 class="
-                            d-flex
-                            align-items-center
-                            justify-content-end
-                            pr-3
-                            pl-3
-                            border-top
-                        "
+                    d-flex
+                    align-items-center
+                    justify-content-end
+                    pr-3
+                    pl-3
+                    border-top
+                "
             >
                 <div class="mr-3">
                     <span class="mr-3">Rows per page: </span>
@@ -535,9 +223,34 @@
                 />
                 <span>MANDATORY</span>
             </div>
-            <h6 class="mb-4">Fill in all the fields</h6>
+            <h6 class="mb-3">
+                Invite an existing user to become an employee or invite anyone
+                to register as an employee
+            </h6>
             <b-form @submit="handleSave" novalidate>
-                <label for="name" class="text-brand">Save file as</label>
+                <label for="email" class="text-brand mt-2"
+                    >1. Send your employees the following invitation by
+                    email</label
+                >
+                <b-row>
+                    <b-col md="3">
+                        <img
+                            src="@/assets/icons/account/email_template_image.svg"
+                        />
+                    </b-col>
+                    <b-col md="9">
+                        <b-form-select
+                            v-model="employeeForm.template"
+                            :options="templateOptions"
+                            class="border-primary"
+                        ></b-form-select>
+                    </b-col>
+                </b-row>
+
+                <label for="name" class="text-brand mt-3"
+                    >2. Invite an existing user to register as an
+                    employee</label
+                >
                 <b-input-group class="border border-primary rounded" style="">
                     <b-input-group-prepend>
                         <span class="input-group-text border-0"
@@ -547,34 +260,37 @@
                     <b-input
                         v-model="employeeForm.user"
                         class="border-0 no-shadow pl-0"
+                        type="email"
+                        :state="validateUser"
                     ></b-input>
-                    <b-button variant="primary" class="border-0 rounded"
+                    <b-button
+                        variant="primary"
+                        class="border-0 rounded"
+                        @click="handleAddEmployeeClick('user', validateUser)"
                         >Add</b-button
                     >
                 </b-input-group>
 
-                <label for="email" class="text-brand mt-4"
-                    >Send employee an invitation by email</label
-                >
-                <b-form-select
-                    v-model="employeeForm.template"
-                    :options="templateOptions"
-                    value-field="item"
-                    text-field="name"
-                    disabled-field="notEnabled"
-                    class="border-primary"
-                ></b-form-select>
+                <div class="devider mt-4">
+                    <hr style="width: 50%; border-color: #333333" />
+                    <div class="devider__text mb-0">OR</div>
+                </div>
 
                 <label for="email" class="text-brand mt-4"
-                    >Add employee email</label
+                    >2. Invite anyone to register as an employee</label
                 >
                 <b-input-group class="border border-primary rounded" style="">
                     <b-input
                         v-model="employeeForm.email"
                         class="border-0 no-shadow"
                         placeholder="Email"
+                        type="email"
+                        :state="validateEmail"
                     ></b-input>
-                    <b-button variant="primary" class="border-0 rounded"
+                    <b-button
+                        variant="primary"
+                        class="border-0 rounded"
+                        @click="handleAddEmployeeClick('email', validateEmail)"
                         >Add</b-button
                     >
                 </b-input-group>
@@ -585,7 +301,12 @@
 
                 <div class="border border-primary rounded">
                     <div
-                        class="d-flex align-items-center justify-content-between p-2"
+                        class="
+                            d-flex
+                            align-items-center
+                            justify-content-between
+                            p-2
+                        "
                         v-for="emailItem in emailList"
                         :key="emailItem.id"
                     >
@@ -594,15 +315,20 @@
                         </p>
                         <fa-icon
                             icon="trash-alt"
-                            @click="handleAddEmployeeClick(emailItem.id)"
-                            style="cursor: pointer;"
+                            @click="handleRemoveEmployeeClick(emailItem.id)"
+                            style="cursor: pointer"
                         />
                     </div>
                 </div>
 
                 <b-form-group>
                     <div
-                        class="d-flex align-items-center justify-content-between mt-5"
+                        class="
+                            d-flex
+                            align-items-center
+                            justify-content-between
+                            mt-5
+                        "
                     >
                         <b-btn
                             block
@@ -638,18 +364,19 @@ export default {
         currentPageForEmployee: 1,
         employeeForm: {
             user: '',
-            template: '',
-            email: ''
+            template: null,
+            email: '',
         },
         emailList: [
             { id: 0, email: 'Mark@wikkels.nl' },
             { id: 1, email: 'Mark@wikkels.nl' },
-            { id: 2, email: 'Mark@wikkels.nl' }
+            { id: 2, email: 'Mark@wikkels.nl' },
         ],
         templateOptions: [
-            { item: 'A', name: 'Option A' },
-            { item: 'B', name: 'Option B' },
-            { item: 'C', name: 'Option C' }
+            { value: null, text: 'Select a template' },
+            { value: 'a', text: 'This is First option' },
+            { value: 'b', text: 'Selected Option' },
+            { value: 'd', text: 'This one is disabled' },
         ],
         selectedChartId: '',
         isAddEmployee: false,
@@ -661,91 +388,123 @@ export default {
             { value: 15, text: '15' },
             { value: 20, text: '20' },
             { value: 50, text: '50' },
-            { value: 100, text: '100' }
+            { value: 100, text: '100' },
         ],
         fieldsForEmployee: [
             {
                 key: 'firstName',
                 sortable: false,
                 label: 'FIRST NAME',
-                thStyle: { paddingLeft: '40px' }
+                thStyle: { paddingLeft: '40px' },
             },
             {
                 key: 'lastName',
                 sortable: false,
                 label: 'LAST NAME',
-                thStyle: { textAlign: 'center' }
+                thStyle: { textAlign: 'center' },
             },
             {
                 key: 'email',
                 sortable: false,
                 label: 'EMAIL',
-                thStyle: { textAlign: 'center' }
+                thStyle: { textAlign: 'center' },
             },
-            { key: 'action', label: '' }
+            { key: 'action', label: '' },
         ],
         datatable: [
             {
                 id: 0,
                 firstName: 'Mark',
                 lastName: 'Noorlander',
-                email: 'mark@gmail.com'
+                email: 'mark@gmail.com',
             },
             {
                 id: 1,
                 firstName: 'Mark',
                 lastName: 'Noorlander',
-                email: 'mark@gmail.com'
+                email: 'mark@gmail.com',
             },
             {
                 id: 2,
                 firstName: 'Mark',
                 lastName: 'Noorlander',
-                email: 'mark@gmail.com'
+                email: 'mark@gmail.com',
             },
             {
                 id: 3,
                 firstName: 'Mark',
                 lastName: 'Noorlander',
-                email: 'mark@gmail.com'
-            }
+                email: 'mark@gmail.com',
+            },
         ],
-        selectedData: null
+        selectedData: null,
     }),
-    computed: {},
+    computed: {
+        validateEmail() {
+            if (!this.employeeForm.email) return null;
+            var re = /\S+@\S+\.\S+/;
+            return re.test(this.employeeForm.email);
+        },
+        validateUser() {
+            if (!this.employeeForm.user) return null;
+            var re = /\S+@\S+\.\S+/;
+            return re.test(this.employeeForm.user);
+        },
+    },
     methods: {
         onDiscardChanges() {
             this.isAddEmployee = false;
         },
-        showChartForRoute(item) {
-            console.log(item);
-        },
-        editTemplate(item) {
-            console.log(item);
-        },
+        showChartForRoute(item) {},
+        editTemplate(item) {},
         deleteTemplate(item) {
             this.selectedData = item;
             this.$bvModal.show('delete-employee-confirm-modal');
         },
         handleSave() {},
-        handleClickLandingPageTemplateTableRow(item) {
-            console.log(item);
-        },
+        handleClickLandingPageTemplateTableRow(item) {},
         handleShowModalAddEmployee() {
             this.isAddEmployee = true;
         },
-        handleAddEmployeeClick() {
-            console.log('trash employee click');
+        handleAddEmployeeClick(type, validation) {
+            if (validation) {
+                this.emailList = [
+                    ...this.emailList,
+                    {
+                        id: this.emailList.length + new Date(),
+                        email: this.employeeForm[type],
+                    },
+                ];
+                this.employeeForm[type] = '';
+            }
         },
-        handleOnSubmitDelete() {
-            console.log('DELETE IN HERE');
-        }
+        handleOnSubmitDelete() {},
+        handleRemoveEmployeeClick(id) {
+            this.emailList = this.emailList.filter((item) => item.id !== id);
+        },
     },
-    mounted() {}
+    mounted() {},
 };
 </script>
 
 <style lang="scss" scoped>
+.devider {
+    // width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__text {
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #ffffff;
+        width: 75px;
+        text-align: center;
+        font-size: 12px;
+    }
+}
 .input-group-text {
     background-color: transparent;
 }

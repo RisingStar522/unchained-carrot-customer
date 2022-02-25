@@ -33,7 +33,12 @@
                             <p class="domain__normal">
                                 Your routes will use ucc.link
                             </p>
-                            <b-button variant="primary" class="mt-4"
+                            <b-button
+                                variant="primary"
+                                class="mt-4"
+                                @click="
+                                    handleAddDomain(DOMAIN_MENU.TRAFFIC_ROUTE)
+                                "
                                 >Configure</b-button
                             >
                         </b-col>
@@ -56,9 +61,9 @@
                         <div
                             class="d-flex align-items-center justify-content-end m-4"
                             style=" cursor: pointer;"
-                            @click="handleAddDomain"
+                            @click="handleAddDomain(DOMAIN_MENU.TRAFFIC_ROUTE)"
                         >
-                            <fa-icon icon="plus-circle" class="text-primary" />
+                            <fa-icon icon="plus-circle" class="text-primary" style="font-size: 25px;" />
                             <p
                                 class="mb-0 ml-2"
                                 style="text-decoration: underline;"
@@ -101,7 +106,10 @@
                             Your routes will use
                             pages.unchainedcarrot.com/{shortname}
                         </p>
-                        <b-button variant="primary" class="mt-4"
+                        <b-button
+                            variant="primary"
+                            class="mt-4"
+                            @click="handleAddDomain(DOMAIN_MENU.LANDING_PAGE)"
                             >Configure</b-button
                         >
                     </b-col>
@@ -133,7 +141,10 @@
                                 Your emails will be sent from
                                 no-reply@unchainedcarrot.com
                             </p>
-                            <b-button variant="primary" class="mt-4"
+                            <b-button
+                                variant="primary"
+                                class="mt-4"
+                                @click="handleAddDomain(DOMAIN_MENU.EMAIL)"
                                 >Configure</b-button
                             >
                         </b-col>
@@ -168,7 +179,10 @@
                             The referral links of you remembers will be
                             {shortname}.rfby.me/ABC123
                         </p>
-                        <b-button variant="primary" class="mt-4"
+                        <b-button
+                            variant="primary"
+                            class="mt-4"
+                            @click="handleAddDomain(DOMAIN_MENU.REFERRED_BY_ME)"
                             >Configure</b-button
                         >
                     </b-col>
@@ -202,7 +216,10 @@
                             The domain for the micro survey option links will be
                             unchainedcarrot.click
                         </p>
-                        <b-button variant="primary" class="mt-4"
+                        <b-button
+                            variant="primary"
+                            class="mt-4"
+                            @click="handleAddDomain(DOMAIN_MENU.REVIEW_BY_ME)"
                             >Configure</b-button
                         >
                     </b-col>
@@ -229,22 +246,23 @@
             v-model="isAddDomainModal"
             id="template-modal"
             hide-footer
-            title="Add Employee"
+            :title="`Add Custom Domain for ${DOMAIN_MENU_TEXT[selectedDomain]}`"
             hide-backdrop
             body-class="pt-0"
             header-class="custom-modal-header"
         >
             <div v-if="customDomainStep === ADD_CUSTOM_DOMAIN_STEP.STEP_ONE">
                 <p>
-                    You can use any domain that you can control for the traffic
-                    Routes links. However, we recommend that you use short
-                    hostnames and the .link top-level domain (TLD).
+                    You can use any domain that you can control for the
+                    {{ DOMAIN_MENU_TEXT[selectedDomain] }} links. However, we
+                    recommend that you use short hostnames and the .link
+                    top-level domain (TLD).
                 </p>
                 <p>
-                    The domain name needs to be exclusive for use by Traffic
-                    Routes! It cannot be the same as your website or the domain
-                    names used for other features such as landing pages the
-                    referral links.
+                    The domain name needs to be exclusive for use by
+                    {{ DOMAIN_MENU_TEXT[selectedDomain] }}! It cannot be the
+                    same as your website or the domain names used for other
+                    features such as landing pages the referral links.
                 </p>
                 <label for="name" class="text-brand">Domain name</label>
                 <b-form-input placeholder="e.g.short.link" />
@@ -329,15 +347,21 @@
 
 <script>
 import DeleteConfirmModal from '../components/DeleteConfirmModal.vue';
-import { DOMAIN_MENU, ADD_CUSTOM_DOMAIN_STEP } from '../constant';
+import {
+    DOMAIN_MENU,
+    ADD_CUSTOM_DOMAIN_STEP,
+    DOMAIN_MENU_TEXT
+} from '../constant';
 export default {
     components: { DeleteConfirmModal },
     name: 'domain-tab',
     data: () => ({
         DOMAIN_MENU,
+        DOMAIN_MENU_TEXT,
         ADD_CUSTOM_DOMAIN_STEP,
         customDomainStep: ADD_CUSTOM_DOMAIN_STEP.STEP_ONE,
         isAddDomainModal: false,
+        selectedDomain: DOMAIN_MENU.TRAFFIC_ROUTE,
         selectedItem: null,
         submitButton: ['Continue', 'I have done this', 'Close'],
         leftMenu: [
@@ -361,8 +385,8 @@ export default {
             },
             {
                 id: DOMAIN_MENU.REFERRED_BY_ME,
-                title: 'ReferrendByMe',
-                icon: require('../../../assets/icons/Reviews.svg'),
+                title: 'ReferredByMe',
+                icon: require('../../../assets/icons/Integrations.svg'),
                 isActived: false
             },
             {
@@ -440,8 +464,9 @@ export default {
                 return left;
             });
         },
-        handleAddDomain() {
+        handleAddDomain(domain) {
             this.isAddDomainModal = true;
+            this.selectedDomain = domain;
         },
         handleCancel() {
             if (this.customDomainStep === ADD_CUSTOM_DOMAIN_STEP.STEP_ONE) {
@@ -463,9 +488,7 @@ export default {
             this.$bvModal.show('delete-domain-confirm-modal');
             this.selectedItem = item;
         },
-        handleOnSubmitDelete() {
-            console.log('DELETE IN HERE');
-        }
+        handleOnSubmitDelete() {}
     }
 };
 </script>

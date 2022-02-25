@@ -16,8 +16,11 @@ import {
     faInstagram,
     faYoutube,
     faTwitter,
+    faFacebook,
     faLinkedinIn,
-    faTelegramPlane
+    faTelegramPlane,
+    faLinkedin,
+    faTelegram
 } from '@fortawesome/free-brands-svg-icons';
 
 import {
@@ -34,6 +37,8 @@ import {
     faChevronDown,
     faChevronRight,
     faChevronLeft,
+    faFilter,
+    faBolt,
     faUser,
     faCog,
     faSignOutAlt,
@@ -96,6 +101,7 @@ library.add(
     faSignOutAlt,
     faBell,
     faLanguage,
+    faBolt,
     faBars,
     faExclamationTriangle,
     faPlusCircle,
@@ -125,14 +131,18 @@ library.add(
     faStar,
     faFacebookF,
     faInstagram,
+    faTelegram,
+    faFilter,
     faYoutube,
     faTwitter,
+    faFacebook,
     faLinkedinIn,
     faTelegramPlane,
     faEllipsisH,
     faList,
     faTh,
     faPhone,
+    faLinkedin,
     faMobileAlt
 );
 

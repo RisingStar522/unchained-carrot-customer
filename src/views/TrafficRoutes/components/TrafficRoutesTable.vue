@@ -1,3 +1,4 @@
+@@ -0,0 +1,1585 @@
 <template>
     <div class="content">
         <div class="traffic-routes">
@@ -25,6 +26,17 @@
                                     UTM Campaign
                                 </option>
                             </b-form-select>
+                        </div>
+                    <div class="ml-4">
+                            <b-form-input
+                                v-model="search"
+                                @change="getTrafficRoutes()"
+                                id="tag-search-input"
+                                type="search"
+                                placeholder="Search by name...."
+                                size="lg"
+                                autocomplete="off"
+                            ></b-form-input>
                         </div>
                     </div>
                     <div class="d-flex align-items-center ml-auto">
@@ -752,7 +764,7 @@
                         <b-form-select
                             v-model="pageSizeForRecentRedirects"
                             @change="
-                                handleRecentRedirectsPageSizeChange($event)
+                            handleRecentRedirectsPageSizeChange($event)
                             "
                             :options="rowsPerPageOptions"
                             style="width: 80px; height: 35px"
@@ -780,6 +792,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import DateRangePicker from 'vue2-daterange-picker';
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
 
@@ -805,6 +818,7 @@ export default {
     data: () => ({
         tableTitle: '',
         totalClicks: 0,
+        search: '',
         hoverItemId: '',
         options: {
             legend: {
@@ -1310,8 +1324,19 @@ export default {
             }
         },
         async getTrafficRoutes() {
+            const sort = { [this.selectedOrderByOption]: 1 };
+            if (this.search.includes('\\')) 
+            {
+                this.search = '' ;
+                Vue.notify({
+                    type: 'info',
+                    title: 'Can not use backslash in search input'
+                });
+            }
+            let filter = { title: { $regex: this.search } };
             const routes = await this.$store.dispatch('getAllTrafficRoutes', {
-                sort_by: this.selectedOrderByOption,
+                filter: JSON.stringify(JSON.stringify(filter)),
+                sort_by: JSON.stringify(JSON.stringify(sort)),
                 limit: this.perPageForTrafficRoutes,
                 offset:
                     (this.currentPageForTrafficRoutes - 1) *

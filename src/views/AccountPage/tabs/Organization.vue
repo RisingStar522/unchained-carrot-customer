@@ -12,55 +12,152 @@
                 >General</b-card-title
             >
             <b-row>
-                <b-col md="4">
-                    <b-form>
-                        <b-form-group>
-                            <label class="text-primary"
-                                >Organization Name</label
-                            >
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
+                <b-col>
+                    <b-form-group>
+                        <label class="text-primary">Organization Name</label>
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                v-model="generalData.organizationName"
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
 
-                        <b-form-group>
-                            <label class="text-primary"
-                                >Organization Short Name</label
+                    <b-form-group>
+                        <label class="text-primary"
+                            >Organization Shortname</label
+                        >
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                v-model="generalData.organizationShortName"
+                            />
+                            <b-button
+                                variant="default"
+                                class="p-0"
+                                v-b-tooltip.hover
+                                title="The short name is used to generate links for landing pages, referral links etc, in case no custom domain has been configured. For example, referral links will be shortname.rfby.me, landing pages will be hosted on pages.unchainedcarrot.com/shortname"
                             >
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <b-button
-                                    variant="default"
-                                    class="p-0"
-                                    v-b-tooltip.hover
-                                    title="The short name is used to generate links for landing pages, referral links etc, in case no custom domain has been configured. For example, referral links will be shortname.rfby.me, landing pages will be hosted on pages.unchainedcarrot.com/shortname"
-                                >
-                                    <fa-icon
-                                        icon="info-circle"
-                                        class="text-primary ml-3"
-                                    />
-                                </b-button>
-                            </div>
-                        </b-form-group>
+                                <fa-icon
+                                    icon="info-circle"
+                                    class="text-primary ml-3"
+                                />
+                            </b-button>
+                        </div>
+                    </b-form-group>
 
-                        <b-form-group>
-                            <label class="text-primary"
-                                >Organization Register</label
+                    <b-form-group>
+                        <label class="text-primary"
+                            >Organization Registration</label
+                        >
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                v-model="generalData.organizationRegistration"
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
+
+                    <b-form-group>
+                        <label class="text-primary">Organization Address</label>
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                v-model="generalData.organizationAddress"
+                            />
+                            <b-button
+                                variant="default"
+                                class="p-0"
+                                v-b-tooltip.hover
+                                title="The address line is automatically added into the footer of emails and landing pages for regulatory compliance."
                             >
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
-                    </b-form>
+                                <fa-icon
+                                    icon="info-circle"
+                                    class="text-primary ml-3"
+                                />
+                            </b-button>
+                        </div>
+                    </b-form-group>
                 </b-col>
-                <b-col md="8" class="d-flex align-items-center px-5">
+
+                <b-col>
+                    <b-form-group>
+                        <label class="text-primary">Country</label>
+                        <div class="d-flex align-items-center">
+                            <b-form-select
+                                v-model="generalData.country"
+                                :options="countryOption"
+                            ></b-form-select>
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
+
+                    <b-form-group>
+                        <label class="text-primary">Website</label>
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                v-model="generalData.website"
+                                :state="validateUrl"
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
+
+                    <b-form-group>
+                        <label class="text-primary"
+                            >Terms & Conditions URL</label
+                        >
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                v-model="generalData.termAndConditionUrl"
+                            />
+                            <b-button
+                                variant="default"
+                                class="p-0"
+                                v-b-tooltip.hover
+                                title="The terms & conditions URL is automatically added into the footer of emails and landing pages. Make sure that your terms match to kind of campaigns you intend to run using Unchained Carrot."
+                            >
+                                <fa-icon
+                                    icon="info-circle"
+                                    class="text-primary ml-3"
+                                />
+                            </b-button>
+                        </div>
+                    </b-form-group>
+
+                    <b-form-group>
+                        <label class="text-primary">Privacy Policy URL</label>
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                v-model="generalData.privacyPolicyUrl"
+                            />
+                            <b-button
+                                variant="default"
+                                class="p-0"
+                                v-b-tooltip.hover
+                                title="The privacy policy URL is automatically added into the footer of emails and landing pages for regulatory compliance."
+                            >
+                                <fa-icon
+                                    icon="info-circle"
+                                    class="text-primary ml-3"
+                                />
+                            </b-button>
+                        </div>
+                    </b-form-group>
+                </b-col>
+
+                <b-col class="d-flex align-items-center px-5">
                     <div>
                         <p class="mb-1 ml-3 text-primary">Organization Logo</p>
+                        <div v-if="logoFiles.length">
+                            <img
+                                :src="logoFiles[0].url"
+                                width="160px"
+                                height="144px"
+                            />
+                        </div>
                         <div
                             style="opacity: 0.4; width: fit-content"
                             class="text-primary d-flex flex-column align-items-center justify-content-center border border-5 rounded px-5 py-3 ml-3"
+                            v-else
                         >
                             <p class="mb-0" style="font-size: 10px">1:1</p>
                             <p class="mb-0" style="font-size: 10px">
@@ -138,115 +235,58 @@
                 All contact information is kepts strictly confidential. View our
                 <b class="text-primary">privacy policy</b>
             </p>
-            <b-form>
-                <b-row>
-                    <b-col>
-                        <b-form-group>
-                            <label class="text-primary">First Name</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
+            <b-row>
+                <b-col>
+                    <b-form-group>
+                        <label class="text-primary">First Name</label>
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                v-model="
+                                    contactPersonData.contactPersonFirstName
+                                "
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
 
-                        <b-form-group>
-                            <label class="text-primary">Email</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
+                    <b-form-group>
+                        <label class="text-primary">Email</label>
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                type="email"
+                                required
+                                v-model="contactPersonData.contactPersonEmail"
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
+                </b-col>
+                <b-col>
+                    <b-form-group>
+                        <label class="text-primary">Last name</label>
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                v-model="
+                                    contactPersonData.contactPersonLastName
+                                "
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
 
-                        <b-form-group>
-                            <label class="text-primary">Country</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-select
-                                    v-model="selectedCountry"
-                                    :options="countryOption"
-                                ></b-form-select>
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
-
-                        <b-form-group>
-                            <label class="text-primary"
-                                >Privacy Policy URL</label
-                            >
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <b-button
-                                    variant="default"
-                                    class="p-0"
-                                    v-b-tooltip.hover
-                                    title="The privacy policy URL is automatically added into the footer of emails and landing pages for regulatory compliance."
-                                >
-                                    <fa-icon
-                                        icon="info-circle"
-                                        class="text-primary ml-3"
-                                    />
-                                </b-button>
-                            </div>
-                        </b-form-group>
-                    </b-col>
-                    <b-col>
-                        <b-form-group>
-                            <label class="text-primary">Last name</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
-
-                        <b-form-group>
-                            <label class="text-primary">Address line</label>
-
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <b-button
-                                    variant="default"
-                                    class="p-0"
-                                    v-b-tooltip.hover
-                                    title="The address line is automatically added into the footer of emails and landing pages for regulatory compliance."
-                                >
-                                    <fa-icon
-                                        icon="info-circle"
-                                        class="text-primary ml-3"
-                                    />
-                                </b-button>
-                            </div>
-                        </b-form-group>
-
-                        <b-form-group>
-                            <label class="text-primary">Website</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
-
-                        <b-form-group>
-                            <label class="text-primary"
-                                >Terms & Conditions URL</label
-                            >
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <b-button
-                                    variant="default"
-                                    class="p-0"
-                                    v-b-tooltip.hover
-                                    title="The terms & conditions URL is automatically added into the footer of emails and landing pages. Make sure that your terms match to kind of campaigns you intend to run using Unchained Carrot."
-                                >
-                                    <fa-icon
-                                        icon="info-circle"
-                                        class="text-primary ml-3"
-                                    />
-                                </b-button>
-                            </div>
-                        </b-form-group>
-                    </b-col>
-                    <b-col></b-col>
-                </b-row>
-            </b-form>
+                    <b-form-group>
+                        <label class="text-primary">Country</label>
+                        <div class="d-flex align-items-center">
+                            <b-form-select
+                                v-model="contactPersonData.country"
+                                :options="countryOption"
+                            ></b-form-select>
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
+                </b-col>
+                <b-col></b-col>
+            </b-row>
         </b-card>
 
         <b-card class="mt-5">
@@ -264,60 +304,124 @@
                 Enter the links to your Social Media accounts here. The links
                 can then be merged into emails and landing pages.
             </p>
-            <b-form>
-                <b-row>
-                    <b-col>
-                        <b-form-group>
-                            <label class="text-primary">Facebook</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
+            <b-row>
+                <b-col>
+                    <b-form-group>
+                        <label class="text-primary">
+                            <fa-icon
+                                :icon="{
+                                    prefix: 'fab',
+                                    iconName: 'facebook'
+                                }"
+                                class="text-primary mr-2"
+                            />Facebook</label
+                        >
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                placeholder="https://nl-nl.facebook.com/my-company/"
+                                v-model="socialMediaData.facebook"
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
 
-                        <b-form-group>
-                            <label class="text-primary">Youtube</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
-                        <b-form-group>
-                            <label class="text-primary">Twitter</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
-                    </b-col>
-                    <b-col>
-                        <b-form-group>
-                            <label class="text-primary">Instagram</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
+                    <b-form-group>
+                        <label class="text-primary"
+                            ><fa-icon
+                                :icon="{
+                                    prefix: 'fab',
+                                    iconName: 'youtube'
+                                }"
+                                class="text-primary mr-2"
+                            />Youtube</label
+                        >
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                placeholder="https://www.youtube.com/channel/UC21xMErtZEraSL5rhfplHZA"
+                                v-model="socialMediaData.youtube"
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
+                    <b-form-group>
+                        <label class="text-primary"
+                            ><fa-icon
+                                :icon="{
+                                    prefix: 'fab',
+                                    iconName: 'twitter'
+                                }"
+                                class="text-primary mr-2"
+                            />Twitter</label
+                        >
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                placeholder="https://twitter.com/CarrotUnchained"
+                                v-model="socialMediaData.twitter"
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
+                </b-col>
+                <b-col>
+                    <b-form-group>
+                        <label class="text-primary"
+                            ><fa-icon
+                                :icon="{
+                                    prefix: 'fab',
+                                    iconName: 'instagram'
+                                }"
+                                class="text-primary mr-2"
+                            />Instagram</label
+                        >
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                placeholder="https://www.instagram.com/unchainedcarrot/"
+                                v-model="socialMediaData.instagram"
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
 
-                        <b-form-group>
-                            <label class="text-primary">Linkedin</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
+                    <b-form-group>
+                        <label class="text-primary"
+                            ><fa-icon
+                                :icon="{
+                                    prefix: 'fab',
+                                    iconName: 'linkedin'
+                                }"
+                                class="text-primary mr-2"
+                            />Linkedin</label
+                        >
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                placeholder="https://www.linkedin.com/company/unchained-carrot"
+                                v-model="socialMediaData.linkedin"
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
 
-                        <b-form-group>
-                            <label class="text-primary">Telegram</label>
-                            <div class="d-flex align-items-center">
-                                <b-form-input placeholder="La lsla s.r.l" />
-                                <div style="margin-left: 30px" />
-                            </div>
-                        </b-form-group>
-                    </b-col>
-                    <b-col></b-col>
-                </b-row>
-            </b-form>
+                    <b-form-group>
+                        <label class="text-primary"
+                            ><fa-icon
+                                :icon="{
+                                    prefix: 'fab',
+                                    iconName: 'telegram'
+                                }"
+                                class="text-primary mr-2"
+                            />Telegram</label
+                        >
+                        <div class="d-flex align-items-center">
+                            <b-form-input
+                                placeholder="https://t.me/my-company"
+                                v-model="socialMediaData.telegram"
+                            />
+                            <div style="margin-left: 30px" />
+                        </div>
+                    </b-form-group>
+                </b-col>
+                <b-col></b-col>
+            </b-row>
         </b-card>
     </div>
 </template>
@@ -331,13 +435,49 @@ export default {
         acceptTypes: 'image/png,image/gif,image/jpeg,image/jpg',
         logoFiles: [],
         selectedCountry: null,
-        countryOption: [
-            { value: null, text: 'Please select an option' },
-            { value: 'a', text: 'This is First option' },
-            { value: 'b', text: 'Selected Option' }
-        ]
+        countryOption: require('./countries.json'),
+        generalData: {
+            organizationName: '',
+            organizationShortName: '',
+            website: '',
+            organizationRegistration: '',
+            organizationAddress: '',
+            termAndConditionUrl: '',
+            privacyPolicyUrl: '',
+            country: ''
+        },
+        contactPersonData: {
+            contactPersonFirstName: '',
+            contactPersonLastName: '',
+            contactPersonEmail: '',
+            country: ''
+        },
+        socialMediaData: {
+            facebook: '',
+            instagram: '',
+            youtube: '',
+            linkedin: '',
+            twitter: '',
+            telegram: ''
+        }
     }),
+    computed: {
+        validateUrl() {
+            if (!this.generalData.website) return null;
+            var re = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm;
+            return re.test(this.generalData.website);
+        }
+    },
     methods: {
+        async getCustomer() {
+            try {
+                const response = await this.$store.dispatch('getCustomer');
+                console.log('response =>', response);
+                return response;
+            } catch (error) {
+                console.log(error);
+            }
+        },
         logoInputFilter(newFile, oldFile, prevent) {
             if (newFile && !oldFile) {
                 if (!/\.(gif|jpg|jpeg|png|webp)$/i.test(newFile.name)) {
@@ -365,6 +505,27 @@ export default {
                 this.$bvModal.hide('logo-crop-modal');
             }
         }
+    },
+    async mounted() {
+        try {
+            const response = await this.getCustomer();
+            this.generalData = {
+                ...this.generalData,
+                organizationName: response.organizationName,
+                organizationAddress: response.address,
+                organizationRegistration: response.companyRegistration || '',
+                privacyPolicyUrl: response.privacyPolicyUrl || '',
+                website: response.website,
+                country: response.country
+            };
+            this.contactPersonData = {
+                ...this.contactPersonData,
+                contactPersonFirstName: response.contactPersonFirstName,
+                contactPersonLastName: response.contactPersonLastName,
+                contactPersonEmail: response.contactPersonEmail,
+                country: response.country
+            };
+        } catch (error) {}
     }
 };
 </script>

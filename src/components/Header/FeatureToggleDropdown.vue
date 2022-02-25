@@ -36,7 +36,6 @@ export default {
             this.chosenMode = this.modes[mode];
             window.location.reload(true);
         }
-    },
-    mounted() {}
+    }
 };
 </script>

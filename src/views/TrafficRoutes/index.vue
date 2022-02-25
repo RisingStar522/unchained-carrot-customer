@@ -4,10 +4,7 @@
             <b-spinner label="Loading..."></b-spinner>
         </div>
         <div v-else>
-            <div
-                class="traffic-table-container"
-                v-if="itemsForTrafficRoutes.length > 0"
-            >
+            <div class="traffic-table-container" v-if="hasRoutes">
                 <TrafficRoutesTable />
             </div>
             <div class="traffic-route-container" v-else>
@@ -71,12 +68,14 @@ export default {
             'Custom domain',
             'Custom URL'
         ],
-        loading: false
+        loading: false,
+        hasRoutes: false
     }),
     async created() {
         this.loading = true;
         this.$store.dispatch('getAllTrafficRoutes', {}).then(() => {
             this.loading = false;
+            this.hasRoutes = true;
         });
     },
     computed: {

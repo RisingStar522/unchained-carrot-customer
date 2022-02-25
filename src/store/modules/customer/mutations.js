@@ -7,6 +7,8 @@ export default {
         state.vatNumber = data.vatNumber;
         state.companyRegistration = data.companyRegistration;
         state.website = data.website;
+        state.startMode = data.startMode;
+        state.allowedModes = data.allowedModes;
     },
 
     SET_CUSTOMER_PROGRAMS(state, data) {
@@ -14,5 +16,17 @@ export default {
     },
     SET_CUSTOMER_SETTINGS(state, data) {
         state.settings = data;
+    },
+    SET_CUSTOMER_WALLETS(state, data) {
+        state.wallets = data
+    },
+    SET_CUSTOMER_DEPOSITS(state, data) {
+        state.deposits = data
+    },
+    SET_CUSTOMER_WITHDRAWALS(state, data) {
+        state.deposits = data
+    },
+    SET_CUSTOMER_EVENTS(state, data) {
+        state.events = data
     }
 };

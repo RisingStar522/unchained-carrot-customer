@@ -17,7 +17,13 @@ export default {
         companyRegistration: '',
         website: '',
         programs: [],
-        settings: null
+        settings: null,
+        startMode: '',
+        allowedModes: [],
+        wallets: [],
+        deposits: [],
+        withdrawals: [],
+        events: []
     },
     actions,
     getters,

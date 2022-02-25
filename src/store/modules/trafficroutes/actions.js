@@ -15,7 +15,7 @@ export default {
                     resolve(resp);
                 })
                 .catch(err => {
-                    Vue.notify({ type: 'error', title: 'Error' });
+                    Vue.notify({ type: 'error', title: err.message });
                     reject(err);
                 });
         });

@@ -2,7 +2,6 @@ import API from './API';
 import Axios from 'axios';
 
 class CustomerAPI extends API {
-
     billingEndpoint = `${process.env.VUE_APP_LAMDA_AP}/ecurring-subscriptions`;
 
     constructor(parameters = {}) {
@@ -23,6 +22,10 @@ class CustomerAPI extends API {
 
     getSettings() {
         return this.submit('get', `${this.endpoint}/settings`);
+    }
+
+    setSettings(data) {
+        return this.submit('patch', `${this.endpoint}/settings`, data);
     }
 
     getBillingData(customerId) {

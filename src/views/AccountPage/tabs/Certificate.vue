@@ -46,11 +46,6 @@
                 <template v-slot:cell(action)="data">
                     <div class="text-center">
                         <fa-icon
-                            icon="pen"
-                            @click="handleEdit(data.item)"
-                            style="cursor: pointer;"
-                        />
-                        <fa-icon
                             icon="trash-alt"
                             class="ml-3"
                             @click="handleDelete(data.item)"
@@ -105,6 +100,7 @@
                                     <b-form-input
                                         placeholder="Test"
                                         v-model="selectedData[item.key]"
+                                        readonly
                                     ></b-form-input>
                                 </b-col>
                                 <b-col md="8" v-if="item.type === 'table'">
@@ -392,9 +388,7 @@ export default {
             this.selectedData = item;
             this.isExpandInfo = true;
         },
-        handleEdit(item) {
-            console.log('Edit', item);
-        },
+        handleEdit(item) {},
         handleDelete(item) {
             this.$bvModal.show('delete-certificate-confirm-modal');
             this.selectedData = item;
@@ -402,9 +396,7 @@ export default {
         handleClose() {
             this.isExpandInfo = false;
         },
-        handleOnSubmitDelete() {
-            console.log('DELETE IN HERE');
-        }
+        handleOnSubmitDelete() {}
     }
 };
 </script>

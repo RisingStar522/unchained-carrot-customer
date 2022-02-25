@@ -81,6 +81,25 @@ export default {
             navigation: [],
             adminNavigation: [
                 {
+                    name: 'Personas',
+                    icon: require('../../assets/icons/Personas.svg'),
+                    hasSidenav: false,
+                    linkName: 'Personas'
+                },
+                 {
+                    name: 'Email Templates',
+                    icon: require('../../assets/icons/Email.svg'),
+                    hasSidenav: false,
+                    linkName: 'EmailBuilder'
+                },
+                {
+                    name: 'Email Rules',
+                    icon: require('../../assets/icons/Email.svg'),
+                    hasSidenav: false,
+                    linkName: 'EmailRules'
+                },
+               
+                {
                     name: 'Loyalty Programs',
                     icon: require('../../assets/icons/Reward Rules.svg'),
                     hasSidenav: true,
@@ -119,22 +138,16 @@ export default {
                     linkName: 'Audiences'
                 },
                 {
+                    name: 'Event',
+                    icon: require('../../assets/icons/Audiences.svg'),
+                    hasSidenav: false,
+                    linkName: 'Event'
+                },
+                {
                     name: 'Apple Wallet',
                     icon: require('../../assets/icons/AppleWallet.svg'),
                     hasSidenav: false,
                     linkName: 'AppleWallet'
-                },
-                {
-                    name: 'Email Rules',
-                    icon: require('../../assets/icons/Email.svg'),
-                    hasSidenav: false,
-                    linkName: 'EmailRules'
-                },
-                {
-                    name: 'Email Templates',
-                    icon: require('../../assets/icons/Email.svg'),
-                    hasSidenav: false,
-                    linkName: 'EmailBuilder'
                 },
                 {
                     name: 'Email Broadcasts',
@@ -142,17 +155,17 @@ export default {
                     hasSidenav: false,
                     linkName: 'EmailBroadcasts'
                 },
+                 {
+                    name: 'Traffic Routes',
+                    icon: require('../../assets/icons/TrafficRoutes.svg'),
+                    hasSidenav: false,
+                    linkName: 'TrafficRoutes'
+                },
                 {
                     name: 'Landing Pages',
                     icon: require('../../assets/icons/Page Builder.svg'),
                     hasSidenav: false,
                     linkName: 'PageBuilder'
-                },
-                {
-                    name: 'Traffic Routes',
-                    icon: require('../../assets/icons/TrafficRoutes.svg'),
-                    hasSidenav: false,
-                    linkName: 'TrafficRoutes'
                 },
                 {
                     name: 'ReviewByMe',
@@ -192,12 +205,7 @@ export default {
                     hasSidenav: false,
                     linkName: 'Webhooks'
                 },
-                {
-                    name: 'Personas',
-                    icon: require('../../assets/icons/Personas.svg'),
-                    hasSidenav: false,
-                    linkName: 'Personas'
-                },
+             
                 {
                     name: 'Social Media',
                     icon: require('../../assets/icons/Surveys.svg'),

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rettangolo_1801" data-name="Rettangolo 1801" width="16" height="16" transform="translate(671 534)" fill="#2f3380" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Gruppo_di_maschere_67" data-name="Gruppo di maschere 67" transform="translate(-671 -534)" clip-path="url(#clip-path)">
+    <path id="noun-filter-1052518" d="M20.907,6.063a1.116,1.116,0,0,0-.994-.582H7.056a1.125,1.125,0,0,0-.994.582,1.145,1.145,0,0,0,.023,1.144c.023.023.023.042.042.065l5.157,6.791v4.9a.84.84,0,0,0,.408.732l2.654,1.66a.841.841,0,0,0,.863.023.846.846,0,0,0,.455-.755V14.063l5.154-6.794c.023-.023.023-.042.042-.065a1.129,1.129,0,0,0,.046-1.14Z" transform="translate(665.52 528.52)" fill="#2f3380"/>
+  </g>
+</svg>

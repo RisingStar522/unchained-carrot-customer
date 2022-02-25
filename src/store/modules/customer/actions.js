@@ -1,18 +1,19 @@
 import Vue from 'vue';
 import CustomerAPI from '../../../api/CustomerAPI';
+import CustomerWalletsAPI from '../../../api/CustomerWallets';
+import CustomerDepositsAPI from '../../../api/CustomerDepositsAPI';
+import CustomerEventsAPI from '../../../api/CustomerEventsAPI';
 import CustomerProgramTransformer from '../../../transformers/CustomerProgramTransformer';
 
 export default {
-    getCustomer({ commit }) {
-        return new CustomerAPI()
-            .getCustomer()
-            .then(resp => {
-                commit('SET_CUSTOMER', resp);
-                return true;
-            })
-            .catch(() => {
-                return false;
-            });
+    async getCustomer({ commit }) {
+        try {
+            const resp = await new CustomerAPI().getCustomer();
+            commit('SET_CUSTOMER', resp);
+            return resp;
+        } catch (error) {
+            return error;
+        }
     },
 
     createCustomer({ commit }, data) {
@@ -47,13 +48,76 @@ export default {
         new CustomerAPI()
             .getSettings()
             .then(resp => {
-                commit(
-                    'SET_CUSTOMER_SETTINGS',
-                    resp[0]
-                );
+                commit('SET_CUSTOMER_SETTINGS', resp[0]);
             })
             .catch(err => {
                 console.error(err);
             });
+    },
+
+    getCustomerWallets({ commit }) {
+        new CustomerWalletsAPI()
+            .getWallets()
+            .then(resp => {
+                commit('SET_CUSTOMER_WALLETS', resp.result);
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    },
+
+    createCustomerWallet({ dispatch }, data) {
+        return new Promise((resolve, reject) => {
+            new CustomerWalletsAPI()
+                .createWallet(data)
+                .then(resp => {
+                    dispatch('getCustomerWallets');
+                    resolve(resp);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    getCustomerDeposits({ commit }, query = {}) {
+        return new Promise((resolve, reject) => {
+            new CustomerDepositsAPI()
+                .getDeposits(query)
+                .then(resp => {
+                    commit('SET_CUSTOMER_DEPOSITS', resp.result);
+                    resolve(resp);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+
+    getCustomerWithdrawals({ commit }, query = {}) {
+        return new Promise((resolve, reject) => {
+            new CustomerDepositsAPI()
+                .getDeposits(query)
+                .then(resp => {
+                    commit('SET_CUSTOMER_WITHDRAWALS', resp.result);
+                    resolve(resp);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+
+    getCustomerEvents({ commit }) {
+        return new Promise((resolve, reject) => {
+            new CustomerEventsAPI()
+                .getCustomerEvents()
+                .then(resp => {
+                    commit('SET_CUSTOMER_EVENTS', resp.result);
+                    resolve(resp);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
     }
 };
